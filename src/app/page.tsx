@@ -41,6 +41,11 @@ export default function Page() {
 
   async function onSelected(file: File, previewUrl: string, note?: string) {
     console.debug('[upload] Selected', { name: file.name, type: file.type, size: file.size })
+    // Reset per-submission state so a new invoice can be confirmed
+    setLocked(false)
+    setIsEditing(false)
+    setIsConfirming(false)
+    setSummary(null)
     push({ side: 'right', type: 'image', id: 'img', data: { url: previewUrl, file } })
     if (note) push({ side: 'left', type: 'text', id: 'note', data: note })
 

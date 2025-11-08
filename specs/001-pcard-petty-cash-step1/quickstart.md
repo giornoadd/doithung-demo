@@ -38,7 +38,7 @@
  - Open history at `/status` from the Rich Menu (ประวัติการเบิก).
 
 ## Where to change thresholds & config
-- Confidence threshold and formatting helpers: `lib/format.ts`.
+- Confidence threshold and formatting helpers: `src/lib/format.ts`.
 - Toggle OCR sources in `.env.local`:
   - Mock: `USE_MOCK=true`
   - Real API: `OCR_API_URL=...`, `USE_MOCK=false`

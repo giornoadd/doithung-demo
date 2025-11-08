@@ -54,11 +54,11 @@
 This repository also includes a minimal Next.js prototype for “LINE-like Petty Cash – Step 1: Employee Input”, implemented under `specs/001-pcard-petty-cash-step1/`.
 
 Paths:
-- App: `app/page.tsx`
-- API (mock OCR): `app/api/ocr/route.ts`
-- API (OpenRouter OCR): `app/api/ocr/openrouter/route.ts`
-- Components: `components/*`
-- Utilities: `lib/*`
+- App: `src/app/page.tsx`
+- API (mock OCR): `src/app/api/ocr/route.ts`
+- API (OpenRouter OCR): `src/app/api/ocr/openrouter/route.ts`
+- Components: `src/components/*`
+- Utilities: `src/lib/*`
 
 Run locally:
 1) Install: `yarn` (or `npm install`)
