@@ -10,7 +10,7 @@
 ## โปรโตไทป์และไฟล์สำคัญ
 | ขั้นตอน | คำอธิบาย |ไฟล์|
 |---|---|---|
-| Project Hub | แลนดิ้งเพจนําเสนอเรื่องราวและเชื่อมทุกเดโม | [project-hub.html](project-hub.html) |
+| Project Hub | แลนดิ้งเพจนําเสนอเรื่องราวและเชื่อมทุกเดโม | [index.html](index.html) |
 | Step 1 – Employee Input | LINE Chatbot สำหรับส่งใบเสร็จผ่านมือถือ | [line-prototype.html](line-prototype.html) |
 | Step 2 – Finance Control | AI Confidence Dashboard แก้โจทย์ “Untrust AI” | [dashboard-prototype.html](dashboard-prototype.html) |
 | Step 3a – Program Tracking | ภาพรวมการแทนเงินสดย่อยด้วย P-Card | [pcard-program-prototype.html](pcard-program-prototype.html) |
