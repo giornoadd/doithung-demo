@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Users/80005558/workspaces/ai/skoodio/doithung-demo/logs/.9fcbd8a0151bec288a07fc489c8501dad2c5a18c-audit.json",
+    "files": [
+        {
+            "date": 1762602642067,
+            "name": "/Users/80005558/workspaces/ai/skoodio/doithung-demo/logs/mcp-puppeteer-2025-11-08.log",
+            "hash": "deb2a1fb27b60047d8e2c291a2cfd75479f5f8ebdcedcb5d9b68a529e2bb4861"
+        }
+    ],
+    "hashType": "sha256"
+}

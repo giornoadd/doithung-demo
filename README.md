@@ -46,3 +46,35 @@
 - สตอรี่บอร์ดและภาพสเก็ตช์ใช้โทนเดียวกัน (เส้นดินสอ) เพื่อช่วยผู้ฟังมองเห็น Vision ร่วมกัน
 
 ขอให้การนำเสนอราบรื่นและสร้างความเชื่อมั่นให้ผู้มีส่วนได้ส่วนเสียครับ! 🎯
+
+---
+
+## Next.js Demo App (Step 1)
+
+This repository also includes a minimal Next.js prototype for “LINE-like Petty Cash – Step 1: Employee Input”, implemented under `specs/001-pcard-petty-cash-step1/`.
+
+Paths:
+- App: `app/page.tsx`
+- API (mock OCR): `app/api/ocr/route.ts`
+- API (OpenRouter OCR): `app/api/ocr/openrouter/route.ts`
+- Components: `components/*`
+- Utilities: `lib/*`
+
+Run locally:
+1) Install: `yarn` (or `npm install`)
+2) Copy `.env.example` → `.env.local`, set:
+   - `USE_MOCK=true` (or `NEXT_PUBLIC_USE_MOCK=true`) to use local mock
+   - `OCR_API_URL=` (or `NEXT_PUBLIC_OCR_API_URL=`) to call a real API
+   - `NEXT_PUBLIC_IMGBB_KEY=` to enable auto image upload to imgbb
+   - `NEXT_PUBLIC_USE_OPENROUTER=true` to use OpenRouter OCR via server route
+   - `OPENROUTER_API_KEY=sk-or-...` (server-side)
+3) Start dev: `yarn dev`, open `http://localhost:3000`
+
+Tips:
+- Use the “อัปโหลดตัวอย่าง” button; replace `public/sample-receipt.jpg` with a real image for better visuals.
+- History page at `/status` via Rich Menu → “ประวัติการเบิก”.
+- Header time and message timestamps are stamped once when displayed; they don’t live update.
+
+Debugging:
+- Upload logs: `[upload]` / `[imgbb]` in the browser console.
+- OpenRouter logs: `[openrouter]`; server route maps `{total, store, date}` → `{amount, merchant, date}`.

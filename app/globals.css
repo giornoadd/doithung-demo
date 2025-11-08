@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Force light mode to match mock */
+  color-scheme: light;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  @apply text-gray-900 bg-gray-50;
+}
+
+.safe-area-padding {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+.safe-area-padding-bottom {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 0.5rem);
+}
+
+/* Focus visibility */
+*:focus-visible {
+  outline: 2px solid #1d4ed8; /* blue-700 */
+  outline-offset: 2px;
+}
+
+/* Simple wallpaper background for chat */
+.chat-wallpaper {
+  background-image: radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+
+/* Chat bubble tails */
+.chat-bubble { position: relative; }
+.chat-bubble.left:after {
+  content: '';
+  position: absolute;
+  left: -6px;
+  bottom: 10px;
+  width: 0; height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid theme('colors.white');
+}
+
+/* Page background resembling chat area in mock */
+.page-bg {
+  background: linear-gradient(180deg, rgba(20,184,166,0.06) 0px, rgba(20,184,166,0.02) 120px, transparent 220px), #f4f6f8;
+}
