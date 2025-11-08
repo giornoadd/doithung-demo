@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doi Tung - P-Card Program (Petty Cash Elimination) | Financial Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: #F4F6F8;
+            color: #1F2933;
+        }
+        .card-shadow {
+            box-shadow: 0 18px 35px -18px rgba(30, 64, 175, 0.35);
+        }
+        .active-tab {
+            background: linear-gradient(90deg, #2563EB 0%, #1D4ED8 100%);
+            color: white !important;
+        }
+        .tab-panel {
+            display: none;
+        }
+        .tab-panel.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <button class="fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-2 rounded-full shadow-lg text-sm hover:bg-slate-800 transition" onclick="location.reload()">Restart Demo</button>
+
+    <div class="max-w-6xl mx-auto px-5 py-8">
+        <header class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-900">Doi Tung - P-Card Program (Petty Cash Elimination) | Financial Report</h1>
+            <p class="text-slate-500 mt-2 text-sm md:text-base">Post go-live snapshot proving that every manual petty cash reimbursement, voucher, and ad-hoc payment has been replaced by the SCB P-Card feed with AI categorisation and SAP automation.</p>
+        </header>
+
+        <nav class="flex flex-wrap gap-3 mb-6">
+            <button id="btn-feed" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 border border-slate-200 bg-white hover:border-blue-400 transition active-tab">Transaction Feed</button>
+            <button id="btn-policy" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 border border-slate-200 bg-white hover:border-blue-400 transition">Store Policy</button>
+            <button id="btn-journal" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 border border-slate-200 bg-white hover:border-blue-400 transition">SAP Journal</button>
+        </nav>
+
+        <section id="tab-feed" class="tab-panel active">
+            <div class="bg-white rounded-2xl card-shadow border border-slate-100 overflow-hidden">
+                <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
+                    <div>
+                        <h2 class="text-xl font-semibold text-slate-900">P-Card Transaction Feed (Real-Time)</h2>
+                        <p class="text-sm text-slate-500 mt-1">Source: SCB Procurement Card provider feed + OCR/LLM classification trained on PV-BK-6910124 reimbursement data.</p>
+                    </div>
+                    <span class="text-xs font-semibold bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full uppercase tracking-wide">Manual Entry Eliminated</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-slate-200 text-sm">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left font-medium text-slate-500 uppercase tracking-wider">Date</th>
+                                <th class="px-6 py-3 text-left font-medium text-slate-500 uppercase tracking-wider">Merchant</th>
+                                <th class="px-6 py-3 text-left font-medium text-slate-500 uppercase tracking-wider">Amount (THB)</th>
+                                <th class="px-6 py-3 text-left font-medium text-slate-500 uppercase tracking-wider">Card</th>
+                                <th class="px-6 py-3 text-left font-medium text-slate-500 uppercase tracking-wider">AI GL Code</th>
+                                <th class="px-6 py-3 text-left font-medium text-slate-500 uppercase tracking-wider">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-slate-100">
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-700">06/10/2025</td>
+                                <td class="px-6 py-4 text-slate-800">CALTEX - PETCHASATORN</td>
+                                <td class="px-6 py-4 text-emerald-600 font-semibold">620.00</td>
+                                <td class="px-6 py-4 text-slate-600">...1234 (สาขา 001)</td>
+                                <td class="px-6 py-4"><span class="inline-flex items-center gap-2 bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full">63902 <span class="text-xs">ค่าน้ำมัน</span></span></td>
+                                <td class="px-6 py-4 text-emerald-600 font-semibold">✅ Ready for SAP</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-700">04/10/2025</td>
+                                <td class="px-6 py-4 text-slate-800">CREA TRADING (Coffee Machine)</td>
+                                <td class="px-6 py-4 text-emerald-600 font-semibold">3,145.15</td>
+                                <td class="px-6 py-4 text-slate-600">...5678 (สาขา 281)</td>
+                                <td class="px-6 py-4"><span class="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-3 py-1 rounded-full">63501 <span class="text-xs">เครื่องใช้</span></span></td>
+                                <td class="px-6 py-4 text-emerald-600 font-semibold">✅ Ready for SAP</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-700">09/10/2025</td>
+                                <td class="px-6 py-4 text-slate-800">Grab* (Taxi)</td>
+                                <td class="px-6 py-4 text-emerald-600 font-semibold">97.00</td>
+                                <td class="px-6 py-4 text-slate-600">...9012 (สนง.บัญชี)</td>
+                                <td class="px-6 py-4"><span class="inline-flex items-center gap-2 bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full">62503 <span class="text-xs">ค่าเดินทาง</span></span></td>
+                                <td class="px-6 py-4 text-emerald-600 font-semibold">✅ Ready for SAP</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-700">07/10/2025</td>
+                                <td class="px-6 py-4 text-slate-800">THAILAND POST (EMS)</td>
+                                <td class="px-6 py-4 text-emerald-600 font-semibold">264.00</td>
+                                <td class="px-6 py-4 text-slate-600">...5678 (สาขา 850)</td>
+                                <td class="px-6 py-4"><span class="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-3 py-1 rounded-full">63703 <span class="text-xs">ค่าส่งของ</span></span></td>
+                                <td class="px-6 py-4 text-emerald-600 font-semibold">✅ Ready for SAP</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-700">04/10/2025</td>
+                                <td class="px-6 py-4 text-slate-800">LALAMOVE</td>
+                                <td class="px-6 py-4 text-emerald-600 font-semibold">121.00</td>
+                                <td class="px-6 py-4 text-slate-600">...5678 (สาขา 850)</td>
+                                <td class="px-6 py-4"><span class="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-3 py-1 rounded-full">63703 <span class="text-xs">ค่าส่งของ</span></span></td>
+                                <td class="px-6 py-4 text-emerald-600 font-semibold">✅ Ready for SAP</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="mt-6 bg-blue-50 border border-blue-100 text-blue-700 rounded-xl p-5 text-sm leading-relaxed">
+                <h3 class="font-semibold text-blue-900 mb-2">Key Message</h3>
+                <p>Every line item originates from the reimbursement bundle <span class="font-semibold">PV-BK-6910124</span> but now arrives digitally from the bank feed. The AI fills GL codes instantly; Finance simply validates. There are no more handwritten vouchers, no PDF scans, and no "ใบรับรองแทนใบเสร็จ" requests (e.g. PC-12432) because the data is born-digital and reconciled daily.</p>
+            </div>
+        </section>
+
+        <section id="tab-policy" class="tab-panel">
+            <div class="bg-white rounded-2xl card-shadow border border-slate-100 overflow-hidden">
+                <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
+                    <div>
+                        <h2 class="text-xl font-semibold text-slate-900">Store Expense Management Policy (To-Be)</h2>
+                        <p class="text-sm text-slate-500 mt-1">Converted from the legacy petty cash schedule in <span class="font-semibold">Petty cash by stores.pdf</span> to P-Card controls per store.</p>
+                    </div>
+                    <span class="text-xs font-semibold bg-amber-50 text-amber-600 px-3 py-1 rounded-full uppercase tracking-wide">Risk Exposure Eliminated</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-slate-200 text-sm">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left font-medium text-slate-500 uppercase tracking-wider">Store Name</th>
+                                <th class="px-6 py-3 text-left font-medium text-slate-500 uppercase tracking-wider">Old Petty Cash Limit</th>
+                                <th class="px-6 py-3 text-left font-medium text-slate-500 uppercase tracking-wider">New System</th>
+                                <th class="px-6 py-3 text-left font-medium text-slate-500 uppercase tracking-wider">P-Card Limit</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-slate-100">
+                            <tr>
+                                <td class="px-6 py-4 font-semibold text-slate-800">สนามบินเชียงราย (236)</td>
+                                <td class="px-6 py-4 text-rose-600 font-semibold">5,000.00</td>
+                                <td class="px-6 py-4 text-slate-700">P-Card (...4451)</td>
+                                <td class="px-6 py-4 text-emerald-600 font-semibold">5,000.00</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-semibold text-slate-800">กาแฟดอยตุง (234)</td>
+                                <td class="px-6 py-4 text-rose-600 font-semibold">6,000.00</td>
+                                <td class="px-6 py-4 text-slate-700">P-Card (...4452)</td>
+                                <td class="px-6 py-4 text-emerald-600 font-semibold">6,000.00</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-semibold text-slate-800">แฟชั่นไอร์แลนด์ (217)</td>
+                                <td class="px-6 py-4 text-rose-600 font-semibold">10,000.00</td>
+                                <td class="px-6 py-4 text-slate-700">P-Card (...4453)</td>
+                                <td class="px-6 py-4 text-emerald-600 font-semibold">10,000.00</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-semibold text-slate-800">SCB ปาร์ค พลาซ่า (227)</td>
+                                <td class="px-6 py-4 text-rose-600 font-semibold">7,000.00</td>
+                                <td class="px-6 py-4 text-slate-700">P-Card (...4454)</td>
+                                <td class="px-6 py-4 text-emerald-600 font-semibold">7,000.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="mt-6 bg-emerald-50 border border-emerald-100 text-emerald-700 rounded-xl p-5 text-sm leading-relaxed">
+                <h3 class="font-semibold text-emerald-900 mb-2">Key Message</h3>
+                <p>Every store has migrated from physical floats to card limits; Finance recovered <span class="font-semibold">562,000 THB</span> of idle cash from the balance sheet. Managers tap to pay, AI reconciles, and Treasury sees a single statement—no more envelope deposits or store-by-store reimbursements.</p>
+            </div>
+        </section>
+
+        <section id="tab-journal" class="tab-panel">
+            <div class="bg-white rounded-2xl card-shadow border border-slate-100 overflow-hidden">
+                <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
+                    <div>
+                        <h2 class="text-xl font-semibold text-slate-900">Auto-Generated Journal (SAP Posting)</h2>
+                        <p class="text-sm text-slate-500 mt-1">Derived from the same transaction set in PV-BK-6910124 but aggregated for the SCB P-Card settlement.</p>
+                    </div>
+                    <span class="text-xs font-semibold bg-slate-800 text-white px-3 py-1 rounded-full uppercase tracking-wide">SAP Ready</span>
+                </div>
+                <div class="grid gap-6 md:grid-cols-2 px-6 py-6">
+                    <div class="space-y-3 text-sm text-slate-600">
+                        <div class="bg-slate-50 border border-slate-100 rounded-lg p-4">
+                            <h3 class="text-base font-semibold text-slate-800 mb-3">Document Header</h3>
+                            <p><span class="font-semibold text-slate-800">Voucher No:</span> PCARD-BK-6910124</p>
+                            <p><span class="font-semibold text-slate-800">Voucher Date:</span> 16/10/2025</p>
+                            <p><span class="font-semibold text-slate-800">Pay To:</span> Siam Commercial Bank (Procurement Card Program)</p>
+                            <p><span class="font-semibold text-slate-800">Description:</span> Consolidated P-Card Statement (Oct 2025)</p>
+                        </div>
+                        <div class="bg-blue-50 border border-blue-100 rounded-lg p-4 text-blue-800">
+                            <h3 class="text-base font-semibold text-blue-900 mb-2">Key Message</h3>
+                            <p>The 37-page reimbursement pack (PV-BK-6910124) is now a single journal. Treasury pays one counterpart—SCB—instead of eight employees (Thasanee, Ploy, Thidaporn, Natthaporn, etc. from page 4). Supporting receipts live in the P-Card portal; SAP just books the totals.</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-100 rounded-lg p-4 text-sm text-slate-700">
+                        <h3 class="text-base font-semibold text-slate-800 mb-4">Line Items (Aggregated)</h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-slate-200">
+                                <thead class="bg-slate-100">
+                                    <tr>
+                                        <th class="px-4 py-2 text-left font-medium text-slate-500 uppercase tracking-wider">Account</th>
+                                        <th class="px-4 py-2 text-left font-medium text-slate-500 uppercase tracking-wider">Description</th>
+                                        <th class="px-4 py-2 text-right font-medium text-slate-500 uppercase tracking-wider">Debit (THB)</th>
+                                        <th class="px-4 py-2 text-right font-medium text-slate-500 uppercase tracking-wider">Credit (THB)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-slate-100">
+                                    <tr>
+                                        <td class="px-4 py-3 text-slate-800 font-semibold">62503</td>
+                                        <td class="px-4 py-3">Other traveling exp.-Local</td>
+                                        <td class="px-4 py-3 text-right text-emerald-600 font-semibold">97.00</td>
+                                        <td class="px-4 py-3 text-right">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3 text-slate-800 font-semibold">63902</td>
+                                        <td class="px-4 py-3">Vehicle petrol</td>
+                                        <td class="px-4 py-3 text-right text-emerald-600 font-semibold">620.00</td>
+                                        <td class="px-4 py-3 text-right">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3 text-slate-800 font-semibold">63501</td>
+                                        <td class="px-4 py-3">Fixed assets</td>
+                                        <td class="px-4 py-3 text-right text-emerald-600 font-semibold">3,145.15</td>
+                                        <td class="px-4 py-3 text-right">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3 text-slate-800 font-semibold">63703</td>
+                                        <td class="px-4 py-3">Postage and courier</td>
+                                        <td class="px-4 py-3 text-right text-emerald-600 font-semibold">385.00</td>
+                                        <td class="px-4 py-3 text-right">-</td>
+                                    </tr>
+                                    <tr class="bg-slate-100">
+                                        <td class="px-4 py-3 text-slate-800 font-semibold">21903</td>
+                                        <td class="px-4 py-3">Accrued expenses - SCB</td>
+                                        <td class="px-4 py-3 text-right">-</td>
+                                        <td class="px-4 py-3 text-right text-blue-600 font-semibold">4,247.15</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="bg-slate-100">
+                                    <tr>
+                                        <td class="px-4 py-3 font-semibold text-slate-700" colspan="2">Totals</td>
+                                        <td class="px-4 py-3 text-right font-semibold text-slate-700">4,247.15</td>
+                                        <td class="px-4 py-3 text-right font-semibold text-slate-700">4,247.15</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const tabs = {
+            feed: document.getElementById('tab-feed'),
+            policy: document.getElementById('tab-policy'),
+            journal: document.getElementById('tab-journal'),
+        };
+
+        const buttons = {
+            feed: document.getElementById('btn-feed'),
+            policy: document.getElementById('btn-policy'),
+            journal: document.getElementById('btn-journal'),
+        };
+
+        function setActiveTab(target) {
+            Object.values(tabs).forEach(panel => panel.classList.remove('active'));
+            Object.values(buttons).forEach(btn => btn.classList.remove('active-tab'));
+            tabs[target].classList.add('active');
+            buttons[target].classList.add('active-tab');
+        }
+
+        buttons.feed.addEventListener('click', () => setActiveTab('feed'));
+        buttons.policy.addEventListener('click', () => setActiveTab('policy'));
+        buttons.journal.addEventListener('click', () => setActiveTab('journal'));
+
+        // Ensure default tab is visible on load even if script runs before DOM ready (failsafe)
+        setActiveTab('feed');
+    </script>
+</body>
+</html>

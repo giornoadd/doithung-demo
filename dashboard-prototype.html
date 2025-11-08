@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doi Tung - AI Petty Cash Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #F3F4F6;
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+        }
+        .transition-base {
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <button class="fixed bottom-5 right-5 z-40 bg-slate-900 text-white px-4 py-2 rounded-full shadow-lg text-sm transition-base hover:bg-slate-700" onclick="location.reload()">Restart Demo</button>
+
+    <div class="max-w-6xl mx-auto px-4 py-6" id="dashboard-view">
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold text-slate-900">Doi Tung - AI Petty Cash Dashboard</h1>
+            <p class="text-slate-500 mt-2 text-sm">Transparency-first cockpit for Finance teams to trust and steer the AI-powered petty cash workflow.</p>
+        </header>
+
+        <section class="grid gap-6 md:grid-cols-3 mb-10">
+            <div class="bg-white rounded-lg card-shadow p-6 border border-slate-100 transition-base">
+                <p class="text-slate-500 text-sm mb-2">Automation Rate (Last 24h)</p>
+                <div class="flex items-end justify-between">
+                    <span class="text-4xl font-semibold text-emerald-500">92%</span>
+                    <span class="text-xs uppercase tracking-wide text-emerald-500 bg-emerald-50 px-2 py-1 rounded-lg">+6% vs avg</span>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg card-shadow p-6 border border-slate-100 transition-base">
+                <p class="text-slate-500 text-sm mb-2">Avg. AI Confidence</p>
+                <div class="flex items-end justify-between">
+                    <span class="text-4xl font-semibold text-emerald-500">98.5%</span>
+                    <span class="text-xs uppercase tracking-wide text-emerald-500 bg-emerald-50 px-2 py-1 rounded-lg">Stable</span>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg card-shadow p-6 border border-slate-100 transition-base">
+                <p class="text-slate-500 text-sm mb-2">Items for Manual Review</p>
+                <div class="flex items-end justify-between">
+                    <span id="review-count" class="text-4xl font-semibold text-rose-500">3</span>
+                    <span class="text-xs uppercase tracking-wide text-rose-500 bg-rose-50 px-2 py-1 rounded-lg">HITL Queue</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-xl card-shadow border border-slate-100">
+            <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
+                <div>
+                    <h2 class="text-xl font-semibold text-slate-900">Transactions Requiring Human Oversight</h2>
+                    <p class="text-sm text-slate-500 mt-1">AI flags anomalies so Finance can validate in seconds. Confidence thresholds adapt to your policy.</p>
+                </div>
+                <span class="bg-blue-50 text-blue-600 text-xs font-semibold px-3 py-1 rounded-full">Human-in-the-Loop Active</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-slate-200" id="queue-table">
+                    <thead class="bg-slate-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Receipt ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">AI Confidence</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Status</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-slate-100 text-sm">
+                        <tr>
+                            <td class="px-6 py-4 font-semibold text-slate-800">#DT-98765</td>
+                            <td class="px-6 py-4"><span class="inline-flex items-center text-emerald-600 font-medium">99% <span class="ml-1 text-xs bg-emerald-50 px-2 py-0.5 rounded-full">High</span></span></td>
+                            <td class="px-6 py-4 text-emerald-600">Ready (Auto)</td>
+                            <td class="px-6 py-4"><button class="px-3 py-1 rounded-lg text-gray-400 bg-gray-100 cursor-not-allowed" disabled>Approved</button></td>
+                        </tr>
+                        <tr id="row-98766" class="bg-rose-50/40">
+                            <td class="px-6 py-4 font-semibold text-slate-800">#DT-98766</td>
+                            <td class="px-6 py-4"><span class="inline-flex items-center text-rose-600 font-bold">65% <span class="ml-1 text-xs bg-rose-50 px-2 py-0.5 rounded-full">Low</span></span></td>
+                            <td class="px-6 py-4"><span id="status-98766" class="text-rose-600 font-medium">⚠️ Needs Manual Review</span></td>
+                            <td class="px-6 py-4"><button id="review-btn-98766" class="bg-blue-500 hover:bg-blue-600 transition-base text-white px-3 py-1 rounded-lg font-medium" onclick="openReview()">Review</button></td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-semibold text-slate-800">#DT-98767</td>
+                            <td class="px-6 py-4"><span class="inline-flex items-center text-emerald-600 font-medium">97% <span class="ml-1 text-xs bg-emerald-50 px-2 py-0.5 rounded-full">High</span></span></td>
+                            <td class="px-6 py-4 text-emerald-600">Ready (Auto)</td>
+                            <td class="px-6 py-4"><button class="px-3 py-1 rounded-lg text-gray-400 bg-gray-100 cursor-not-allowed" disabled>Approved</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 py-6 hidden" id="review-view">
+        <header class="mb-6 flex items-center justify-between">
+            <div>
+                <h1 class="text-3xl font-bold text-slate-900">Manual Review: Receipt #DT-98766</h1>
+                <p class="text-sm text-slate-500 mt-2">Finance validates flagged AI extractions before Treasury payment runs. Edit, approve, or reroute in one glance.</p>
+            </div>
+            <button id="back-btn" class="flex items-center text-blue-500 hover:text-blue-600 transition-base" onclick="backToDashboard()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+                Back to Dashboard
+            </button>
+        </header>
+
+        <div class="grid gap-6 md:grid-cols-2">
+            <div class="bg-white rounded-xl card-shadow border border-slate-100 overflow-hidden">
+                <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+                    <div>
+                        <h2 class="text-lg font-semibold text-slate-900">The Proof</h2>
+                        <p class="text-xs text-slate-500 mt-1">OCR Source: Uploaded via LINE chatbot</p>
+                    </div>
+                    <span class="text-xs bg-amber-50 text-amber-500 px-2 py-1 rounded-full">Flagged: Low Confidence</span>
+                </div>
+                <div class="p-6 flex items-center justify-center bg-slate-50">
+                    <img src="https://placehold.co/400x600/eee/333?text=Blurry+Receipt+Image" alt="Receipt Preview" class="rounded-lg shadow-md border border-slate-200">
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl card-shadow border border-slate-100 flex flex-col">
+                <div class="px-6 py-4 border-b border-slate-100">
+                    <h2 class="text-lg font-semibold text-slate-900">AI Analysis (OCR + LLM)</h2>
+                    <p class="text-xs text-slate-500 mt-1">Editable insights show the AI's best guess. Finance remains in the driver's seat.</p>
+                </div>
+                <div class="p-6 space-y-6">
+                    <div>
+                        <label for="field-merchant" class="block text-sm font-semibold text-slate-700 mb-1">Merchant</label>
+                        <input id="field-merchant" type="text" value="7-ELEV N" class="w-full border-2 border-rose-400 focus:border-rose-500 focus:ring-rose-500 rounded-lg px-3 py-2 text-sm text-slate-800 transition-base">
+                        <p class="text-xs text-rose-500 mt-1">AI flagged: Possible OCR mismatch. Suggested correction &ldquo;7-ELEVEN&rdquo;.</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Total Amount (THB)</label>
+                        <input type="text" value="120.00" class="w-full border-2 border-emerald-400 focus:border-emerald-500 focus:ring-emerald-500 rounded-lg px-3 py-2 text-sm text-slate-800 transition-base">
+                        <p class="text-xs text-emerald-500 mt-1">High-confidence extraction confirmed across OCR + LLM.</p>
+                    </div>
+                    <div class="bg-slate-50 rounded-lg p-4 border border-slate-100">
+                        <h3 class="text-sm font-semibold text-slate-700 mb-3">AI Confidence Breakdown</h3>
+                        <ul class="space-y-2 text-sm text-slate-600">
+                            <li><span class="font-medium text-slate-800">Merchant:</span> <span class="text-rose-600 font-semibold">65% (Low)</span></li>
+                            <li><span class="font-medium text-slate-800">LLM Reason:</span> &ldquo;Possible OCR mismatch on &lsquo;N&rsquo;. Suggest &lsquo;EN&rsquo; or &lsquo;IN&rsquo;.&rdquo;</li>
+                            <li><span class="font-medium text-slate-800">Total Amount:</span> <span class="text-emerald-600 font-semibold">99% (High)</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-white rounded-lg border border-slate-100 p-4 shadow-sm">
+                        <h3 class="text-sm font-semibold text-slate-700 mb-3">Policy &amp; Routing Check</h3>
+                        <ul class="space-y-2 text-sm text-slate-600">
+                            <li><span class="font-medium text-emerald-600">Status:</span> ✅ Verified (Amount &lt; 300 THB)</li>
+                            <li><span class="font-medium text-blue-600">Routing:</span> Treasury (Auto-Assigned)</li>
+                        </ul>
+                    </div>
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <button id="approve-btn" class="bg-emerald-500 hover:bg-emerald-600 transition-base text-white px-4 py-2 rounded-lg text-sm font-semibold" onclick="approveTransaction()">Correct &amp; Approve</button>
+                        <button id="reject-btn" class="bg-rose-500 hover:bg-rose-600 transition-base text-white px-4 py-2 rounded-lg text-sm font-semibold" onclick="rejectTransaction()">Reject Transaction</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openReview() {
+            document.getElementById('dashboard-view').classList.add('hidden');
+            document.getElementById('review-view').classList.remove('hidden');
+            document.getElementById('field-merchant').focus();
+        }
+
+        function backToDashboard() {
+            document.getElementById('review-view').classList.add('hidden');
+            document.getElementById('dashboard-view').classList.remove('hidden');
+        }
+
+        function approveTransaction() {
+            const merchantField = document.getElementById('field-merchant');
+            if (!merchantField.value.trim()) {
+                merchantField.classList.add('border-rose-500');
+                return;
+            }
+
+            document.getElementById('review-view').classList.add('hidden');
+            document.getElementById('dashboard-view').classList.remove('hidden');
+
+            const statusCell = document.getElementById('status-98766');
+            statusCell.textContent = '✅ Approved (Manual)';
+            statusCell.classList.remove('text-rose-600');
+            statusCell.classList.add('text-emerald-600', 'font-semibold');
+
+            const reviewButton = document.getElementById('review-btn-98766');
+            reviewButton.textContent = 'Approved';
+            reviewButton.disabled = true;
+            reviewButton.classList.remove('bg-blue-500', 'hover:bg-blue-600', 'text-white');
+            reviewButton.classList.add('bg-gray-100', 'text-gray-400', 'cursor-not-allowed');
+
+            const reviewRow = document.getElementById('row-98766');
+            reviewRow.classList.remove('bg-rose-50/40');
+            reviewRow.classList.add('bg-emerald-50/40');
+
+            const reviewCountEl = document.getElementById('review-count');
+            const currentCount = parseInt(reviewCountEl.textContent, 10);
+            if (!isNaN(currentCount) && currentCount > 0) {
+                reviewCountEl.textContent = currentCount - 1;
+                reviewCountEl.classList.remove('text-rose-500');
+                reviewCountEl.classList.add('text-emerald-500');
+            }
+        }
+
+        function rejectTransaction() {
+            document.getElementById('review-view').classList.add('hidden');
+            document.getElementById('dashboard-view').classList.remove('hidden');
+
+            const statusCell = document.getElementById('status-98766');
+            statusCell.textContent = '❌ Rejected (Manual)';
+            statusCell.classList.remove('text-rose-600');
+            statusCell.classList.add('text-rose-500', 'font-semibold');
+
+            const reviewButton = document.getElementById('review-btn-98766');
+            reviewButton.textContent = 'Rejected';
+            reviewButton.disabled = true;
+            reviewButton.classList.remove('bg-blue-500', 'hover:bg-blue-600', 'text-white');
+            reviewButton.classList.add('bg-gray-100', 'text-gray-400', 'cursor-not-allowed');
+
+            const reviewRow = document.getElementById('row-98766');
+            reviewRow.classList.remove('bg-rose-50/40');
+            reviewRow.classList.add('bg-rose-100/60');
+
+            const reviewCountEl = document.getElementById('review-count');
+            const currentCount = parseInt(reviewCountEl.textContent, 10);
+            if (!isNaN(currentCount) && currentCount > 0) {
+                reviewCountEl.textContent = currentCount - 1;
+            }
+        }
+    </script>
+</body>
+</html>

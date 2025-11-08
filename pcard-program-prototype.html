@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doi Tung - P-Card Program Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/heroicons/2.1.3/24/outline/hero-icons.min.css');
+        body {
+            font-family: 'Sarabun', sans-serif;
+        }
+        .kpi-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .document-frame {
+            background: white;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            max-width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-blue-700">Doi Tung</span>
+                    <span class="ml-2 text-2xl font-light text-gray-600">| P-Card Program Dashboard</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="text-sm text-gray-600 mr-3">ยินดีต้อนรับ, Finance Manager</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto max-w-7xl p-4 sm:p-6 lg:p-8">
+
+        <!-- Section 1: The "Why" - Problem Solved (KPIs) -->
+        <section id="kpi-summary" class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">ผลลัพธ์จากการยกเลิก Petty Cash (Before vs. After)</h2>
+            <p class="text-lg text-gray-600 mb-6">
+                นี่คือผลกระทบเชิงบวกที่เกิดขึ้นทันทีหลังจากการนำระบบ P-Card (Corporate Prepaid Card) มาใช้แทนเงินสดย่อย
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Before Card 1 (Data from Petty cash by stores.pdf) -->
+                <div class="kpi-card border-l-4 border-red-500">
+                    <h3 class="text-gray-500 text-sm font-medium uppercase">Before: จุดถือเงินสดย่อย</h3>
+                    <p class="text-4xl font-bold text-red-600 mt-2">25 <span class="text-xl font-normal">จุด</span></p>
+                    <p class="text-gray-500 text-sm mt-1">(เช่น สาขาสนามบิน, แฟชั่นฯ, SCB Park)</p>
+                </div>
+                
+                <!-- After Card 1 -->
+                <div class="kpi-card border-l-4 border-green-500">
+                    <h3 class="text-gray-500 text-sm font-medium uppercase">After: จุดถือเงินสดย่อย</h3>
+                    <p class="text-4xl font-bold text-green-600 mt-2">0 <span class="text-xl font-normal">จุด</span></p>
+                    <p class="text-gray-500 text-sm mt-1">เปลี่ยนเป็น P-Card ทั้งหมด</p>
+                </div>
+
+                <!-- Before Card 2 (Data from Petty cash by stores.pdf) -->
+                <div class="kpi-card border-l-4 border-red-500">
+                    <h3 class="text-gray-500 text-sm font-medium uppercase">Before: เงินสดหมุนเวียน (Liability)</h3>
+                    <p class="text-4xl font-bold text-red-600 mt-2">562,000 <span class="text-xl font-normal">THB</span></p>
+                    <p class="text-gray-500 text-sm mt-1">เงินสดคงค้างในระบบที่หน้าร้าน</p>
+                </div>
+
+                <!-- After Card 2 -->
+                <div class="kpi-card border-l-4 border-green-500">
+                    <h3 class="text-gray-500 text-sm font-medium uppercase">After: เงินสดหมุนเวียน (Liability)</h3>
+                    <p class="text-4xl font-bold text-green-600 mt-2">0 <span class="text-xl font-normal">THB</span></p>
+                    <p class="text-gray-500 text-sm mt-1">ไม่มีความเสี่ยงเงินสดหาย</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <!-- Before Card 3 (Data from Report...Petty Cash.pdf) -->
+                <div class="kpi-card border-l-4 border-red-500">
+                    <h3 class="text-gray-500 text-sm font-medium uppercase">Before: ภาระงาน (Workload)</h3>
+                    <p class="text-4xl font-bold text-red-600 mt-2">สูงมาก</p>
+                    <p class="text-gray-500 text-sm mt-1">ต้องใช้คน (Finance) ตรวจสอบและคีย์ข้อมูล</p>
+                </div>
+                
+                <!-- After Card 3 (Data from Report...Petty Cash.pdf) -->
+                <div class="kpi-card border-l-4 border-green-500">
+                    <h3 class="text-gray-500 text-sm font-medium uppercase">After: ภาระงาน (Workload)</h3>
+                    <p class="text-4xl font-bold text-green-600 mt-2">ลดลง >80%</p>
+                    <p<class="text-gray-500 text-sm mt-1">ข้อมูล Transaction วิ่งตรงเข้า SAP/Treasury</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: "The 'How'" - New Automated Workflow -->
+        <section id="transaction-feed" class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">P-Card Transaction Feed (สถานะ: พร้อมสำหรับ SAP)</h2>
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ผู้ถือบัตร (พนักงาน)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cost Center (Store/Dept)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">วันที่</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ร้านค้า (Merchant)</th>
+                                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">ยอดเงิน (THB)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">AI G/L Code</th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">สถานะ</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">ทัศนีย์ วิ...</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">281 (Sales-Food)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">04/10/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">CREA TRADING (Coffee Machine)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right font-medium">3,145.15</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">63501 (Fixed Assets)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm"><span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">✅ Auto-Posted</span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">พลอย โก...</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">804 (Accounting)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">10/10/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">GrabTaxi</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right font-medium">97.00</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">62503 (Travel)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm"><span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">✅ Auto-Posted</span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">รณกร พึง...</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">001 (Warehouse)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">06/10/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">CALTEX (เพชรสาทร)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right font-medium">620.00</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">63902 (Vehicle Petrol)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm"><span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">✅ Auto-Posted</span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">รณกร พึง...</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">001 (Warehouse)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">06/10/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Toll Plaza (ดินแดง)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right font-medium">50.00</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">62503 (Travel)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm"><span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">✅ Auto-Posted</span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">กันตเมศฐ์...</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">347 (Event)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">04/10/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Homepro (ฟิล์มยืด)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right font-medium">966.00</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">63101 (Other Supplies)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm"><span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">✅ Auto-Posted</span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">สุพัตรา...</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">850 (IT)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">06/10/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Lalamove</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right font-medium">121.00</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">63703 (Courier)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm"><span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">✅ Auto-Posted</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: "The 'Success Output'" - Sample Auto-Generated Document -->
+        <section id="output-document">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-bold text-gray-900">ตัวอย่างเอกสารที่ระบบสร้างอัตโนมัติ (100% Outcome)</h2>
+                <button class="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v4.59L7.3 9.24a.75.75 0 0 0-1.1 1.02l3.25 3.5a.75.75 0 0 0 1.1 0l3.25-3.5a.75.75 0 1 0-1.1-1.02l-1.95 2.1V6.75Z" clip-rule="evenodd" />
+                    </svg>
+                    Download PDF
+                </button>
+            </div>
+            <div class="document-frame p-8 md:p-12">
+                <div class="border-b pb-4 mb-4">
+                    <h1 class="text-2xl font-bold">โครงการพัฒนาดอยตุง (พื้นที่ทรงงาน) อันเนื่องมาจากพระราชดำริ</h1>
+                    <p class="text-sm">1875/10 พระราม4 แขวงลุมพินี เขตปทุมวัน กรุงเทพฯ 10330</p>
+                </div>
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h2 class="text-3xl font-bold text-blue-700">ใบสำคัญจ่าย (Payment Voucher)</h2>
+                        <p class="text-gray-600">สถานะ: <span class="font-bold text-green-600">AUTOMATED & POSTED</span></p>
+                    </div>
+                    <div class="text-right text-sm">
+                        <p><span class="font-bold">เลขที่ใบสำคัญ:</span> PV-BK-6910200 (Auto)</p>
+                        <p><span class="font-bold">วันที่ลงรายการ:</span> 17/10/2025</p>
+                        <p><span class="font-bold">เลขที่สมุดรายวัน:</span> JN305030 (Auto)</p>
+                    </div>
+                </div>
+                <div class="mb-6 text-sm">
+                    <p><span class="font-bold">จ่ายให้ (Bank):</span> SCB - P-Card Program</p>
+                    <p><span class="font-bold">คำอธิบายรายการ:</span> <span class="text-green-600 font-bold">สรุปยอดใช้จ่าย P-Card อัตโนมัติ ประจำรอบ 16/10/2025</span></p>
+                </div>
+                <table class="min-w-full text-sm border-t border-b border-gray-400">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="px-4 py-2 text-left font-bold">Cost Center</th>
+                            <th class="px-4 py-2 text-left font-bold">รหัสบัญชี (G/L)</th>
+                            <th class="px-4 py-2 text-left font-bold">ชื่อบัญชี</th>
+                            <th class="px-4 py-2 text-right font-bold">เดบิต (THB)</th>
+                            <th class="px-4 py-2 text-right font-bold">เครดิต (THB)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-4 py-2">281</td>
+                            <td class="px-4 py-2">63501</td>
+                            <td class="px-4 py-2">Fixed assets not capitalised (Coffee Machine)</td>
+                            <td class="px-4 py-2 text-right">3,145.15</td>
+                            <td class="px-4 py-2 text-right">0.00</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2">001</td>
+                            <td class="px-4 py-2">63902</td>
+                            <td class="px-4 py-2">Vehicle petrol</td>
+                            <td class="px-4 py-2 text-right">620.00</td>
+                            <td class="px-4 py-2 text-right">0.00</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2">804</td>
+                            <td class="px-4 py-2">62503</td>
+                            <td class="px-4 py-2">Other traveling exp.-Local (Grab)</td>
+                            <td class="px-4 py-2 text-right">97.00</td>
+                            <td class="px-4 py-2 text-right">0.00</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2">001</td>
+                            <td class="px-4 py-2">62503</td>
+                            <td class="px-4 py-2">Other traveling exp.-Local (Toll)</td>
+                            <td class="px-4 py-2 text-right">50.00</td>
+                            <td class="px-4 py-2 text-right">0.00</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2">347</td>
+                            <td class="px-4 py-2">63101</td>
+                            <td class="px-4 py-2">Other Supplies (Homepro)</td>
+                            <td class="px-4 py-2 text-right">966.00</td>
+                            <td class="px-4 py-2 text-right">0.00</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2">850</td>
+                            <td class="px-4 py-2">63703</td>
+                            <td class="px-4 py-2">Postage and courier (Lalamove)</td>
+                            <td class="px-4 py-2 text-right">121.00</td>
+                            <td class="px-4 py-2 text-right">0.00</td>
+                        </tr>
+                        <tr class="bg-gray-100 font-bold">
+                            <td class="px-4 py-2">P03</td>
+                            <td class="px-4 py-2">11211</td>
+                            <td class="px-4 py-2">Saving Accounts (P-Card Clearing)</td>
+                            <td class="px-4 py-2 text-right">0.00</td>
+                            <td class="px-4 py-2 text-right text-blue-700">4,999.15</td>
+                        </tr>
+                    </tbody>
+                    <tfoot class="bg-gray-200">
+                        <tr>
+                            <td colspan="3" class="px-4 py-2 text-right font-bold">รวมยอด</td>
+                            <td class="px-4 py-2 text-right font-bold">4,999.15</td>
+                            <td class="px-4 py-2 text-right font-bold">4,999.15</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="mt-8 pt-8 border-t border-dashed">
+                    <div class="grid grid-cols-3 gap-8 text-center">
+                        <div>
+                            <p class="font-bold text-green-600">SYSTEM (Auto-Generated)</p>
+                            <p class="text-xs border-t mt-2 pt-2">ผู้จัดทำ/ผู้ตรวจสอบ</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-green-600">SYSTEM (Auto-Approved)</p>
+                            <p class="text-xs border-t mt-2 pt-2">ผู้อนุมัติ</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-green-600">POSTED TO SAP</p>
+                            <p class="text-xs border-t mt-2 pt-2">ผู้บันทึกรายการ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="text-center mt-8 pb-8">
+        <p class="text-gray-500 text-sm">© 2025 Doi Tung Development Project. P-Card Solution Prototype.</p>
+    </footer>
+
+</body>
+</html>
