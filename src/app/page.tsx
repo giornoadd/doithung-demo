@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { ChatBubble } from '@/components/ChatBubble'
 import { RichMenu } from '@/components/RichMenu'
@@ -23,16 +23,21 @@ export default function Page() {
   const router = useRouter()
   const [mode, setMode] = useState<'idle' | 'submit'>('idle')
   const [messages, setMessages] = useState<Msg[]>(() => [
-    { id: 'greet', side: 'left', type: 'text', data: 'สวัสดีครับ! 🙏 ยินดีต้อนรับสู่ระบบเบิกเงินสดย่อยอัตโนมัติ กรุณาเริ่มต้นจากด้านล่าง (Rich Menu) เพื่อเริ่มใช้งาน ⬇️', ts: formatTime12hWithSeconds() },
+    { id: 'greet', side: 'left', type: 'text', data: 'สวัสดีครับ! 🙏 ยินดีต้อนรับสู่ระบบเบิกเงินสดย่อยอัตโนมัติ กรุณาเริ่มต้นจากด้านล่าง (Rich Menu) เพื่อเริ่มใช้งาน ⬇️', ts: '' },
   ])
   const [summary, setSummary] = useState<OCRResponse | null>(null)
-  const [headerTime] = useState<string>(formatTime12hWithSeconds())
+  const [headerTime, setHeaderTime] = useState<string>('')
   const [locked, setLocked] = useState(false) // lock actions after final confirm
   const [isEditing, setIsEditing] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const { show, Toast } = useToast()
 
-  // header time is stamped once at mount via state initializer
+  // Stamp header time on mount (client-only) to avoid SSR/CSR mismatch
+  useEffect(() => {
+    setHeaderTime(formatTime12hWithSeconds())
+    // Also stamp initial greet message time if empty
+    setMessages(prev => prev.map(m => m.id === 'greet' && !m.ts ? { ...m, ts: formatTime12hWithSeconds() } : m))
+  }, [])
 
   function push(m: Msg) {
     const ts = m.ts ?? formatTime12hWithSeconds()
@@ -140,7 +145,7 @@ export default function Page() {
       <header className="safe-area-padding sticky top-0 z-10 bg-[#06c755] text-white shadow">
         {/* Status row */}
         <div className="px-4 pt-2 text-[11px] opacity-90 flex items-center justify-between">
-          <div>{headerTime}</div>
+          <div suppressHydrationWarning>{headerTime || '\u00A0'}</div>
           <div className="flex items-center gap-1" aria-hidden>
             <span className="inline-block h-1 w-1 rounded-full bg-white/90"></span>
             <span className="inline-block h-1 w-1 rounded-full bg-white/90"></span>
@@ -271,10 +276,10 @@ export default function Page() {
                 </ChatBubble>
               </div>
               {m.side === 'left' && m.type === 'text' && (
-                <div className="text-[11px] text-gray-400 mt-1 ml-12">{m.ts}</div>
+                <div suppressHydrationWarning className="text-[11px] text-gray-400 mt-1 ml-12">{m.ts || headerTime}</div>
               )}
               {m.type === 'image' && (
-                <div className={`text-[11px] text-gray-400 mt-1 ${m.side === 'left' ? 'ml-12' : ''}`}>{m.ts}</div>
+                <div suppressHydrationWarning className={`text-[11px] text-gray-400 mt-1 ${m.side === 'left' ? 'ml-12' : ''}`}>{m.ts || headerTime}</div>
               )}
             </div>
           ))}
