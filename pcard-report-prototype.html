@@ -31,6 +31,74 @@
         .tab-panel.active {
             display: block;
         }
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 288px;
+            transform: translateX(0);
+            transition: transform 0.3s ease-in-out;
+            z-index: 40;
+        }
+        .sidebar.collapsed {
+            transform: translateX(-288px);
+        }
+        .main-content {
+            margin-left: 288px;
+            transition: margin-left 0.3s ease-in-out;
+        }
+        .main-content.expanded {
+            margin-left: 0;
+        }
+        .hamburger-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 50;
+            background: #006A4E;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 106, 78, 0.3);
+        }
+        .hamburger-btn:hover {
+            background: #009688;
+            transform: scale(1.05);
+        }
+        .hamburger-btn.sidebar-open {
+            left: 308px;
+        }
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 30;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-288px);
+            }
+            .sidebar.collapsed {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .hamburger-btn.sidebar-open {
+                left: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -46,8 +114,20 @@
             <a href="program-hub.html" class="text-sm font-medium text-[#006A4E] hover:text-[#009688] transition">← Back to Hub</a>
         </div>
     </header>
+
+    <button id="hamburger-btn" class="hamburger-btn sidebar-open" onclick="toggleSidebar()" aria-label="Toggle menu">
+        <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+    </button>
+
+    <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
+
     <div class="min-h-screen flex">
-        <aside class="w-72 bg-[#006A4E] text-white flex flex-col p-6 space-y-10">
+        <aside id="sidebar" class="sidebar w-72 bg-[#006A4E] text-white flex flex-col p-6 space-y-10">
             <header class="space-y-1">
                 <p class="text-xs uppercase tracking-[0.4em] text-white/70">P-Card Initiative</p>
                 <h1 class="text-2xl font-semibold text-white">Doi Tung P-Card Analytics</h1>
@@ -81,7 +161,7 @@
             </footer>
         </aside>
 
-        <main class="flex-1 overflow-y-auto">
+        <main id="main-content" class="main-content flex-1 overflow-y-auto">
             <section data-view id="view-executive" class="hidden min-h-screen p-10 space-y-8">
                 <div class="max-w-6xl mx-auto space-y-6">
                     <header class="space-y-3">
@@ -98,21 +178,64 @@
 
                     <section id="tab-feed" class="tab-panel active space-y-6">
                         <div class="grid gap-4 md:grid-cols-3 text-sm">
-                            <article class="bg-white rounded-2xl border border-slate-200 p-5">
-                                <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Projected Quarterly Saving</p>
-                                <p class="mt-3 text-3xl font-bold text-emerald-600">฿148,800</p>
-                                <p class="mt-2 text-slate-500">ลดภาระงานการเงิน 320 ชั่วโมง ต่อไตรมาสด้วยการแปลงแฟ้ม PV/ADV เป็น card feed (อ้างอิง <code>PCV-BK-6910020/21/28</code>).</p>
+                            <article class="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl border border-emerald-400 p-5 text-white shadow-lg">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-xs font-semibold uppercase tracking-wide text-emerald-100">Projected Quarterly Saving</p>
+                                    <span class="text-3xl">💰</span>
+                                </div>
+                                <p class="mt-3 text-4xl font-bold">฿148,800</p>
+                                <div class="mt-3 flex items-center gap-2 text-xs text-emerald-100">
+                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-white/20">
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clip-rule="evenodd"/></svg>
+                                        320 ชั่วโมง/ไตรมาส
+                                    </span>
+                                </div>
+                                <p class="mt-2 text-xs text-emerald-100">ลดภาระงานการเงิน ด้วยการแปลงแฟ้ม PV/ADV เป็น card feed (อ้างอิง <code class="bg-white/20 px-1 rounded">PCV-BK-6910020/21/28</code>).</p>
                             </article>
-                            <article class="bg-white rounded-2xl border border-slate-200 p-5">
-                                <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Bundles Converted / Quarter</p>
-                                <p class="mt-3 text-3xl font-bold text-slate-900">48 ชุด</p>
-                                <p class="mt-2 text-slate-500">เทียบแฟ้ม ADV/PCV ใน <code>Petty cash by stores.md</code> เมื่อ rollout ครบ 25 cost centre.</p>
+                            <article class="bg-gradient-to-br from-slate-700 to-slate-900 rounded-2xl border border-slate-600 p-5 text-white shadow-lg">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-xs font-semibold uppercase tracking-wide text-slate-300">Bundles Converted / Quarter</p>
+                                    <span class="text-3xl">📦</span>
+                                </div>
+                                <p class="mt-3 text-4xl font-bold">48 ชุด</p>
+                                <div class="mt-3 h-2 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-blue-400 to-blue-600 rounded-full" style="width: 75%"></div>
+                                </div>
+                                <p class="mt-2 text-xs text-slate-300">เทียบแฟ้ม ADV/PCV ใน <code class="bg-white/20 px-1 rounded">Petty cash by stores.md</code> เมื่อ rollout ครบ 25 cost centre.</p>
                             </article>
-                            <article class="bg-white rounded-2xl border border-slate-200 p-5">
-                                <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Payback Period</p>
-                                <p class="mt-3 text-3xl font-bold text-blue-600">≤ 3 เดือน</p>
-                                <p class="mt-2 text-slate-500">รวมค่า training + integration (SCB API ➜ SAP) เทียบกับ savings ต่อไตรมาส.</p>
+                            <article class="bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl border border-blue-400 p-5 text-white shadow-lg">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-xs font-semibold uppercase tracking-wide text-blue-100">Payback Period</p>
+                                    <span class="text-3xl">⚡</span>
+                                </div>
+                                <p class="mt-3 text-4xl font-bold">≤ 3 เดือน</p>
+                                <div class="mt-3 flex items-center gap-2">
+                                    <div class="flex gap-1">
+                                        <div class="w-3 h-3 rounded-full bg-white"></div>
+                                        <div class="w-3 h-3 rounded-full bg-white"></div>
+                                        <div class="w-3 h-3 rounded-full bg-white"></div>
+                                        <div class="w-3 h-3 rounded-full bg-white/30"></div>
+                                        <div class="w-3 h-3 rounded-full bg-white/30"></div>
+                                    </div>
+                                    <span class="text-xs text-blue-100">Fast ROI</span>
+                                </div>
+                                <p class="mt-2 text-xs text-blue-100">รวมค่า training + integration (SCB API ➜ SAP) เทียบกับ savings ต่อไตรมาส.</p>
                             </article>
+                        </div>
+
+                        <div class="bg-white rounded-2xl card-shadow border border-slate-100 overflow-hidden">
+                            <div class="px-6 py-5 border-b border-slate-100">
+                                <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                                    <div>
+                                        <h3 class="text-xl font-semibold text-slate-900">Quarterly Savings Projection</h3>
+                                        <p class="text-sm text-slate-500">คาดการณ์การประหยัดต้นทุนต่อไตรมาส FY2026</p>
+                                    </div>
+                                    <span class="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-600 uppercase tracking-wide">เป้าหมาย +85% efficiency</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <canvas id="savings-chart" style="max-height: 300px;"></canvas>
+                            </div>
                         </div>
 
                         <div class="bg-white rounded-2xl card-shadow border border-slate-100 overflow-hidden">
@@ -208,28 +331,70 @@
                                     </thead>
                                     <tbody class="bg-white divide-y divide-slate-100">
                                         <tr>
-                                            <td class="px-6 py-4 font-semibold text-slate-800">สนามบินเชียงราย (236)</td>
-                                            <td class="px-6 py-4 text-rose-600 font-semibold">5,000.00</td>
-                                            <td class="px-6 py-4 text-slate-700">P-Card (...4451)</td>
-                                            <td class="px-6 py-4 text-emerald-600 font-semibold">5,000.00</td>
+                                            <td class="px-6 py-4 font-semibold text-slate-800">โรงงานดอยตุง (214)</td>
+                                            <td class="px-6 py-4 text-rose-600 font-semibold">100,000.00</td>
+                                            <td class="px-6 py-4 text-slate-700">P-Card (...8901)</td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">100,000.00</td>
                                         </tr>
                                         <tr>
-                                            <td class="px-6 py-4 font-semibold text-slate-800">กาแฟดอยตุง (234)</td>
-                                            <td class="px-6 py-4 text-rose-600 font-semibold">6,000.00</td>
-                                            <td class="px-6 py-4 text-slate-700">P-Card (...4452)</td>
-                                            <td class="px-6 py-4 text-emerald-600 font-semibold">6,000.00</td>
+                                            <td class="px-6 py-4 font-semibold text-slate-800">ดอยตุง กระจกมังกร (220)</td>
+                                            <td class="px-6 py-4 text-rose-600 font-semibold">30,000.00</td>
+                                            <td class="px-6 py-4 text-slate-700">P-Card (...8902)</td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">30,000.00</td>
                                         </tr>
                                         <tr>
-                                            <td class="px-6 py-4 font-semibold text-slate-800">แฟชั่นไอร์แลนด์ (217)</td>
-                                            <td class="px-6 py-4 text-rose-600 font-semibold">10,000.00</td>
-                                            <td class="px-6 py-4 text-slate-700">P-Card (...4453)</td>
-                                            <td class="px-6 py-4 text-emerald-600 font-semibold">10,000.00</td>
+                                            <td class="px-6 py-4 font-semibold text-slate-800">สนามบินสุวรรณภูมิ (357)</td>
+                                            <td class="px-6 py-4 text-rose-600 font-semibold">25,000.00</td>
+                                            <td class="px-6 py-4 text-slate-700">P-Card (...8903)</td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">25,000.00</td>
                                         </tr>
                                         <tr>
-                                            <td class="px-6 py-4 font-semibold text-slate-800">SCB ปาร์ค พลาซ่า (227)</td>
-                                            <td class="px-6 py-4 text-rose-600 font-semibold">7,000.00</td>
-                                            <td class="px-6 py-4 text-slate-700">P-Card (...4454)</td>
-                                            <td class="px-6 py-4 text-emerald-600 font-semibold">7,000.00</td>
+                                            <td class="px-6 py-4 font-semibold text-slate-800">สนามบินดอนเมือง (357)</td>
+                                            <td class="px-6 py-4 text-rose-600 font-semibold">20,000.00</td>
+                                            <td class="px-6 py-4 text-slate-700">P-Card (...8904)</td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">20,000.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 font-semibold text-slate-800">ดอยตุง ซีคอนสแควร์ ศรีนครินทร์ (253)</td>
+                                            <td class="px-6 py-4 text-rose-600 font-semibold">25,000.00</td>
+                                            <td class="px-6 py-4 text-slate-700">P-Card (...8905)</td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">25,000.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 font-semibold text-slate-800">ดอยตุง เทอร์มินอล 21 โคราช (239)</td>
+                                            <td class="px-6 py-4 text-rose-600 font-semibold">20,000.00</td>
+                                            <td class="px-6 py-4 text-slate-700">P-Card (...8906)</td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">20,000.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 font-semibold text-slate-800">กาดกลางกรุง (347)</td>
+                                            <td class="px-6 py-4 text-rose-600 font-semibold">50,000.00</td>
+                                            <td class="px-6 py-4 text-slate-700">P-Card (...8907)</td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">50,000.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 font-semibold text-slate-800">ดอยตุง เซ็นทรัล เอ็มบาสซี (244)</td>
+                                            <td class="px-6 py-4 text-rose-600 font-semibold">30,000.00</td>
+                                            <td class="px-6 py-4 text-slate-700">P-Card (...8908)</td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">30,000.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 font-semibold text-slate-800">ดอยตุง เซ็นทรัล พระราม 2 (230)</td>
+                                            <td class="px-6 py-4 text-rose-600 font-semibold">25,000.00</td>
+                                            <td class="px-6 py-4 text-slate-700">P-Card (...8909)</td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">25,000.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 font-semibold text-slate-800">ดอยตุง เซ็นทรัล ลาดพร้าว (267)</td>
+                                            <td class="px-6 py-4 text-rose-600 font-semibold">25,000.00</td>
+                                            <td class="px-6 py-4 text-slate-700">P-Card (...8910)</td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">25,000.00</td>
+                                        </tr>
+                                        <tr class="bg-slate-50 font-semibold">
+                                            <td class="px-6 py-4 text-slate-900">รวม 10 สาขาแรก</td>
+                                            <td class="px-6 py-4 text-rose-600">375,000.00</td>
+                                            <td class="px-6 py-4 text-slate-700">Phase 1 Rollout</td>
+                                            <td class="px-6 py-4 text-emerald-600">375,000.00</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -255,14 +420,16 @@
                                 <div class="space-y-3 text-sm text-slate-600">
                                     <div class="bg-slate-50 border border-slate-100 rounded-lg p-4">
                                         <h4 class="text-base font-semibold text-slate-800 mb-3">Document Header</h4>
-                                        <p><span class="font-semibold text-slate-800">Voucher No:</span> PCARD-BK-6910124</p>
-                                        <p><span class="font-semibold text-slate-800">Voucher Date:</span> 16/10/2025</p>
-                                        <p><span class="font-semibold text-slate-800">Pay To:</span> Siam Commercial Bank (Procurement Card Program)</p>
-                                        <p><span class="font-semibold text-slate-800">Description:</span> Consolidated P-Card Statement (Oct 2025)</p>
+                                        <p><span class="font-semibold text-slate-800">Voucher No:</span> PV-BK-6910296</p>
+                                        <p><span class="font-semibold text-slate-800">Voucher Date:</span> 08/10/2025</p>
+                                        <p><span class="font-semibold text-slate-800">Cost Center:</span> 281 (Food/E-commerce)</p>
+                                        <p><span class="font-semibold text-slate-800">Requestor:</span> ทัศนีย์ รัตนวรรณ (103353)</p>
+                                        <p><span class="font-semibold text-slate-800">Description:</span> ค่าขนส่ง Grab/Lalamove + ค่าเดินทางไป-กลับสนามบิน</p>
+                                        <p class="mt-2 pt-2 border-t border-slate-200"><span class="font-semibold text-slate-800">Total Amount:</span> <span class="text-emerald-600 font-bold">฿356.00</span></p>
                                     </div>
                                     <div class="bg-blue-50 border border-blue-100 rounded-lg p-4 text-blue-800">
                                         <h4 class="text-base font-semibold text-blue-900 mb-2">Key Message</h4>
-                                        <p>แฟ้มเบิก 37 หน้า (PV-BK-6910124) ย่อเป็น journal template เดียว Treasury จ่ายให้ SCB เพียงคู่สัญญาเดียว พร้อม receipt ใน portal.</p>
+                                        <p>ข้อมูลจาก <strong>PV-BK-6910296</strong> รวม 2 ใบเสร็จ: Grab ค่าขนส่งสินค้า (306 บาท) + ค่าผ่านทางพิเศษ (50 บาท) สำหรับพนักงาน Food/E-commerce ในการออกบูธ 08-14/10/2025</p>
                                     </div>
                                 </div>
                                 <div class="bg-slate-50 border border-slate-100 rounded-lg p-4 text-sm text-slate-700">
@@ -279,41 +446,29 @@
                                             </thead>
                                             <tbody class="bg-white divide-y divide-slate-100">
                                                 <tr>
+                                                    <td class="px-4 py-3 text-slate-800 font-semibold">64802</td>
+                                                    <td class="px-4 py-3">Freight & Courier (Grab)</td>
+                                                    <td class="px-4 py-3 text-right text-emerald-600 font-semibold">306.00</td>
+                                                    <td class="px-4 py-3 text-right">-</td>
+                                                </tr>
+                                                <tr>
                                                     <td class="px-4 py-3 text-slate-800 font-semibold">62503</td>
-                                                    <td class="px-4 py-3">Other traveling exp.-Local</td>
-                                                    <td class="px-4 py-3 text-right text-emerald-600 font-semibold">97.00</td>
-                                                    <td class="px-4 py-3 text-right">-</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-4 py-3 text-slate-800 font-semibold">63902</td>
-                                                    <td class="px-4 py-3">Vehicle petrol</td>
-                                                    <td class="px-4 py-3 text-right text-emerald-600 font-semibold">620.00</td>
-                                                    <td class="px-4 py-3 text-right">-</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-4 py-3 text-slate-800 font-semibold">63501</td>
-                                                    <td class="px-4 py-3">Fixed assets</td>
-                                                    <td class="px-4 py-3 text-right text-emerald-600 font-semibold">3,145.15</td>
-                                                    <td class="px-4 py-3 text-right">-</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-4 py-3 text-slate-800 font-semibold">63703</td>
-                                                    <td class="px-4 py-3">Postage and courier</td>
-                                                    <td class="px-4 py-3 text-right text-emerald-600 font-semibold">385.00</td>
+                                                    <td class="px-4 py-3">Other traveling exp. (ค่าผ่านทาง)</td>
+                                                    <td class="px-4 py-3 text-right text-emerald-600 font-semibold">50.00</td>
                                                     <td class="px-4 py-3 text-right">-</td>
                                                 </tr>
                                                 <tr class="bg-slate-100">
-                                                    <td class="px-4 py-3 text-slate-800 font-semibold">21903</td>
-                                                    <td class="px-4 py-3">Accrued expenses - SCB</td>
+                                                    <td class="px-4 py-3 text-slate-800 font-semibold">11902</td>
+                                                    <td class="px-4 py-3">Short-term advances to employees</td>
                                                     <td class="px-4 py-3 text-right">-</td>
-                                                    <td class="px-4 py-3 text-right text-blue-600 font-semibold">4,247.15</td>
+                                                    <td class="px-4 py-3 text-right text-blue-600 font-semibold">356.00</td>
                                                 </tr>
                                             </tbody>
                                             <tfoot class="bg-slate-100">
                                                 <tr>
                                                     <td class="px-4 py-3 font-semibold text-slate-700" colspan="2">Totals</td>
-                                                    <td class="px-4 py-3 text-right font-semibold text-slate-700">4,247.15</td>
-                                                    <td class="px-4 py-3 text-right font-semibold text-slate-700">4,247.15</td>
+                                                    <td class="px-4 py-3 text-right font-semibold text-slate-700">356.00</td>
+                                                    <td class="px-4 py-3 text-right font-semibold text-slate-700">356.00</td>
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -331,6 +486,11 @@
                     <h2 class="text-3xl font-semibold text-slate-900">ภาพรวมการใช้จ่าย (P-Card Program)</h2>
                     <p class="text-sm text-slate-600 max-w-3xl">แทนที่แฟ้มรายงานแบบเดิม (เช่น PV-BK-6910124.pdf) ด้วยแดชบอร์ดสดที่รวมทุกหมวดค่าใช้จ่าย พร้อมสัญญาณเตือนอัจฉริยะจาก LLM.</p>
                 </header>
+
+                <aside class="bg-blue-50 border border-blue-200 text-blue-900 rounded-3xl p-6 shadow-sm">
+                    <h3 class="font-semibold text-blue-900 mb-2">🤖 <span class="underline decoration-blue-300">AI/LLM Summary</span></h3>
+                    <p class="text-sm leading-relaxed">ภาพรวมการใช้จ่ายในเดือนตุลาคม 2568 (Oct 2025) อยู่ในเกณฑ์ปกติ หมวด "ค่าขนส่ง" (64802) และ "ค่าเดินทาง" (62503) มีปริมาณธุรกรรมสูงสุด ซึ่งสอดคล้องกับการดำเนินงานปกติ <strong>[ข้อสังเกต ⚠️]</strong> ตรวจพบการใช้จ่ายกับ "Grab" 5 ครั้งในวันหยุดสุดสัปดาห์ (นอกเวลาทำการ) และการซื้อ "อุปกรณ์สำนักงาน" จากหลายสาขาแทนการสั่งซื้อจากส่วนกลาง แนะนำให้ Ops ตรวจสอบนโยบายการจัดซื้อของสาขา</p>
+                </aside>
 
                 <div class="grid gap-4 md:grid-cols-3">
                     <article class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-2">
@@ -350,13 +510,50 @@
                     </article>
                 </div>
 
-                <section class="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm space-y-4">
+                <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-4">
                     <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                         <div>
-                            <h3 class="text-lg font-semibold text-slate-900">Spend by Category</h3>
+                            <h3 class="text-lg font-semibold text-slate-900">Spend by Category - Visual Breakdown</h3>
                             <p class="text-xs text-slate-500">แยกตาม GL หมวดหลักจากชุด ADV/PV</p>
                         </div>
                         <span class="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">Source · 62503 · 64802 · 63101 · 61303 · 61101</span>
+                    </header>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <canvas id="overview-chart" style="max-height: 300px;"></canvas>
+                        </div>
+                        <div class="flex flex-col justify-center space-y-3">
+                            <div class="flex items-center gap-3 p-3 bg-gradient-to-r from-[#006A4E]/10 to-transparent rounded-xl">
+                                <div class="w-12 h-12 rounded-xl bg-[#006A4E] flex items-center justify-center text-white font-bold text-lg">50%</div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-semibold text-slate-900">ค่าเบี้ยเลี้ยง / ค่ารับรอง</p>
+                                    <p class="text-xs text-slate-500">฿29,701.00 (GL: 61303)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-gradient-to-r from-[#009688]/10 to-transparent rounded-xl">
+                                <div class="w-12 h-12 rounded-xl bg-[#009688] flex items-center justify-center text-white font-bold text-lg">17%</div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-semibold text-slate-900">วัตถุดิบ / ค่าแรงโครงการ</p>
+                                    <p class="text-xs text-slate-500">฿10,036.50</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-gradient-to-r from-[#00796B]/10 to-transparent rounded-xl">
+                                <div class="w-12 h-12 rounded-xl bg-[#00796B] flex items-center justify-center text-white font-bold text-lg">12%</div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-semibold text-slate-900">ค่าขนส่ง / Courier</p>
+                                    <p class="text-xs text-slate-500">฿7,005.00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm space-y-4">
+                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                        <div>
+                            <h3 class="text-lg font-semibold text-slate-900">Detailed Breakdown</h3>
+                            <p class="text-xs text-slate-500">ตารางรายละเอียดทั้งหมด</p>
+                        </div>
                     </header>
                     <div class="overflow-x-auto">
                         <table class="min-w-full text-sm">
@@ -416,13 +613,33 @@
                     <p class="text-sm text-slate-600 max-w-3xl">ผูกข้อมูลพนักงานจาก PV-BK-6910124, PV-BK-6910296, ADV-BK-6910037 กับ cost center เพื่อดูพฤติกรรมใช้จ่ายและความเสี่ยง.</p>
                 </header>
 
+                <aside class="bg-amber-50 border border-amber-200 text-amber-900 rounded-3xl p-6 shadow-sm">
+                    <h3 class="font-semibold text-amber-900 mb-2">🤖 <span class="underline decoration-amber-300">AI/LLM Summary (HR/Fraud Alert)</span></h3>
+                    <p class="text-sm leading-relaxed">การใช้จ่ายส่วนใหญ่สอดคล้องกับหน้าที่ (เช่น "ทัศนีย์ รัตนวรรณ" (103353) จาก PV-BK-6910296 ใช้ในหมวด Food/E-comm). <strong>[ข้อสังเกต Fraud 🚩]</strong> ตรวจพบพนักงาน "ธิดาพร ปิ่นสงวน" (108179) จาก PV-BK-6910124 มีการเบิก "ค่าเดินทาง (Taxi)" 2 ครั้ง (PC-12407, PC-12387) ในวันเดียวกัน (8-9/10) และพนักงาน "พลอย โกมลสิงห์" (จาก PV-BK-6910124) มีการใช้ Grab (PC-12432) 6 ครั้งใน 3 วันหลัง 22:00 น. ซึ่งเป็นพฤติกรรมที่ควรตรวจสอบ (Anomaly).</p>
+                </aside>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-4">
+                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                        <div>
+                            <h3 class="text-lg font-semibold text-slate-900">Top 5 Spenders - Visualization</h3>
+                            <p class="text-xs text-slate-500">ข้อมูลจากใบสำคัญ PV-BK-6910296, PV-BK-6910124, PV-BK-1910310</p>
+                        </div>
+                        <span class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            LLM confidence 92%
+                        </span>
+                    </header>
+                    <div>
+                        <canvas id="employee-chart" style="max-height: 350px;"></canvas>
+                    </div>
+                </div>
+
                 <section class="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm space-y-4">
                     <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                         <div>
-                            <h3 class="text-lg font-semibold text-slate-900">Top 5 Spenders</h3>
-                            <p class="text-xs text-slate-500">ข้อมูลจากใบสำคัญ PV-BK-6910296, PV-BK-6910124, PV-BK-1910310</p>
+                            <h3 class="text-lg font-semibold text-slate-900">Employee Details</h3>
+                            <p class="text-xs text-slate-500">รายละเอียดพนักงาน Top Spenders</p>
                         </div>
-                        <span class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">LLM confidence 92%</span>
                     </header>
                     <div class="overflow-x-auto">
                         <table class="min-w-full text-sm">
@@ -486,66 +703,6 @@
                     <h3 class="font-semibold text-amber-900 mb-2">🤖 <span class="underline decoration-amber-300">AI/LLM Summary (HR/Fraud Alert)</span></h3>
                     <p class="text-sm leading-relaxed">การใช้จ่ายส่วนใหญ่สอดคล้องกับหน้าที่ (เช่น “ทัศนีย์ รัตนวรรณ” (103353) จาก PV-BK-6910296 ใช้ในหมวด Food/E-comm). <strong>[ข้อสังเกต Fraud 🚩]</strong> ตรวจพบพนักงาน “ธิดาพร ปิ่นสงวน” (108179) จาก PV-BK-6910124 มีการเบิก “ค่าเดินทาง (Taxi)” 2 ครั้ง (PC-12407, PC-12387) ในวันเดียวกัน (8-9/10) และพนักงาน “พลอย โกมลสิงห์” (จาก PV-BK-6910124) มีการใช้ Grab (PC-12432) 6 ครั้งใน 3 วันหลัง 22:00 น. ซึ่งเป็นพฤติกรรมที่ควรตรวจสอบ (Anomaly).</p>
                 </aside>
-
-                <section class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-4">
-                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                        <div>
-                            <h3 class="text-lg font-semibold text-slate-900">ตารางสรุปการใช้จ่ายตามพนักงาน</h3>
-                            <p class="text-xs text-slate-500">Cross-reference: PV-BK-6910124, PV-BK-6910296, PV-BK-1910310</p>
-                        </div>
-                        <span class="text-xs text-slate-400">มูลค่าเป็นบาท (THB)</span>
-                    </header>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full text-sm text-slate-600">
-                            <thead class="bg-slate-50 text-slate-500 uppercase text-[0.7rem] tracking-[0.2em]">
-                                <tr>
-                                    <th class="px-4 py-3 text-left">พนักงาน</th>
-                                    <th class="px-4 py-3 text-left">รหัส</th>
-                                    <th class="px-4 py-3 text-left">แผนก / Cost Center</th>
-                                    <th class="px-4 py-3 text-right">ยอดรวม</th>
-                                    <th class="px-4 py-3 text-right">จำนวนธุรกรรม</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-slate-100">
-                                <tr>
-                                    <td class="px-4 py-3 font-semibold text-slate-900">ทัศนีย์ รัตนวรรณ</td>
-                                    <td class="px-4 py-3">103353</td>
-                                    <td class="px-4 py-3">281 (Food / E-comm)</td>
-                                    <td class="px-4 py-3 text-right font-semibold">฿19,608.50</td>
-                                    <td class="px-4 py-3 text-right">25</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-3 font-semibold text-slate-900">กันตเมศฐ์ อารียชัยสิริ</td>
-                                    <td class="px-4 py-3">109701</td>
-                                    <td class="px-4 py-3">347 (Project กาดกลางกรุง)</td>
-                                    <td class="px-4 py-3 text-right font-semibold">฿11,979.00</td>
-                                    <td class="px-4 py-3 text-right">12</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-3 font-semibold text-slate-900">ดวงกมล ธาดาเกียรติดำรง</td>
-                                    <td class="px-4 py-3">B04274</td>
-                                    <td class="px-4 py-3">356 (Store Ops)</td>
-                                    <td class="px-4 py-3 text-right font-semibold">฿1,357.00</td>
-                                    <td class="px-4 py-3 text-right">3</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-3 font-semibold text-slate-900">ธิดาพร ปิ่นสงวน</td>
-                                    <td class="px-4 py-3">108179</td>
-                                    <td class="px-4 py-3">804 (บัญชี)</td>
-                                    <td class="px-4 py-3 text-right font-semibold">฿1,087.00</td>
-                                    <td class="px-4 py-3 text-right">2</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-3 font-semibold text-slate-900">พลอย โกมลสิงห์</td>
-                                    <td class="px-4 py-3">-</td>
-                                    <td class="px-4 py-3">804 (บัญชี)</td>
-                                    <td class="px-4 py-3 text-right font-semibold">฿589.00</td>
-                                    <td class="px-4 py-3 text-right">6</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
             </section>
 
             <section data-view id="view-by-department" class="hidden min-h-screen p-10 space-y-8">
@@ -555,13 +712,65 @@
                     <p class="text-sm text-slate-600 max-w-3xl">รวบรวมยอดใช้จ่ายตาม Cost Center จาก Petty cash by stores.md, PV-BK-6910296, PV-BK-6910301 และ ADV-BK-6910038 เพื่อบังคับใช้นโยบายแบบรวมศูนย์.</p>
                 </header>
 
+                <aside class="bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-3xl p-6 shadow-sm">
+                    <h3 class="font-semibold text-emerald-900 mb-2">🤖 <span class="underline decoration-emerald-300">AI/LLM Summary (Operations Insight)</span></h3>
+                    <p class="text-sm leading-relaxed">แผนก 281 (Food/E-comm) และ 347 (Project กาดกลางกรุง) เป็นผู้ใช้จ่ายหลัก สอดคล้องกับกิจกรรมทางธุรกิจ <strong>[ข้อสังเกต Operation ⚠️]</strong> พบการจัดซื้อ "อุปกรณ์สำนักงาน" (จาก ADV-BK-6910038) และ "น้ำยาทำความสะอาด" (จาก PV-BK-6910301) ในระดับสาขา (เช่น 357, 244) แทนที่จะเป็นการสั่งซื้อจากส่วนกลาง (Central Procurement) การรวมศูนย์การสั่งซื้อ (Consolidation) สามารถประหยัดต้นทุนได้ 15-20%.</p>
+                </aside>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-4">
+                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                        <div>
+                            <h3 class="text-lg font-semibold text-slate-900">Spend by Department - Doughnut Chart</h3>
+                            <p class="text-xs text-slate-500">เปรียบเทียบยอดรวมต่อ Cost Center</p>
+                        </div>
+                        <span class="inline-flex items-center gap-2 rounded-full bg-sky-50 px-3 py-1 text-xs font-semibold text-sky-700">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+                            Auto-update ทุกสิ้นวัน
+                        </span>
+                    </header>
+                    <div class="grid md:grid-cols-2 gap-6 items-center">
+                        <div>
+                            <canvas id="dept-chart" style="max-height: 320px;"></canvas>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="p-4 bg-gradient-to-r from-[#006A4E] to-[#006A4E]/80 text-white rounded-xl shadow-md">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs opacity-90">281 - Food/E-commerce</p>
+                                        <p class="text-2xl font-bold mt-1">฿22,035.50</p>
+                                    </div>
+                                    <div class="text-3xl">🍽️</div>
+                                </div>
+                                <div class="mt-2 text-xs opacity-80">55.1% ของยอดรวม · 30 รายการ</div>
+                            </div>
+                            <div class="p-3 bg-[#009688]/10 border border-[#009688]/20 rounded-xl">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs text-slate-600">347 - Project กาดกลางกรุง</p>
+                                        <p class="text-lg font-bold text-[#009688] mt-1">฿11,979.00</p>
+                                    </div>
+                                    <span class="text-xl">🏗️</span>
+                                </div>
+                            </div>
+                            <div class="p-3 bg-[#00796B]/10 border border-[#00796B]/20 rounded-xl">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs text-slate-600">804 - บัญชี</p>
+                                        <p class="text-lg font-bold text-[#00796B] mt-1">฿3,111.15</p>
+                                    </div>
+                                    <span class="text-xl">💼</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <section class="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm space-y-4">
                     <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                         <div>
-                            <h3 class="text-lg font-semibold text-slate-900">Spend by Department</h3>
-                            <p class="text-xs text-slate-500">เปรียบเทียบยอดรวมต่อ Cost Center</p>
+                            <h3 class="text-lg font-semibold text-slate-900">Department Details</h3>
+                            <p class="text-xs text-slate-500">ตารางรายละเอียดแผนก</p>
                         </div>
-                        <span class="inline-flex items-center gap-2 rounded-full bg-sky-50 px-3 py-1 text-xs font-semibold text-sky-700">Auto-update ทุกสิ้นวัน</span>
                     </header>
                     <div class="overflow-x-auto">
                         <table class="min-w-full text-sm">
@@ -625,60 +834,6 @@
                     <h3 class="font-semibold text-emerald-900 mb-2">🤖 <span class="underline decoration-emerald-300">AI/LLM Summary (Operations Insight)</span></h3>
                     <p class="text-sm leading-relaxed">แผนก 281 (Food/E-comm) และ 347 (Project กาดกลางกรุง) เป็นผู้ใช้จ่ายหลัก สอดคล้องกับกิจกรรมทางธุรกิจ <strong>[ข้อสังเกต Operation ⚠️]</strong> พบการจัดซื้อ “อุปกรณ์สำนักงาน” (จาก ADV-BK-6910038) และ “น้ำยาทำความสะอาด” (จาก PV-BK-6910301) ในระดับสาขา (เช่น 357, 244) แทนที่จะเป็นการสั่งซื้อจากส่วนกลาง (Central Procurement) การรวมศูนย์การสั่งซื้อ (Consolidation) สามารถประหยัดต้นทุนได้ 15-20%.</p>
                 </aside>
-
-                <section class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-4">
-                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                        <div>
-                            <h3 class="text-lg font-semibold text-slate-900">ตารางสรุปการใช้จ่ายตามแผนก / Cost Center</h3>
-                            <p class="text-xs text-slate-500">Reference · Petty cash by stores.md + PV Series</p>
-                        </div>
-                        <span class="text-xs text-slate-400">มูลค่าเป็นบาท (THB)</span>
-                    </header>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full text-sm text-slate-600">
-                            <thead class="bg-slate-50 text-slate-500 uppercase text-[0.7rem] tracking-[0.2em]">
-                                <tr>
-                                    <th class="px-4 py-3 text-left">แผนก / สาขา (Cost Center)</th>
-                                    <th class="px-4 py-3 text-right">ยอดรวม</th>
-                                    <th class="px-4 py-3 text-right">ธุรกรรม</th>
-                                    <th class="px-4 py-3 text-left">หมวดหลัก</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-slate-100">
-                                <tr>
-                                    <td class="px-4 py-3 font-semibold text-slate-900">281 (Food/E-comm)</td>
-                                    <td class="px-4 py-3 text-right font-semibold">฿22,035.50</td>
-                                    <td class="px-4 py-3 text-right">30</td>
-                                    <td class="px-4 py-3">ค่าขนส่ง</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-3 font-semibold text-slate-900">347 (Project กาดกลางกรุง)</td>
-                                    <td class="px-4 py-3 text-right font-semibold">฿11,979.00</td>
-                                    <td class="px-4 py-3 text-right">12</td>
-                                    <td class="px-4 py-3">ค่าจ้าง / เบี้ยเลี้ยง</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-3 font-semibold text-slate-900">804 (บัญชี)</td>
-                                    <td class="px-4 py-3 text-right font-semibold">฿3,111.15</td>
-                                    <td class="px-4 py-3 text-right">12</td>
-                                    <td class="px-4 py-3">ค่าเดินทาง (T&amp;E)</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-3 font-semibold text-slate-900">244 (สาขากรุงศรีฯ เพลินจิต)</td>
-                                    <td class="px-4 py-3 text-right font-semibold">฿2,174.00</td>
-                                    <td class="px-4 py-3 text-right">4</td>
-                                    <td class="px-4 py-3">วัตถุดิบ / ของใช้</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-3 font-semibold text-slate-900">357 (สาขาสนามบินดอนเมือง)</td>
-                                    <td class="px-4 py-3 text-right font-semibold">฿786.00</td>
-                                    <td class="px-4 py-3 text-right">1</td>
-                                    <td class="px-4 py-3">อุปกรณ์สำนักงาน</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
             </section>
 
             <section data-view id="view-by-merchant" class="hidden min-h-screen p-10 space-y-8">
@@ -688,13 +843,33 @@
                     <p class="text-sm text-slate-600 max-w-3xl">ผนวกใบเสร็จจาก PV-BK-6910124, PV-BK-6910296, ADV-BK-6910008 และ ADV-BK-6910037 เพื่อดูพฤติกรรมซื้อซ้ำและ supplier overlap.</p>
                 </header>
 
+                <aside class="bg-rose-50 border border-rose-200 text-rose-900 rounded-3xl p-6 shadow-sm">
+                    <h3 class="font-semibold text-rose-900 mb-2">🤖 <span class="underline decoration-rose-300">AI/LLM Summary (Procurement/Fraud Alert)</span></h3>
+                    <p class="text-sm leading-relaxed">การใช้จ่ายกระจายตัวปกติ "CREA TRADING" มียอดซื้อเครื่องชงกาแฟ 3,145.15 บาท (PV-BK-6910124) สูงสุด ขณะที่ "Grab/Lalamove" รวม 1,821.00 บาท แต่เกิดบ่อยในช่วงค่ำ <strong>[ข้อสังเกต Fraud 🚩]</strong> ตรวจพบการซื้อวัสดุบรรจุภัณฑ์จาก HomePro 966.00 บาท (ADV-BK-6910008) และอุปกรณ์สำนักงาน 786.00 บาท จาก OfficeMate (ADV-BK-6910038) ภายในสัปดาห์เดียวกันของคนละสาขา แนะนำให้ Procurement ตรวจสอบความซ้ำซ้อนและรวมคำสั่งซื้อผ่านส่วนกลาง.</p>
+                </aside>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-4">
+                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                        <div>
+                            <h3 class="text-lg font-semibold text-slate-900">Top 5 Merchants - Horizontal Bar Chart</h3>
+                            <p class="text-xs text-slate-500">สรุปตามยอดรวมต่อร้านค้า</p>
+                        </div>
+                        <span class="inline-flex items-center gap-2 rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                            Fraud lens enabled
+                        </span>
+                    </header>
+                    <div>
+                        <canvas id="merchant-chart" style="max-height: 350px;"></canvas>
+                    </div>
+                </div>
+
                 <section class="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm space-y-4">
                     <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                         <div>
-                            <h3 class="text-lg font-semibold text-slate-900">Top 5 Merchants by Spend</h3>
-                            <p class="text-xs text-slate-500">สรุปตามยอดรวมต่อร้านค้า</p>
+                            <h3 class="text-lg font-semibold text-slate-900">Merchant Details</h3>
+                            <p class="text-xs text-slate-500">รายละเอียดร้านค้า Top 5</p>
                         </div>
-                        <span class="inline-flex items-center gap-2 rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700">Fraud lens enabled</span>
                     </header>
                     <div class="overflow-x-auto">
                         <table class="min-w-full text-sm">
@@ -752,60 +927,6 @@
                     <h3 class="font-semibold text-rose-900 mb-2">🤖 <span class="underline decoration-rose-300">AI/LLM Summary (Procurement/Fraud Alert)</span></h3>
                     <p class="text-sm leading-relaxed">การใช้จ่ายกระจายตัวปกติ “CREA TRADING” มียอดซื้อเครื่องชงกาแฟ 3,145.15 บาท (PV-BK-6910124) สูงสุด ขณะที่ “Grab/Lalamove” รวม 1,821.00 บาท แต่เกิดบ่อยในช่วงค่ำ <strong>[ข้อสังเกต Fraud 🚩]</strong> ตรวจพบการซื้อวัสดุบรรจุภัณฑ์จาก HomePro 966.00 บาท (ADV-BK-6910008) และอุปกรณ์สำนักงาน 786.00 บาท จาก OfficeMate (ADV-BK-6910038) ภายในสัปดาห์เดียวกันของคนละสาขา แนะนำให้ Procurement ตรวจสอบความซ้ำซ้อนและรวมคำสั่งซื้อผ่านส่วนกลาง.</p>
                 </aside>
-
-                <section class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-4">
-                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                        <div>
-                            <h3 class="text-lg font-semibold text-slate-900">ตารางสรุปการใช้จ่ายตามร้านค้า</h3>
-                            <p class="text-xs text-slate-500">Derived from PV-BK-6910124, PV-BK-6910296, PV-BK-6910301, ADV-BK-6910008, ADV-BK-6910037</p>
-                        </div>
-                        <span class="text-xs text-slate-400">มูลค่าเป็นบาท (THB)</span>
-                    </header>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full text-sm text-slate-600">
-                            <thead class="bg-slate-50 text-slate-500 uppercase text-[0.7rem] tracking-[0.2em]">
-                                <tr>
-                                    <th class="px-4 py-3 text-left">ร้านค้า</th>
-                                    <th class="px-4 py-3 text-right">ยอดรวม</th>
-                                    <th class="px-4 py-3 text-right">ธุรกรรม</th>
-                                    <th class="px-4 py-3 text-left">หมวดหลัก</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-slate-100">
-                                <tr>
-                                    <td class="px-4 py-3 font-semibold text-slate-900">CREA TRADING (Coffee Machine)</td>
-                                    <td class="px-4 py-3 text-right font-semibold">฿3,145.15</td>
-                                    <td class="px-4 py-3 text-right">1</td>
-                                    <td class="px-4 py-3">สินทรัพย์ / เครื่องชงกาแฟ</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-3 font-semibold text-slate-900">Grab / Lalamove</td>
-                                    <td class="px-4 py-3 text-right font-semibold">฿1,821.00</td>
-                                    <td class="px-4 py-3 text-right">8</td>
-                                    <td class="px-4 py-3">ค่าเดินทาง / ค่าขนส่ง</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-3 font-semibold text-slate-900">HomePro</td>
-                                    <td class="px-4 py-3 text-right font-semibold">฿966.00</td>
-                                    <td class="px-4 py-3 text-right">2</td>
-                                    <td class="px-4 py-3">อุปกรณ์และวัสดุบรรจุภัณฑ์</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-3 font-semibold text-slate-900">OfficeMate</td>
-                                    <td class="px-4 py-3 text-right font-semibold">฿786.00</td>
-                                    <td class="px-4 py-3 text-right">1</td>
-                                    <td class="px-4 py-3">อุปกรณ์สำนักงาน</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-3 font-semibold text-slate-900">CALTEX – PETCHASATORN</td>
-                                    <td class="px-4 py-3 text-right font-semibold">฿620.00</td>
-                                    <td class="px-4 py-3 text-right">1</td>
-                                    <td class="px-4 py-3">ค่าน้ำมัน</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
             </section>
         </main>
     </div>
@@ -885,10 +1006,168 @@
         const charts = {};
 
         function renderCharts() {
+            const savingsCtx = document.getElementById('savings-chart');
             const overviewCtx = document.getElementById('overview-chart');
             const employeeCtx = document.getElementById('employee-chart');
             const deptCtx = document.getElementById('dept-chart');
             const merchantCtx = document.getElementById('merchant-chart');
+
+            if (savingsCtx) {
+                charts.savings = new Chart(savingsCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Q1 2026', 'Q2 2026', 'Q3 2026', 'Q4 2026'],
+                        datasets: [{
+                            label: 'Projected Savings (฿)',
+                            data: [148800, 162500, 178200, 195000],
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 6,
+                            pointHoverRadius: 8,
+                            pointBackgroundColor: '#10b981',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2
+                        }, {
+                            label: 'Labor Hours Saved',
+                            data: [320, 350, 384, 420],
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 6,
+                            pointHoverRadius: 8,
+                            pointBackgroundColor: '#3b82f6',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            yAxisID: 'y1'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        scales: {
+                            y: {
+                                type: 'linear',
+                                display: true,
+                                position: 'left',
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return '฿' + value.toLocaleString();
+                                    },
+                                    color: '#64748b',
+                                    font: {
+                                        size: 11,
+                                        family: 'Inter, Sarabun, sans-serif'
+                                    }
+                                },
+                                grid: {
+                                    color: '#f1f5f9',
+                                    drawBorder: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            },
+                            y1: {
+                                type: 'linear',
+                                display: true,
+                                position: 'right',
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + ' hrs';
+                                    },
+                                    color: '#64748b',
+                                    font: {
+                                        size: 11,
+                                        family: 'Inter, Sarabun, sans-serif'
+                                    }
+                                },
+                                grid: {
+                                    drawOnChartArea: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: '#475569',
+                                    font: {
+                                        size: 12,
+                                        weight: '600',
+                                        family: 'Inter, Sarabun, sans-serif'
+                                    }
+                                },
+                                grid: {
+                                    display: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top',
+                                labels: {
+                                    usePointStyle: true,
+                                    padding: 15,
+                                    font: {
+                                        size: 12,
+                                        family: 'Inter, Sarabun, sans-serif'
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                                titleColor: '#f1f5f9',
+                                bodyColor: '#e2e8f0',
+                                borderColor: '#10b981',
+                                borderWidth: 1,
+                                padding: 12,
+                                cornerRadius: 8,
+                                displayColors: true,
+                                titleFont: {
+                                    size: 13,
+                                    weight: '600',
+                                    family: 'Inter, Sarabun, sans-serif'
+                                },
+                                bodyFont: {
+                                    size: 12,
+                                    family: 'Inter, Sarabun, sans-serif'
+                                },
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            if (context.datasetIndex === 0) {
+                                                label += '฿' + context.parsed.y.toLocaleString();
+                                            } else {
+                                                label += context.parsed.y.toLocaleString() + ' hours';
+                                            }
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
 
             if (overviewCtx) {
                 charts.overview = new Chart(overviewCtx, {
@@ -1234,6 +1513,44 @@
                 });
             }
         }
+
+        let sidebarOpen = true;
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const overlay = document.getElementById('overlay');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            
+            sidebarOpen = !sidebarOpen;
+            
+            if (sidebarOpen) {
+                sidebar.classList.remove('collapsed');
+                mainContent.classList.remove('expanded');
+                hamburgerBtn.classList.add('sidebar-open');
+                overlay.classList.add('active');
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('collapsed');
+                mainContent.classList.add('expanded');
+                hamburgerBtn.classList.remove('sidebar-open');
+                overlay.classList.remove('active');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        }
+
+        // Close sidebar when clicking on a nav item (for mobile)
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('[data-nav]') && window.innerWidth <= 768) {
+                if (sidebarOpen) {
+                    toggleSidebar();
+                }
+            }
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
             views = Array.from(document.querySelectorAll('[data-view]'));

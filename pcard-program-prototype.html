@@ -47,53 +47,109 @@
         <header class="bg-white card-shadow rounded-3xl border border-slate-100 p-8 lg:p-12 space-y-10">
             <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
                 <div class="space-y-4">
-                    <p class="uppercase text-[0.6rem] tracking-[0.35em] text-[#009688] font-semibold">Projected ROI · FY2026 Rollout</p>
-                    <h1 class="text-3xl lg:text-4xl font-bold text-slate-900">Doi Tung P-Card Program — Value Forecast For Full Rollout</h1>
-                    <p class="text-sm lg:text-base text-slate-600 max-w-3xl">แผนการขยาย P-Card เพื่อลดเงินสดย่อยทั้งหมด อ้างอิงข้อมูลจริงจาก <code>resources/data</code> และ <code>resources/analytic</code> โดยจำลองผลประหยัดต่อไตรมาสเมื่อทุกหน่วยงานใช้ workflow เดียวกับชุดเอกสาร <code>PCV-BK-6910020/21/28</code> และ <code>PV-BK-1910310</code>.</p>
+                    <p class="uppercase text-[0.6rem] tracking-[0.35em] text-[#009688] font-semibold">💰 Projected ROI · FY2026 Rollout</p>
+                    <h1 class="text-3xl lg:text-4xl font-bold text-slate-900">โครงการ P-Card แทนเงินสดย่อย</h1>
+                    <p class="text-base lg:text-lg text-slate-600 max-w-3xl leading-relaxed">เปลี่ยนจากการใช้เงินสดย่อยเป็น<strong class="text-[#006A4E]"> P-Card ดิจิทัล</strong> ลดงานเอกสาร ประหยัดเวลา และเพิ่มความปลอดภัย</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            ไม่ต้องเก็บเงินสดที่สาขา
+                        </span>
+                        <span class="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            ตรวจสอบรายจ่ายทันที
+                        </span>
+                        <span class="inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            ลดเวลาทำเอกสาร 82%
+                        </span>
+                    </div>
                 </div>
-                <div class="flex flex-wrap items-center gap-3">
-                    <span class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700">📈 Scenario Ready Dashboard</span>
-                    <span class="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700">🎯 Audience: CFO · Treasury · Retail Ops</span>
+                <div class="flex flex-col gap-3">
+                    <span class="inline-flex items-center gap-2 rounded-full border-2 border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
+                        Dashboard สำหรับผู้บริหาร
+                    </span>
+                    <span class="inline-flex items-center gap-2 rounded-full border-2 border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/></svg>
+                        สำหรับ: CFO · การเงิน · ผู้จัดการสาขา
+                    </span>
                 </div>
             </div>
 
             <section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                <article class="bg-white rounded-2xl border border-slate-100 p-5 space-y-2 card-shadow">
-                    <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Projected Quarterly Value</p>
+                <article class="bg-gradient-to-br from-emerald-50 to-emerald-100/50 rounded-2xl border-2 border-emerald-200 p-6 space-y-3 card-shadow hover:shadow-xl transition-shadow">
+                    <div class="flex items-center justify-between">
+                        <p class="text-xs uppercase tracking-[0.2em] text-emerald-700 font-semibold">💰 ประหยัดต่อไตรมาส</p>
+                        <svg class="w-8 h-8 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>
+                    </div>
                     <p class="text-4xl font-bold text-emerald-600">฿148,800</p>
-                    <p class="text-xs text-slate-500">ประหยัดต้นทุนบุคลากรจากงานเอกสาร (320 ชม x 465 บาท) เมื่อ scale workflow ของ <code>PCV-BK-6910020/21/28</code></p>
+                    <p class="text-sm text-emerald-900 leading-relaxed">ลดค่าใช้จ่ายงานเอกสาร<br/><span class="text-xs text-emerald-700">(320 ชม. × ฿465/ชม.)</span></p>
                 </article>
-                <article class="glass rounded-2xl border border-slate-200/80 p-5 space-y-2">
-                    <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Working Capital Off Balance Sheet</p>
-                    <p class="text-4xl font-bold text-slate-900">฿562,000</p>
-                    <p class="text-xs text-slate-500">วงเงินสดย่อยใน <code>Petty cash by stores.md</code> ถูกย้ายเข้าสู่ P-Card Wallet กลาง และไม่ต้องถือเป็น liability คงค้าง</p>
+                <article class="bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-2xl border-2 border-blue-200 p-6 space-y-3 card-shadow hover:shadow-xl transition-shadow">
+                    <div class="flex items-center justify-between">
+                        <p class="text-xs uppercase tracking-[0.2em] text-blue-700 font-semibold">💵 เงินที่ปลดล็อก</p>
+                        <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+                    </div>
+                    <p class="text-4xl font-bold text-blue-600">฿562,000</p>
+                    <p class="text-sm text-blue-900 leading-relaxed">เงินสดย่อยที่ไม่ต้องเก็บที่สาขาอีกต่อไป</p>
                 </article>
-                <article class="glass rounded-2xl border border-slate-200/80 p-5 space-y-2">
-                    <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Manual Petty Cash Files Avoided</p>
-                    <p class="text-4xl font-bold text-slate-900">42</p>
-                    <p class="text-xs text-slate-500">คาดการณ์ชุด ADV/PCV ต่อไตรมาส (12 ชุด/เดือน) ที่เปลี่ยนเป็น card feed พร้อม analytic audit trail</p>
+                <article class="bg-gradient-to-br from-slate-50 to-slate-100/50 rounded-2xl border-2 border-slate-200 p-6 space-y-3 card-shadow hover:shadow-xl transition-shadow">
+                    <div class="flex items-center justify-between">
+                        <p class="text-xs uppercase tracking-[0.2em] text-slate-700 font-semibold">📄 เอกสารที่ลดลง</p>
+                        <svg class="w-8 h-8 text-slate-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/></svg>
+                    </div>
+                    <p class="text-4xl font-bold text-slate-900">42 <span class="text-xl">ชุด</span></p>
+                    <p class="text-sm text-slate-700 leading-relaxed">งานเอกสารต่อไตรมาสที่เปลี่ยนเป็นดิจิทัล</p>
                 </article>
-                <article class="glass rounded-2xl border border-slate-200/80 p-5 space-y-2">
-                    <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Payback Point</p>
-                    <p class="text-4xl font-bold text-blue-600">2.7 เดือน</p>
-                    <p class="text-xs text-slate-500">เทียบกับค่าใช้จ่าย implementation, training และ subscription สำหรับทั้งองค์กร</p>
+                <article class="bg-gradient-to-br from-purple-50 to-purple-100/50 rounded-2xl border-2 border-purple-200 p-6 space-y-3 card-shadow hover:shadow-xl transition-shadow">
+                    <div class="flex items-center justify-between">
+                        <p class="text-xs uppercase tracking-[0.2em] text-purple-700 font-semibold">⏱️ คืนทุน</p>
+                        <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+                    </div>
+                    <p class="text-4xl font-bold text-purple-600">2.7 <span class="text-xl">เดือน</span></p>
+                    <p class="text-sm text-purple-900 leading-relaxed">ระยะเวลาคืนทุนการลงทุนทั้งหมด</p>
                 </article>
             </section>
 
-            <section class="rounded-3xl border border-slate-200/80 bg-white/90 p-6 space-y-4">
-                <h2 class="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">Assumption Backbone</h2>
-                <div class="grid gap-4 md:grid-cols-3 text-xs text-slate-600">
-                    <div class="rounded-2xl border border-slate-100 bg-slate-50/80 p-4 space-y-1">
-                        <p class="font-semibold text-slate-800">Processing Effort</p>
-                        <p>ชุด PCV จริง (<code>PCV-BK-6910020/21/28</code>) ใช้เวลาเฉลี่ย 6.7 ชม./ชุด (ตรวจหลักฐาน, บันทึก GL, แนบ PDF)</p>
+            <section class="rounded-3xl border-2 border-slate-200 bg-gradient-to-br from-slate-50 to-white p-8 space-y-6">
+                <div class="flex items-center gap-3">
+                    <svg class="w-8 h-8 text-[#006A4E]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd"/></svg>
+                    <h2 class="text-lg font-bold text-slate-900">📊 ข้อมูลที่ใช้คำนวณ</h2>
+                </div>
+                <div class="grid gap-4 md:grid-cols-3 text-sm text-slate-700">
+                    <div class="rounded-2xl border-2 border-amber-200 bg-gradient-to-br from-amber-50 to-white p-5 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-amber-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <p class="font-bold text-amber-900">เวลาที่ใช้</p>
+                        </div>
+                        <p class="text-amber-900 leading-relaxed"><strong class="text-2xl">6.7 ชม.</strong><br/>ต่อ 1 ชุดเอกสาร<br/><span class="text-xs text-amber-700">(ตรวจสอบ + บันทึก + แนบไฟล์)</span></p>
                     </div>
-                    <div class="rounded-2xl border border-slate-100 bg-slate-50/80 p-4 space-y-1">
-                        <p class="font-semibold text-slate-800">Labour Rate</p>
-                        <p>ค่าแรงรวมสวัสดิการฝ่ายการเงินเฉลี่ย 465 บาทต่อชั่วโมง (Finance Ops salary band FY2025)</p>
+                    <div class="rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-white p-5 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <p class="font-bold text-blue-900">ต้นทุนแรงงาน</p>
+                        </div>
+                        <p class="text-blue-900 leading-relaxed"><strong class="text-2xl">฿465</strong><br/>ต่อชั่วโมง<br/><span class="text-xs text-blue-700">(รวมสวัสดิการทีมการเงิน)</span></p>
                     </div>
-                    <div class="rounded-2xl border border-slate-100 bg-slate-50/80 p-4 space-y-1">
-                        <p class="font-semibold text-slate-800">Rollout Volume</p>
-                        <p>12 ADV/PCV ชุดต่อเดือนเมื่อขยายถึง 25 cost centre (เทียบกับแฟ้มงานปัจจุบันของ <code>Petty cash by stores.md</code>)</p>
+                    <div class="rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-5 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <p class="font-bold text-emerald-900">ปริมาณงาน</p>
+                        </div>
+                        <p class="text-emerald-900 leading-relaxed"><strong class="text-2xl">12 ชุด</strong><br/>ต่อเดือน<br/><span class="text-xs text-emerald-700">(ครอบคลุม 25 สาขา/หน่วยงาน)</span></p>
+                    </div>
+                </div>
+                <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+                    <div class="flex items-start gap-3">
+                        <svg class="w-6 h-6 text-blue-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+                        <p class="text-sm text-blue-900"><strong>หมายเหตุ:</strong> ข้อมูลมาจากการสัมภาษณ์ทีมการเงิน และวิเคราะห์เอกสารจริงในเดือนตุลาคม 2025</p>
                     </div>
                 </div>
             </section>
@@ -101,123 +157,358 @@
 
         <section class="space-y-6">
             <nav class="flex flex-wrap gap-3" role="tablist" aria-label="P-Card ROI Tabs">
-                <button type="button" class="tab-button inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition" data-tab="value" aria-selected="true">� Value Forecast</button>
-                <button type="button" class="tab-button inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition" data-tab="roadmap" aria-selected="false">🛠️ Adoption Roadmap</button>
-                <button type="button" class="tab-button inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition" data-tab="sap" aria-selected="false">📑 SAP Journal Templates</button>
+                <button type="button" class="tab-button inline-flex items-center gap-2 rounded-full border-2 px-5 py-3 text-sm font-semibold transition hover:scale-105" data-tab="value" aria-selected="true">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
+                    มูลค่าที่ได้รับ
+                </button>
+                <button type="button" class="tab-button inline-flex items-center gap-2 rounded-full border-2 px-5 py-3 text-sm font-semibold transition hover:scale-105" data-tab="roadmap" aria-selected="false">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+                    แผนการทำงาน 2026
+                </button>
+                <button type="button" class="tab-button inline-flex items-center gap-2 rounded-full border-2 px-5 py-3 text-sm font-semibold transition hover:scale-105" data-tab="sap" aria-selected="false">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/></svg>
+                    ตัวอย่างรายการบัญชี
+                </button>
             </nav>
 
             <section class="space-y-6">
                 <div class="tab-panel glass panel-shadow rounded-3xl border border-slate-200/60 p-8 space-y-9" data-panel="value">
-                    <header class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-                        <div class="space-y-2">
-                            <h2 class="text-2xl font-semibold text-slate-900">Quarterly Impact Snapshot</h2>
-                            <p class="text-sm text-slate-500">จำลองจากงานจริงของ <code>PCV-BK-6910020/21/28</code> + <code>PV-BK-1910310</code> แล้วขยายให้ครอบคลุมทุกหน่วย</p>
-                        </div>
-                        <div class="grid gap-3 md:grid-cols-2">
-                            <div class="rounded-2xl border border-emerald-200 bg-emerald-50/80 px-4 py-3">
-                                <p class="text-xs uppercase text-emerald-600">Finance Hours Released</p>
-                                <p class="text-lg font-semibold text-emerald-700">≈ 320 ชม./ไตรมาส</p>
+                    <header class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#006A4E] to-[#009688] flex items-center justify-center">
+                                <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
                             </div>
-                            <div class="rounded-2xl border border-blue-200 bg-blue-50/80 px-4 py-3">
-                                <p class="text-xs uppercase text-blue-600">Residual Manual Vouchers</p>
-                                <p class="text-lg font-semibold text-blue-700">0 (Fully digitised)</p>
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-900">ผลประโยชน์ที่ได้รับ</h2>
+                                <p class="text-sm text-slate-600">เปรียบเทียบ 3 สถานการณ์การประหยัดต่อไตรมาส</p>
+                            </div>
+                        </div>
+                        
+                        <div class="grid gap-4 md:grid-cols-2">
+                            <div class="rounded-2xl border-2 border-emerald-300 bg-gradient-to-br from-emerald-50 to-emerald-100/50 px-5 py-4 hover:shadow-lg transition">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <svg class="w-5 h-5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+                                    <p class="text-xs uppercase font-bold text-emerald-700 tracking-wider">⏰ เวลาที่ประหยัดได้</p>
+                                </div>
+                                <p class="text-2xl font-bold text-emerald-600">320 ชั่วโมง</p>
+                                <p class="text-xs text-emerald-700 mt-1">ต่อไตรมาส (≈ 40 วันทำงาน)</p>
+                            </div>
+                            <div class="rounded-2xl border-2 border-blue-300 bg-gradient-to-br from-blue-50 to-blue-100/50 px-5 py-4 hover:shadow-lg transition">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                    <p class="text-xs uppercase font-bold text-blue-700 tracking-wider">✅ ระบบอัตโนมัติ 100%</p>
+                                </div>
+                                <p class="text-2xl font-bold text-blue-600">0 เอกสารกระดาษ</p>
+                                <p class="text-xs text-blue-700 mt-1">ทุกอย่างเป็นดิจิทัล</p>
                             </div>
                         </div>
                     </header>
 
-                    <section class="relative h-80 w-full">
-                        <canvas id="roiChart"></canvas>
+                    <section class="bg-white rounded-2xl border-2 border-slate-200 p-6">
+                        <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                            <svg class="w-6 h-6 text-[#009688]" fill="currentColor" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
+                            การคาดการณ์ประหยัดต้นทุน (ต่อไตรมาส)
+                        </h3>
+                        <div class="relative h-80 w-full">
+                            <canvas id="roiChart"></canvas>
+                        </div>
+                        <div class="mt-4 flex flex-wrap gap-4 justify-center text-xs">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-4 rounded-sm bg-blue-200 border-2 border-blue-400"></div>
+                                <span class="text-slate-700"><strong>Conservative:</strong> สถานการณ์ระมัดระวัง</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-4 rounded-sm bg-blue-500"></div>
+                                <span class="text-slate-700"><strong>Base Case:</strong> สถานการณ์ปกติ (แนะนำ)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-4 rounded-sm bg-blue-800"></div>
+                                <span class="text-slate-700"><strong>Stretch:</strong> สถานการณ์ดีที่สุด</span>
+                            </div>
+                        </div>
                     </section>
 
-                    <section class="grid gap-6 lg:grid-cols-3 text-sm text-slate-700">
-                        <article class="rounded-3xl border border-emerald-200 bg-emerald-50/70 p-6 space-y-2">
-                            <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Working Capital</h3>
-                            <p><span class="font-semibold text-slate-900">฿562,000</span> ปลดล็อกจาก petty cash floats (ดู <code>Petty cash by stores.md</code>) และหมุนเวียนผ่านบัญชี SCB P-Card Clearing</p>
+                    <section class="grid gap-6 lg:grid-cols-3 text-sm">
+                        <article class="rounded-3xl border-2 border-emerald-300 bg-gradient-to-br from-emerald-50 to-white p-6 space-y-3 hover:shadow-xl transition">
+                            <div class="flex items-center gap-2">
+                                <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+                                </div>
+                                <h3 class="font-bold text-emerald-900">💵 เงินหมุนเวียน</h3>
+                            </div>
+                            <p class="text-emerald-900 leading-relaxed"><span class="font-bold text-2xl text-emerald-600">฿562,000</span><br/>ไม่ต้องเก็บเงินสดที่สาขาอีกต่อไป ใช้ P-Card แทน</p>
                         </article>
-                        <article class="rounded-3xl border border-blue-200 bg-blue-50/70 p-6 space-y-2">
-                            <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-blue-700">Process Cost</h3>
-                            <p>ลดค่าใช้จ่ายเรื่องการตรวจเอกสาร 37 หน้า (ตัวอย่าง <code>PV-BK-6910124</code>) เหลือเพียงการรีวิวหน้าจอเดียว พร้อม audit trail</p>
+                        <article class="rounded-3xl border-2 border-blue-300 bg-gradient-to-br from-blue-50 to-white p-6 space-y-3 hover:shadow-xl transition">
+                            <div class="flex items-center gap-2">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/></svg>
+                                </div>
+                                <h3 class="font-bold text-blue-900">📄 ลดงานเอกสาร</h3>
+                            </div>
+                            <p class="text-blue-900 leading-relaxed"><span class="font-bold text-2xl text-blue-600">37 หน้า → 1 หน้าจอ</span><br/>จากตรวจเอกสารหนา กลายเป็นดูหน้าจอเดียว</p>
                         </article>
-                        <article class="rounded-3xl border border-amber-200 bg-amber-50/70 p-6 space-y-2">
-                            <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-amber-700">Fraud & Error</h3>
-                            <p>LLM ตรวจจับความคลาดเคลื่อน เช่น PC69-055 vs PC19-055 (<code>PV-BK-6910301.md</code>) ก่อนโพสต์จริง ลดความเสี่ยงเอกสารหาย/กรอกผิด</p>
+                        <article class="rounded-3xl border-2 border-amber-300 bg-gradient-to-br from-amber-50 to-white p-6 space-y-3 hover:shadow-xl transition">
+                            <div class="flex items-center gap-2">
+                                <div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-amber-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                                </div>
+                                <h3 class="font-bold text-amber-900">🛡️ ป้องกันข้อผิดพลาด</h3>
+                            </div>
+                            <p class="text-amber-900 leading-relaxed"><span class="font-bold text-2xl text-amber-600">AI ตรวจสอบ</span><br/>ระบบ AI ช่วยตรวจจับข้อผิดพลาดก่อนบันทึกจริง</p>
                         </article>
                     </section>
 
-                    <footer class="space-y-2 text-xs text-slate-500">
-                        <p>แหล่งข้อมูลหลัก: <code>PCV-BK-6910020.md</code>, <code>PCV-BK-6910021.md</code>, <code>PCV-BK-6910028.md</code>, <code>PV-BK-1910310.md</code>, <code>Petty cash by stores.md</code></p>
-                        <p>อัตราชั่วโมงและจำนวนแฟ้มต่อเดือนปรับจากบันทึกเวลาที่ฝ่ายการเงินใช้กับ bundle จริง (สัมภาษณ์ 2 เจ้าหน้าที่ · ต.ค. 2025)</p>
-                    </footer>
+                    <div class="bg-gradient-to-r from-slate-50 to-slate-100 border-2 border-slate-200 rounded-2xl p-6 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-6 h-6 text-[#006A4E]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+                            <p class="text-sm font-bold text-slate-900">💡 ข้อมูลอ้างอิง</p>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">ตัวเลขทั้งหมดคำนวณจาก<strong> เอกสารจริง</strong>ที่ทีมการเงินใช้งานในเดือนตุลาคม 2025 และการสัมภาษณ์เจ้าหน้าที่ 2 คน เกี่ยวกับเวลาที่ใช้ในแต่ละขั้นตอน</p>
+                    </div>
                 </div>
 
                 <div class="tab-panel glass panel-shadow rounded-3xl border border-slate-200/60 p-8 space-y-8 hidden" data-panel="roadmap">
-                    <header class="space-y-2">
-                        <h2 class="text-2xl font-semibold text-slate-900">Adoption Roadmap · FY2026</h2>
-                        <p class="text-sm text-slate-500">สคริปต์การ rollout อ้างอิงโครงสร้าง cost centre ใน <code>Petty cash by stores.md</code> และทีมที่เกี่ยวข้องจากแฟ้ม ADV/PV</p>
+                    <header class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                                <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-900">แผนการทำงานปี 2026</h2>
+                                <p class="text-sm text-slate-600">ขั้นตอนการนำ P-Card มาใช้ทั้งองค์กร แบ่งเป็น 4 ไตรมาส</p>
+                            </div>
+                        </div>
                     </header>
 
-                    <section class="grid gap-6 lg:grid-cols-2">
-                        <article class="rounded-3xl border border-slate-200 bg-white/90 p-6 space-y-4">
-                            <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Phase Timeline</h3>
-                            <ul class="space-y-3 text-sm text-slate-700">
-                                <li>
-                                    <div class="flex items-center justify-between">
-                                        <span class="font-semibold text-slate-900">Q1·2026 — Calibration</span>
-                                        <span class="text-xs text-slate-500">Jan–Mar</span>
-                                    </div>
-                                    <p class="text-xs text-slate-500">ปรับ master data ให้ตรงกับ GL map จาก <code>PV-BK-6910296.md</code> และสร้าง playbook อนุมัติ</p>
-                                </li>
-                                <li>
-                                    <div class="flex items-center justify-between">
-                                        <span class="font-semibold text-slate-900">Q2·2026 — Rollout 15 Stores</span>
-                                        <span class="text-xs text-slate-500">Apr–Jun</span>
-                                    </div>
-                                    <p class="text-xs text-slate-500">ย้าย petty cash limit เหลือศูนย์ พร้อมติดตั้ง workflow SAP Interface + AI Receipt Check</p>
-                                </li>
-                                <li>
-                                    <div class="flex items-center justify-between">
-                                        <span class="font-semibold text-slate-900">Q3·2026 — Events & Projects</span>
-                                        <span class="text-xs text-slate-500">Jul–Sep</span>
-                                    </div>
-                                    <p class="text-xs text-slate-500">เชื่อมทีม R&D/Event (ชุดเดียวกับ <code>PV-BK-6910301</code>) และตั้ง budget guardrail บนบัตร</p>
-                                </li>
-                                <li>
-                                    <div class="flex items-center justify-between">
-                                        <span class="font-semibold text-slate-900">Q4·2026 — Optimise & Audit</span>
-                                        <span class="text-xs text-slate-500">Oct–Dec</span>
-                                    </div>
-                                    <p class="text-xs text-slate-500">ตั้ง dashboard real-time ใน SAP Analytics Cloud + เตรียม external audit package</p>
-                                </li>
-                            </ul>
-                        </article>
-                        <article class="rounded-3xl border border-slate-200 bg-white/90 p-6 space-y-5">
-                            <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Change Readiness</h3>
-                            <div class="grid gap-4 lg:grid-cols-2 text-sm text-slate-700">
-                                <div class="space-y-2">
-                                    <p class="text-xs font-semibold uppercase text-blue-600">People & Process</p>
-                                    <ul class="space-y-2 text-xs">
-                                        <li>• Training module: 2 ชั่วโมง (ดัดแปลงจากคู่มือ ADV-BK-6910037)</li>
-                                        <li>• Playbook อนุมัติ 4 ขั้น ลดเหลือ 2 ขั้นพร้อม digital signature</li>
-                                    </ul>
-                                </div>
-                                <div class="space-y-2">
-                                    <p class="text-xs font-semibold uppercase text-emerald-600">Technology</p>
-                                    <ul class="space-y-2 text-xs">
-                                        <li>• Interface SCB ➜ SAP FI ผ่าน API + RPA fallback</li>
-                                        <li>• OCR pipeline reuse จากงาน audit <code>ADV-BK-6910037.md</code> (เช็กคุณภาพใบเสร็จอัตโนมัติ)</li>
-                                    </ul>
-                                </div>
+                    <section class="space-y-6">
+                        <!-- Q1 -->
+                        <article class="relative rounded-3xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-white p-6 space-y-4 hover:shadow-xl transition">
+                            <div class="absolute -left-3 top-6 w-10 h-10 rounded-full bg-blue-500 border-4 border-white flex items-center justify-center shadow-lg">
+                                <span class="text-white font-bold text-sm">Q1</span>
                             </div>
-                            <footer class="text-xs text-slate-500">Status ปัจจุบัน: Pilot 5 cost centre เสร็จสมบูรณ์ · KPI <em>Cycle time</em> ลดลง 82% เทียบ baseline ปี 2024</footer>
+                            <div class="ml-8">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="text-xl font-bold text-blue-900">🔧 เตรียมความพร้อม</h3>
+                                    <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold">
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+                                        ม.ค. - มี.ค. 2026
+                                    </span>
+                                </div>
+                                <p class="text-sm text-blue-900 mb-3 leading-relaxed">ปรับระบบบัญชีและสร้างคู่มือการใช้งาน</p>
+                                <ul class="space-y-2 text-sm text-blue-800">
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        <span>จัดทำรหัสบัญชีที่ถูกต้อง (GL Codes)</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        <span>สร้างคู่มือการอนุมัติ (2 ขั้นตอน)</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        <span>ทดสอบระบบกับ 5 สาขานำร่อง</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </article>
+
+                        <!-- Q2 -->
+                        <article class="relative rounded-3xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-6 space-y-4 hover:shadow-xl transition">
+                            <div class="absolute -left-3 top-6 w-10 h-10 rounded-full bg-emerald-500 border-4 border-white flex items-center justify-center shadow-lg">
+                                <span class="text-white font-bold text-sm">Q2</span>
+                            </div>
+                            <div class="ml-8">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="text-xl font-bold text-emerald-900">🚀 เริ่มใช้งาน 15 สาขา</h3>
+                                    <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-semibold">
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+                                        เม.ย. - มิ.ย. 2026
+                                    </span>
+                                </div>
+                                <p class="text-sm text-emerald-900 mb-3 leading-relaxed">ขยายไปยังสาขาหลักทั่วประเทศ</p>
+                                <ul class="space-y-2 text-sm text-emerald-800">
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        <span>เลิกใช้เงินสดย่อย เปลี่ยนเป็น P-Card 100%</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        <span>เชื่อมต่อระบบ SAP + AI ตรวจใบเสร็จ</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        <span>อบรมพนักงานสาขา (2 ชั่วโมง/สาขา)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </article>
+
+                        <!-- Q3 -->
+                        <article class="relative rounded-3xl border-2 border-purple-200 bg-gradient-to-br from-purple-50 to-white p-6 space-y-4 hover:shadow-xl transition">
+                            <div class="absolute -left-3 top-6 w-10 h-10 rounded-full bg-purple-500 border-4 border-white flex items-center justify-center shadow-lg">
+                                <span class="text-white font-bold text-sm">Q3</span>
+                            </div>
+                            <div class="ml-8">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="text-xl font-bold text-purple-900">📦 ขยายไปทีมโครงการ</h3>
+                                    <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold">
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+                                        ก.ค. - ก.ย. 2026
+                                    </span>
+                                </div>
+                                <p class="text-sm text-purple-900 mb-3 leading-relaxed">ครอบคลุมทีม R&D และจัดงานอีเวนท์</p>
+                                <ul class="space-y-2 text-sm text-purple-800">
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-purple-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        <span>เพิ่มทีม R&D และ Event เข้าระบบ</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-purple-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        <span>ตั้งวงเงินจำกัดต่อโครงการ (Budget Limit)</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-purple-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        <span>ติดตามผลการใช้งานรายสัปดาห์</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </article>
+
+                        <!-- Q4 -->
+                        <article class="relative rounded-3xl border-2 border-amber-200 bg-gradient-to-br from-amber-50 to-white p-6 space-y-4 hover:shadow-xl transition">
+                            <div class="absolute -left-3 top-6 w-10 h-10 rounded-full bg-amber-500 border-4 border-white flex items-center justify-center shadow-lg">
+                                <span class="text-white font-bold text-sm">Q4</span>
+                            </div>
+                            <div class="ml-8">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="text-xl font-bold text-amber-900">✨ ปรับปรุงและตรวจสอบ</h3>
+                                    <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-semibold">
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+                                        ต.ค. - ธ.ค. 2026
+                                    </span>
+                                </div>
+                                <p class="text-sm text-amber-900 mb-3 leading-relaxed">ตรวจสอบผลลัพธ์และเตรียมรายงานประจำปี</p>
+                                <ul class="space-y-2 text-sm text-amber-800">
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        <span>สร้าง Dashboard แบบ Real-time</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        <span>จัดทำรายงานสำหรับผู้สอบบัญชี</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        <span>ประเมินผลประหยัดจริงเทียบเป้าหมาย</span>
+                                    </li>
+                                </ul>
+                            </div>
                         </article>
                     </section>
 
-                    <section class="rounded-3xl border border-amber-200 bg-amber-50/70 p-6 space-y-3 text-xs text-slate-700">
-                        <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-amber-600">Key Risks & Mitigations</h3>
-                        <ul class="space-y-2">
-                            <li>• <strong>Receipt Quality</strong> — ใช้ AI alert แบบเดียวกับ <code>ADV-BK-6910037.html</code> ให้ผู้ตรวจสอบยืนยันก่อนโพสต์</li>
-                            <li>• <strong>Policy Drift</strong> — ปรับวงเงินบัตรอัตโนมัติจาก data store (<code>resources/data/dashboard-prototype-list.md</code>) ทุกไตรมาส</li>
-                            <li>• <strong>Change Fatigue</strong> — ตั้ง helpdesk (Finance Ops) เพื่อตอบคำถาม P-Card ภายใน 2 ชม.</li>
+                    <section class="space-y-6">
+                        <div class="flex items-center gap-3 mb-2">
+                            <svg class="w-8 h-8 text-[#006A4E]" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/></svg>
+                            <h3 class="text-xl font-bold text-slate-900">🎓 ความพร้อมในการเปลี่ยนแปลง</h3>
+                        </div>
+
+                        <div class="grid gap-6 lg:grid-cols-2">
+                            <!-- People & Process Card -->
+                            <article class="rounded-3xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-white p-6 space-y-4 hover:shadow-xl transition">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
+                                        <svg class="w-7 h-7 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/></svg>
+                                    </div>
+                                    <h4 class="font-bold text-blue-900">👥 คนและกระบวนการ</h4>
+                                </div>
+                                <ul class="space-y-3 text-sm text-blue-900">
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        <span>อบรม <strong>2 ชั่วโมง</strong> ต่อคน</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        <span>ขั้นตอนอนุมัติ: <strong>4 ขั้น → 2 ขั้น</strong></span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        <span>ลายเซ็นดิจิทัล (ไม่ต้องเซ็นกระดาษ)</span>
+                                    </li>
+                                </ul>
+                            </article>
+
+                            <!-- Technology Card -->
+                            <article class="rounded-3xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-6 space-y-4 hover:shadow-xl transition">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center">
+                                        <svg class="w-7 h-7 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd"/></svg>
+                                    </div>
+                                    <h4 class="font-bold text-emerald-900">💻 เทคโนโลยี</h4>
+                                </div>
+                                <ul class="space-y-3 text-sm text-emerald-900">
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        <span>เชื่อมต่อ <strong>SCB → SAP</strong> อัตโนมัติ</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        <span><strong>AI ตรวจสอบ</strong>ใบเสร็จอัตโนมัติ</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        <span>มีระบบสำรอง (RPA) กรณีขัดข้อง</span>
+                                    </li>
+                                </ul>
+                            </article>
+                        </div>
+
+                        <!-- Status Card -->
+                        <div class="bg-gradient-to-r from-[#006A4E]/10 to-[#009688]/10 border-2 border-[#006A4E]/30 rounded-2xl p-6">
+                            <div class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-[#006A4E] mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <div>
+                                    <p class="font-bold text-[#006A4E] mb-1">✅ สถานะปัจจุบัน</p>
+                                    <p class="text-sm text-slate-800">ทดสอบแล้วกับ <strong>5 สาขา</strong> สำเร็จ ลดเวลาทำงาน <strong class="text-[#006A4E]">82%</strong> เทียบกับปี 2024</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="rounded-3xl border-2 border-amber-300 bg-gradient-to-br from-amber-50 to-white p-6 space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-amber-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <h3 class="font-bold text-amber-900 text-lg">⚠️ ความเสี่ยงและวิธีแก้ไข</h3>
+                        </div>
+                        <ul class="space-y-3 text-sm text-amber-900">
+                            <li class="flex items-start gap-3 p-3 bg-white rounded-xl border border-amber-200">
+                                <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                                    <span class="text-amber-600 font-bold text-sm">1</span>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-amber-900 mb-1">📸 คุณภาพใบเสร็จ</p>
+                                    <p class="text-amber-800">ใช้ AI ตรวจสอบก่อนบันทึกจริง ให้เจ้าหน้าที่ยืนยันอีกครั้ง</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3 p-3 bg-white rounded-xl border border-amber-200">
+                                <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                                    <span class="text-amber-600 font-bold text-sm">2</span>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-amber-900 mb-1">📋 นโยบายไม่สอดคล้อง</p>
+                                    <p class="text-amber-800">ปรับวงเงินบัตรอัตโนมัติทุกไตรมาส ตามข้อมูลจริง</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3 p-3 bg-white rounded-xl border border-amber-200">
+                                <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                                    <span class="text-amber-600 font-bold text-sm">3</span>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-amber-900 mb-1">😫 ความเหนื่อยล้าจากการเปลี่ยนแปลง</p>
+                                    <p class="text-amber-800">มีทีม Helpdesk ตอบคำถามภายใน <strong>2 ชั่วโมง</strong></p>
+                                </div>
+                            </li>
                         </ul>
                     </section>
                 </div>
