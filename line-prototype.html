@@ -436,7 +436,21 @@
             addUserMessage(`📋 ${voucherId}`);
             
             registerTimeout(() => {
-                addBotMessage('นี่คือรายละเอียดค่าใช้จ่ายจากรูปภาพที่คุณอัปโหลดครับ\n\n1) ใบเสร็จ GrabExpress (Car)\n   • วันที่: 07 ต.ค. 25\n   • วิธีชำระเงิน: CASHLESS\n   • ค่าบริการ (Item Carrying Fee) 340 บาท\n   • ส่วนลด (Rewards) -34 บาท\n   ⇒ ยอดรวมสุทธิ: 306 บาท\n\n2) ใบรับค่าผ่านทางพิเศษ (การทางพิเศษแห่งประเทศไทย)\n   • วันที่ (จากรอยเจาะ): 15 ก.ค. 25\n   • ประเภทรถ: 4 ล้อ\n   ⇒ ราคา: 50 บาท\n\nข้อมูลนี้ถูกต้องหรือไม่? หากใช่ กรุณากดยืนยันครับ');
+                addBotMessage('นี่คือรายละเอียดค่าใช้จ่ายจากรูปภาพที่คุณอัปโหลดครับ\n\n1) ใบเสร็จ GrabExpress (Car)\n   • วันที่: 07 ต.ค. 25\n   • วิธีชำระเงิน: CASHLESS\n   • ค่าบริการ (Item Carrying Fee) 340 บาท\n   • ส่วนลด (Rewards) -34 บาท\n   ⇒ ยอดรวมสุทธิ: 306 บาท\n\n2) ใบรับค่าผ่านทางพิเศษ (การทางพิเศษแห่งประเทศไทย)\n   • วันที่ (จากรอยเจาะ): 15 ก.ค. 25\n   • ประเภทรถ: 4 ล้อ\n   ⇒ ราคา: 50 บาท');
+            }, 1000);
+
+            registerTimeout(() => {
+                addBotMessage('กรุณาเลือก Account Code (รหัสบัญชี) สำหรับรายการนี้:');
+                renderAccountCodeChoices();
+            }, 2500);
+        }
+
+        function selectAccountCode(accountCode, accountName) {
+            hideQuickReplies();
+            addUserMessage(`💰 ${accountCode} - ${accountName}`);
+            
+            registerTimeout(() => {
+                addBotMessage('ข้อมูลครบถ้วนแล้วครับ ตรวจสอบความถูกต้องอีกครั้ง:\n\n📋 Voucher: PV-BK-6910296\n💰 Account: ' + accountCode + ' - ' + accountName + '\n💵 ยอดรวม: 356 บาท\n\nยืนยันข้อมูลหรือไม่?');
                 renderQuickReplies();
             }, 1000);
         }
@@ -498,6 +512,28 @@
                     <button type="button" onclick="selectVoucher('PV-BK-6910296')" class="rounded-2xl bg-white border-2 border-lineGreen px-4 py-3 text-left shadow-sm transition-all duration-150 hover:scale-[1.02]">
                         <div class="text-sm font-semibold text-slate-800">PV-BK-6910296</div>
                         <div class="text-xs text-emerald-600 mt-1">✓ Payment Voucher (แนะนำ)</div>
+                    </button>
+                </div>
+            `;
+            quickReplyContainer.classList.remove('hidden');
+            scrollChatToBottom();
+        }
+
+        function renderAccountCodeChoices() {
+            if (!quickReplyContainer) return;
+            quickReplyContainer.innerHTML = `
+                <div class="flex flex-col gap-2">
+                    <button type="button" onclick="selectAccountCode('11211', 'Saving Accounts')" class="rounded-2xl bg-white border border-slate-200 px-4 py-3 text-left shadow-sm transition-all duration-150 hover:scale-[1.02] hover:border-lineGreen">
+                        <div class="text-sm font-semibold text-slate-800">11211</div>
+                        <div class="text-xs text-slate-500 mt-1">Saving Accounts (บัญชีเงินฝากออมทรัพย์)</div>
+                    </button>
+                    <button type="button" onclick="selectAccountCode('52101', 'Transportation Expense')" class="rounded-2xl bg-white border-2 border-lineGreen px-4 py-3 text-left shadow-sm transition-all duration-150 hover:scale-[1.02]">
+                        <div class="text-sm font-semibold text-slate-800">52101</div>
+                        <div class="text-xs text-emerald-600 mt-1">✓ Transportation Expense (ค่าเดินทาง - แนะนำ)</div>
+                    </button>
+                    <button type="button" onclick="selectAccountCode('11902', 'Short-term advances to employees')" class="rounded-2xl bg-white border border-slate-200 px-4 py-3 text-left shadow-sm transition-all duration-150 hover:scale-[1.02] hover:border-lineGreen">
+                        <div class="text-sm font-semibold text-slate-800">11902</div>
+                        <div class="text-xs text-slate-500 mt-1">Short-term advances to employees (เงินเบิกล่วงหน้า)</div>
                     </button>
                 </div>
             `;
