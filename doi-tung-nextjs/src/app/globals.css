@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    background: #F2F5F7;
+    color: #1F2937;
+}
+
+.hero-gradient {
+    background: linear-gradient(135deg, rgba(0,106,78,0.08) 0%, rgba(37,99,235,0.12) 100%);
+}
+
+.card-shadow {
+    box-shadow: 0 14px 40px -20px rgba(15, 23, 42, 0.45);
+}
+
+.cta-button {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 18px -12px rgba(15, 118, 110, 0.6);
+}
+
+.nav-link.active {
+    color: #006A4E;
+    border-color: #006A4E;
+}
+
+.chat-wallpaper {
+    background: radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.34) 0, rgba(255, 255, 255, 0.05) 42%),
+                radial-gradient(circle at 88% 12%, rgba(255, 255, 255, 0.35) 0, rgba(255, 255, 255, 0) 45%),
+                #f0f2f5;
+}
+
+.chat-bubble {
+    position: relative;
+    border-radius: 20px;
+    padding: 12px 16px;
+    max-width: calc(100% - 72px);
+    box-shadow: 0 3px 10px rgba(14, 30, 37, 0.08);
+}
+
+.bubble-left::before {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: -7px;
+    width: 14px;
+    height: 14px;
+    background: inherit;
+    border-bottom-right-radius: 10px;
+}
+
+.bubble-left::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -12px;
+    width: 12px;
+    height: 12px;
+    background: transparent;
+    border-bottom-right-radius: 12px;
+    box-shadow: 2px 4px 0 0 rgba(255, 255, 255, 1);
+}
+
+.bubble-right {
+    background: #CFF6A1;
+    color: #0f172a;
+}
+
+.bubble-right::before {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    right: -7px;
+    width: 14px;
+    height: 14px;
+    background: inherit;
+    border-bottom-left-radius: 10px;
+}
+
+.bubble-right::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: -12px;
+    width: 12px;
+    height: 12px;
+    background: transparent;
+    border-bottom-left-radius: 12px;
+    box-shadow: -2px 4px 0 0 rgba(207, 246, 161, 1);
+}
+
+.status-bar-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+}
+
+.shadow-soft {
+    box-shadow: 0 12px 30px rgba(15, 30, 45, 0.18);
+}
+
+.animate-fade-in {
+    animation: fadeIn 220ms ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
