@@ -451,8 +451,12 @@
             
             registerTimeout(() => {
                 addBotMessage('ข้อมูลครบถ้วนแล้วครับ ตรวจสอบความถูกต้องอีกครั้ง:\n\n📋 Voucher: PV-BK-6910296\n💰 Account: ' + accountCode + ' - ' + accountName + '\n💵 ยอดรวม: 356 บาท\n\nยืนยันข้อมูลหรือไม่?');
-                renderQuickReplies();
             }, 1000);
+
+            registerTimeout(() => {
+                addUserNote('📝 หมายเหตุ: กรุณาตรวจสอบความถูกต้องของข้อมูลก่อนยืนยัน หากพบข้อผิดพลาดสามารถกดปุ่ม "❌ แก้ไข" เพื่อทำการแก้ไขได้');
+                renderQuickReplies();
+            }, 1800);
         }
 
         function addProcessingIndicator() {
@@ -586,6 +590,18 @@
                 <div class="mt-4 flex justify-end animate-fade-in">
                     <div class="chat-bubble bubble-right p-2">
                         <img src="${url}" alt="Receipt preview" class="max-w-[220px] rounded-xl shadow-md">
+                    </div>
+                </div>
+            `);
+            scrollChatToBottom();
+        }
+
+        function addUserNote(text) {
+            if (!chatBody) return;
+            chatBody.insertAdjacentHTML('beforeend', `
+                <div class="mt-4 flex justify-center animate-fade-in">
+                    <div class="max-w-[85%] rounded-xl bg-amber-50 border border-amber-200 px-4 py-3 text-xs leading-relaxed text-amber-900 shadow-sm">
+                        ${text}
                     </div>
                 </div>
             `);
