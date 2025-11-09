@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doi Tung Agent Prompt Console</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            color-scheme: dark;
+        }
+        body {
+            font-family: "Inter", "Sarabun", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+        .card-shadow {
+            box-shadow: 0 14px 40px -20px rgba(15, 23, 42, 0.45);
+        }
+        .tab-active {
+            background: linear-gradient(90deg, #006A4E 0%, #009688 100%);
+            color: #fff !important;
+            border-color: transparent !important;
+        }
+    </style>
+</head>
+<body class="bg-slate-950">
+    <div class="min-h-screen flex flex-col">
+        <header class="border-b border-[#006A4E]/20 bg-slate-950">
+            <div class="mx-auto max-w-6xl px-6 py-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                <div class="flex items-center gap-4">
+                    <a href="../program-hub.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-[#009688]/40 text-[#009688] text-sm font-medium hover:bg-[#009688]/10 transition">← Hub</a>
+                    <div class="space-y-2">
+                        <p class="text-xs uppercase tracking-[0.35em] text-[#009688] font-semibold">Admin Console</p>
+                        <h1 class="text-3xl font-semibold text-white">Doi Tung Agent Prompt Console</h1>
+                        <p class="text-sm text-slate-400 max-w-3xl">บริหารจัดการ system prompt, persona, และ instruction ของ Agent แต่ละตัวในกระบวนการ Petty Cash Automation ได้จากหน้าจอนี้แบบมองเห็นภาพรวมและเข้าใจ dependencies.</p>
+                    </div>
+                </div>
+                <div class="flex flex-wrap items-center gap-3">
+                    <button class="px-4 py-2 rounded-xl border border-[#009688]/40 text-[#009688] text-sm font-medium hover:bg-[#009688]/10 transition">📄 Download YAML</button>
+                    <button class="px-4 py-2 rounded-xl bg-[#009688] text-white text-sm font-semibold shadow-lg shadow-[#009688]/30 hover:bg-[#006A4E] transition">🚀 Deploy Update</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-1 bg-slate-900/40">
+            <section class="mx-auto max-w-6xl px-6 py-10 space-y-8">
+                <div class="grid gap-6 md:grid-cols-[320px_minmax(0,1fr)]">
+                    <aside class="bg-slate-900/60 border border-slate-800 rounded-3xl p-5 backdrop-blur">
+                        <div class="space-y-5">
+                            <div>
+                                <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Agent Groups</p>
+                                <div class="mt-3 flex flex-col gap-2">
+                                    <button class="flex items-center justify-between px-4 py-3 rounded-2xl bg-white/5 text-white text-sm font-semibold border border-[#009688]/30">
+                                        Intake & OCR
+                                        <span class="text-xs bg-[#009688]/20 text-[#009688] px-2 py-0.5 rounded-full">2</span>
+                                    </button>
+                                    <button class="flex items-center justify-between px-4 py-3 rounded-2xl text-slate-300 text-sm font-semibold border border-transparent hover:border-slate-700 hover:bg-white/5 transition">
+                                        Policy & Routing
+                                        <span class="text-xs bg-slate-700/50 text-slate-300 px-2 py-0.5 rounded-full">2</span>
+                                    </button>
+                                    <button class="flex items-center justify-between px-4 py-3 rounded-2xl text-slate-300 text-sm font-semibold border border-transparent hover:border-slate-700 hover:bg-white/5 transition">
+                                        Analytics & Reporting
+                                        <span class="text-xs bg-slate-700/50 text-slate-300 px-2 py-0.5 rounded-full">2</span>
+                                    </button>
+                                    <button class="flex items-center justify-between px-4 py-3 rounded-2xl text-slate-300 text-sm font-semibold border border-transparent hover:border-slate-700 hover:bg-white/5 transition">
+                                        Integration
+                                        <span class="text-xs bg-slate-700/50 text-slate-300 px-2 py-0.5 rounded-full">1</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="border-t border-slate-800 pt-4 space-y-3">
+                                <p class="text-xs uppercase tracking-[0.3em] text-slate-500">Environment</p>
+                                <div class="grid grid-cols-2 gap-3 text-xs">
+                                    <button class="px-3 py-2 rounded-xl bg-blue-500/20 border border-blue-500/40 text-blue-200 font-medium">staging</button>
+                                    <button class="px-3 py-2 rounded-xl border border-slate-700 text-slate-300 font-medium hover:bg-slate-800/80">production</button>
+                                </div>
+                                <div class="text-[0.7rem] leading-relaxed text-slate-500 bg-slate-900/80 border border-slate-800 rounded-2xl p-3">
+                                    <p class="font-semibold text-slate-300">Version Control</p>
+                                    <p class="mt-1">Hash ล่าสุด: <span class="text-blue-300">824a1f2</span></p>
+                                    <p>แก้ไขโดย: <span class="text-slate-300">finance-admin@doitung.org</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <section class="space-y-6">
+                        <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-6 backdrop-blur card-shadow">
+                            <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                                <div>
+                                    <p class="text-xs uppercase tracking-[0.32em] text-blue-400">Active Agent</p>
+                                    <h2 class="text-2xl font-semibold text-white flex items-center gap-2">Employee Interface Agent <span class="text-sm font-medium text-blue-300 bg-blue-500/10 px-3 py-1 rounded-full">LINE Chatbot</span></h2>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <button class="px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-300 border border-slate-700 hover:bg-slate-800 transition">ดู Diff</button>
+                                    <button class="px-3 py-1.5 rounded-xl text-xs font-semibold text-blue-200 border border-blue-400/40 hover:bg-blue-500/10 transition">Clone Agent</button>
+                                </div>
+                            </div>
+
+                            <div class="mt-5 grid gap-4 lg:grid-cols-[240px_minmax(0,1fr)]">
+                                <div class="space-y-4">
+                                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+                                        <p class="text-xs uppercase tracking-[0.3em] text-slate-500">Persona</p>
+                                        <p class="mt-2 text-sm text-slate-200 leading-relaxed">Doi Tung Finance Bot · tone สุภาพ, ใช้อีโมจิได้เล็กน้อย · หลีกเลี่ยงคำศัพท์เทคนิค</p>
+                                    </div>
+                                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3 text-xs text-slate-400">
+                                        <div class="flex items-center justify-between text-slate-300">
+                                            <span>Last Edited</span>
+                                            <span>9 Nov 2025 · 14:32</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <span>Owner</span>
+                                            <span class="text-slate-300">Finance Ops Squad</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <span>Dependencies</span>
+                                            <span class="text-blue-300">Routing Orchestrator Agent</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-4">
+                                    <div class="border border-slate-800 rounded-2xl overflow-hidden">
+                                        <div class="flex items-center gap-3 border-b border-slate-800 bg-slate-900/60 px-4 py-3 text-xs font-semibold text-slate-400">
+                                            <button class="px-3 py-1.5 rounded-xl border border-blue-400/50 text-blue-200 bg-blue-500/10 text-xs font-semibold">System Prompt</button>
+                                            <button class="px-3 py-1.5 rounded-xl border border-transparent text-slate-500 hover:border-slate-700 hover:text-slate-300 transition">Guardrails</button>
+                                            <button class="px-3 py-1.5 rounded-xl border border-transparent text-slate-500 hover:border-slate-700 hover:text-slate-300 transition">Test Scenarios</button>
+                                        </div>
+                                        <div class="bg-slate-950/90 p-4 text-sm text-slate-200 font-mono leading-relaxed space-y-3">
+                                            <p>คุณคือ <strong>Doi Tung Finance Bot</strong> ผู้ช่วย AI ที่สุภาพและมืออาชีพบน LINE ทำหน้าที่รับคำร้อง petty cash จากพนักงานและอัปเดตสถานะให้เข้าใจง่าย โดยไม่เปิดเผยข้อมูลเชิงเทคนิคให้ผู้ใช้ปลายทางเห็น</p>
+                                            <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-3">
+                                                <p class="text-xs uppercase tracking-[0.3em] text-slate-400">CORE DUTIES</p>
+                                                <ul class="list-disc pl-5 space-y-2 text-slate-300">
+                                                    <li>ทักทายและสร้างบรรยากาศที่เป็นมิตรทุกครั้งที่เริ่มสนทนา</li>
+                                                    <li>ชวนผู้ใช้ส่งไฟล์หลักฐาน (JPEG/PNG/PDF) พร้อมข้อความประกอบหากมี</li>
+                                                    <li>เมื่อได้รับไฟล์ ให้ตอบกลับทันทีว่า <code>ขอบคุณครับ! 🤖 ได้รับไฟล์แล้ว กำลังส่งให้ AI ตรวจสอบข้อมูลสักครู่นะครับ...</code></li>
+                                                    <li>รอรับ <code>Status Update</code> จาก Routing_Orchestrator_Agent แล้วแจ้งผู้ใช้เป็นภาษาไทยที่เข้าใจง่าย</li>
+                                                </ul>
+                                            </div>
+                                            <div class="bg-blue-500/5 border border-blue-500/30 rounded-xl p-4 space-y-2">
+                                                <p class="text-xs uppercase tracking-[0.3em] text-blue-300">INTERACTION GUARDRAILS</p>
+                                                <p class="text-slate-200">หลีกเลี่ยงการโชว์ error code, JSON, หรือข้อมูลระบบหลังบ้าน · หากไฟล์อ่านไม่ได้ให้สุภาพขอให้ผู้ใช้ส่งใหม่ · หากคำถามเกินขอบเขต ให้แนะนำติดต่อเจ้าหน้าที่การเงิน</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 grid gap-4 md:grid-cols-2">
+                                        <div class="space-y-2 text-sm text-slate-300">
+                                            <p class="text-xs uppercase tracking-[0.3em] text-slate-500">Linked Files</p>
+                                            <p><code>prompt/employee-interface-agent.md</code></p>
+                                            <p><code>prompt/readme.md</code></p>
+                                        </div>
+                                        <div class="space-y-3 text-xs">
+                                            <p class="text-slate-400 uppercase tracking-[0.3em]">Instant Actions</p>
+                                            <div class="flex flex-wrap gap-2">
+                                                <button class="px-3 py-1.5 rounded-xl bg-blue-500 text-white text-xs font-semibold hover:bg-blue-600 transition">🔄 Sync from Git</button>
+                                                <button class="px-3 py-1.5 rounded-xl border border-slate-700 text-slate-300 text-xs font-semibold hover:bg-slate-800 transition">🧪 Run Test</button>
+                                                <button class="px-3 py-1.5 rounded-xl border border-emerald-500/40 text-emerald-300 text-xs font-semibold hover:bg-emerald-500/10 transition">📬 Send Sample Message</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid gap-4 md:grid-cols-3">
+                            <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-5 space-y-3">
+                                <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Agent Canvas</p>
+                                <h3 class="text-white text-lg font-semibold">Intake Flow</h3>
+                                <p class="text-sm text-slate-300">สรุปเส้นทางการทำงาน: พนักงานส่งใบเสร็จ → OCR → Data Structuring → Policy</p>
+                                <button class="px-4 py-2 rounded-xl bg-slate-800 text-slate-200 text-sm font-semibold hover:bg-slate-700 transition">🧭 View Journey Map</button>
+                            </div>
+                            <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-5 space-y-3">
+                                <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Change Log</p>
+                                <ul class="text-sm text-slate-300 space-y-2">
+                                    <li>• 09 พ.ย. 2025 – เพิ่ม guardrail ห้ามแสดง JSON</li>
+                                    <li>• 02 พ.ย. 2025 – ปรับ greeting message ใช้อีโมจิ</li>
+                                    <li>• 28 ต.ค. 2025 – update mapping กับ orchestrator status</li>
+                                </ul>
+                                <button class="px-4 py-2 rounded-xl border border-slate-700 text-slate-300 text-sm font-semibold hover:bg-slate-800 transition">📚 View Full History</button>
+                            </div>
+                            <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-5 space-y-3">
+                                <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Testing Sandbox</p>
+                                <p class="text-sm text-slate-300">เตรียมเคสทดสอบที่ครอบคลุม Greeting, File Upload, Status Update</p>
+                                <button class="px-4 py-2 rounded-xl bg-emerald-500 text-white text-sm font-semibold hover:bg-emerald-600 transition">▶️ Run Scenario</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </main>
+
+        <footer class="border-t border-slate-800 bg-slate-950/80">
+            <div class="mx-auto max-w-6xl px-6 py-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between text-[0.75rem] text-slate-500">
+                <p>© 2025 Mae Fah Luang Foundation – Intelligent Finance Automation Program</p>
+                <div class="flex flex-wrap items-center gap-4">
+                    <span>Docs: <a href="readme.md" class="text-blue-300 hover:text-blue-200 transition">Prompt Handbook</a></span>
+                    <span>Repo: <code>doithung-demo/prompt/</code></span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -4,16 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doi Tung Petty Cash Automation Storyboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             color-scheme: light;
         }
         body {
-            font-family: 'Sarabun', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Inter', 'Sarabun', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             margin: 0;
+            padding: 0;
+            background: #F2F5F7;
+            color: #1F2937;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(0,106,78,0.08) 0%, rgba(37,99,235,0.12) 100%);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+            padding: 24px 20px;
+        }
+        .container {
+            max-width: 1220px;
+            margin: 0 auto;
             padding: 40px 20px 80px;
-            background: #f7f3eb;
-            color: #1c1c1c;
         }
         h1, h2, h3 {
             margin: 0;
@@ -22,29 +33,52 @@
             text-align: center;
             font-size: 2.6rem;
             letter-spacing: 1px;
-            color: #0d4d3a;
+            color: #006A4E;
+            font-weight: 700;
         }
         p.lead {
             text-align: center;
             max-width: 760px;
-            margin: 12px auto 50px;
-            color: #3e3e3e;
+            margin: 12px auto 0;
+            color: #475569;
             font-size: 1.1rem;
+        }
+        .header-actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .btn-hub {
+            display: inline-block;
+            background: #006A4E;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+        .btn-hub:hover {
+            background: #009688;
+            transform: translateY(-2px);
         }
         .grid {
             display: grid;
             gap: 28px;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            max-width: 1220px;
-            margin: 0 auto;
         }
         .card {
-            background: #fffef8;
-            border: 2px dashed #535353;
+            background: white;
+            border: 1px solid #E2E8F0;
             border-radius: 18px;
             padding: 24px;
             position: relative;
-            box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.08);
+            box-shadow: 0 14px 40px -20px rgba(15, 23, 42, 0.45);
+            transition: all 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px -20px rgba(15, 23, 42, 0.55);
         }
         .card::after {
             content: '';
@@ -80,10 +114,10 @@
             margin-top: 16px;
             font-size: 0.95rem;
             line-height: 1.6;
-            color: #333;
+            color: #475569;
         }
         .caption strong {
-            color: #0d4d3a;
+            color: #006A4E;
         }
         .note {
             font-size: 0.85rem;
@@ -102,10 +136,24 @@
     </style>
 </head>
 <body>
-    <h1>Doi Tung Petty Cash Automation Storyboard</h1>
-    <p class="lead">ภาพสเก็ตช์แนวรายเส้นที่สรุปไอเดียหลักจากไฟล์ <strong>story-board.md</strong> ครอบคลุม 8 แนวทางยกระดับประสบการณ์ส่งใบเสร็จและการจัดการ Petty Cash ด้วย AI</p>
+    <div class="hero-gradient">
+        <div style="max-width: 1220px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 20px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 48px; height: 48px; border-radius: 12px; background: #006A4E; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem;">DT</div>
+                <div>
+                    <p style="text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.7rem; color: #006A4E; font-weight: 600; margin: 0;">Doi Tung Finance</p>
+                    <h2 style="font-size: 1.3rem; text-align: left; letter-spacing: 0; color: #475569; margin: 0; font-weight: 600;">Storyboard</h2>
+                </div>
+            </div>
+            <a href="program-hub.html" class="btn-hub">← Back to Hub</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h1 style="margin-top: 40px;">Doi Tung Petty Cash Automation Storyboard</h1>
+        <p class="lead">ภาพสเก็ตช์แนวรายเส้นที่สรุปไอเดียหลักจากไฟล์ <strong>story-board.md</strong> ครอบคลุม 8 แนวทางยกระดับประสบการณ์ส่งใบเสร็จและการจัดการ Petty Cash ด้วย AI</p>
 
-    <section class="grid">
+        <section class="grid" style="margin-top: 40px;">
         <article class="card">
             <h3>Card 1: แอปสแกน OCR</h3>
             <div class="sketch" aria-label="มือถือกับปุ่มสแกนใบเสร็จ">
@@ -186,6 +234,7 @@
                 ผังงาน <strong>Agentic AI</strong> ที่แบ่งเป็น OCR Agent, Policy Agent และ Router Agent ก่อนแยกผลลัพธ์ไปยัง SAP และ Treasury อย่างเป็นระบบ
             </div>
         </article>
-    </section>
+        </section>
+    </div>
 </body>
 </html>

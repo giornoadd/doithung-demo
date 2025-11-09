@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADV-BK-6910037 · Doi Tung Voucher Detail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Sarabun', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at 10% 20%, rgba(226,235,255,0.9) 0%, rgba(241,245,249,1) 45%, rgba(241,245,249,1) 100%);
+            color: #0f172a;
+        }
+        .panel-shadow {
+            box-shadow: 0 12px 36px -18px rgba(15, 23, 42, 0.35);
+        }
+        .card-border {
+            border: 1px solid rgba(148, 163, 184, 0.22);
+        }
+        .glass {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .transition-base {
+            transition: all 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-16">
+    <main class="max-w-5xl mx-auto px-4 md:px-8 py-10 space-y-8">
+        <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+                <p class="text-xs uppercase tracking-[0.3em] text-slate-500">Voucher Drilldown</p>
+                <h1 class="mt-2 text-3xl md:text-4xl font-bold text-slate-900">Review: ADV-BK-6910037 (Clear Advance)</h1>
+                <p class="mt-3 text-sm md:text-base text-slate-600 max-w-2xl">AI แจ้งเตือนคุณภาพใบเสร็จ Grab (CA-011394) และต้องการให้เจ้าหน้าที่ตรวจสอบความชัดเจนก่อนอนุมัติ.</p>
+            </div>
+            <a href="../dashboard-prototype.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 text-white text-sm font-semibold transition-base hover:bg-slate-700">
+                <span class="text-lg">←</span>
+                กลับสรุปใบปะหน้า
+            </a>
+        </header>
+
+        <section class="grid gap-4 md:grid-cols-4">
+            <div class="glass panel-shadow card-border rounded-2xl p-4">
+                <p class="text-xs font-semibold uppercase text-slate-500">Document Type</p>
+                <p class="mt-2 text-base font-semibold text-slate-900">Clear Advance Voucher</p>
+            </div>
+            <div class="glass panel-shadow card-border rounded-2xl p-4">
+                <p class="text-xs font-semibold uppercase text-slate-500">AI Confidence</p>
+                <p class="mt-2 text-base font-semibold text-amber-600">85% (Needs Review)</p>
+            </div>
+            <div class="glass panel-shadow card-border rounded-2xl p-4">
+                <p class="text-xs font-semibold uppercase text-slate-500">Amount (THB)</p>
+                <p class="mt-2 text-base font-semibold text-slate-900">2,000.00</p>
+            </div>
+            <div class="glass panel-shadow card-border rounded-2xl p-4">
+                <p class="text-xs font-semibold uppercase text-slate-500">Journal Ref</p>
+                <p class="mt-2 text-base font-semibold text-slate-900">JN305760 · Period 10/2025</p>
+            </div>
+        </section>
+
+        <section class="grid gap-6 md:grid-cols-2">
+            <article class="glass panel-shadow card-border rounded-3xl overflow-hidden">
+                <header class="px-6 py-4 border-b border-slate-200/70 bg-white/80 flex items-center justify-between">
+                    <div>
+                        <h2 class="text-lg font-semibold text-slate-900">Document Viewer</h2>
+                        <p class="text-xs text-slate-500">สแกนไฟล์ PDF จาก LINE Upload</p>
+                    </div>
+                    <span class="text-xs font-semibold px-3 py-1 rounded-full bg-amber-100 text-amber-700">Manual Check Required</span>
+                </header>
+                <div class="p-6 md:p-10 bg-slate-100/70 min-h-[420px]">
+                    <iframe src="../resources/pdf/ADV-BK-6910037_Petty%20cash.pdf" title="ADV-BK-6910037 supporting document" class="h-[520px] w-full rounded-2xl border border-slate-200/70 shadow-lg" loading="lazy"></iframe>
+                </div>
+            </article>
+
+            <article class="glass panel-shadow card-border rounded-3xl overflow-hidden">
+                <header class="px-6 py-4 border-b border-slate-200/70 bg-white/80">
+                    <h2 class="text-lg font-semibold text-slate-900">AI (OCR + LLM) Analysis</h2>
+                    <p class="text-xs text-slate-500 mt-1">ประเด็นที่ต้องตรวจสอบก่อนบันทึก SAP</p>
+                </header>
+                <div class="p-6 md:p-8 space-y-5 text-sm text-slate-700">
+                    <section class="rounded-2xl border border-slate-200 bg-white p-4 space-y-3">
+                        <h3 class="text-xs font-semibold uppercase text-slate-500">Voucher Highlights</h3>
+                        <ul class="space-y-1">
+                            <li>• พนักงาน: ดวงกมล ธาดาเกียรติดำรง (Unit 356)</li>
+                            <li>• รับเงินทดรอง 2,000.00 บาท · เบิกใช้ 1,357.00 บาท</li>
+                            <li>• คืนเงินสด 643.00 บาท (สลิป 21/10/2025)</li>
+                        </ul>
+                    </section>
+
+                    <section class="rounded-2xl border border-amber-200 bg-amber-50/70 p-4 space-y-3">
+                        <h3 class="text-xs font-semibold uppercase text-amber-700">LLM Alert</h3>
+                        <p>ใบเสร็จ Grab (หน้า 6) เป็นภาพถ่ายหน้าจอคุณภาพต่ำ · โปรดยืนยันยอด 91.00 บาท และตรวจสอบลายเซ็นในใบปะหน้า CA-011394 ก่อนอนุมัติ</p>
+                    </section>
+
+                    <section class="rounded-2xl border border-slate-200 bg-white p-4 space-y-3">
+                        <h3 class="text-xs font-semibold uppercase text-slate-500">General Ledger Preview</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between gap-3"><span>11211 · Saving Accounts (เงินคืน)</span><span class="font-semibold text-slate-900">643.00</span></div>
+                            <div class="flex items-center justify-between gap-3"><span>63101 · Other supplies (HomePro + M Morrow)</span><span class="font-semibold text-slate-900">1,050.00</span></div>
+                            <div class="flex items-center justify-between gap-3"><span>63103 · Cleaning supplies</span><span class="font-semibold text-slate-900">216.00</span></div>
+                            <div class="flex items-center justify-between gap-3"><span>64802 · Delivery cost - Domestic (Grab)</span><span class="font-semibold text-slate-900">91.00</span></div>
+                            <div class="flex items-center justify-between gap-3"><span>11902 · Short-term advances to employees</span><span class="font-semibold text-slate-900">2,000.00 credit</span></div>
+                        </div>
+                        <p class="text-xs text-slate-500">ผลรวมค่าใช้จ่าย (1,357) + เงินคืน (643) = เงินทดรอง 2,000 บาท</p>
+                    </section>
+
+                    <section class="rounded-2xl border border-slate-200 bg-white p-4 space-y-4">
+                        <h3 class="text-xs font-semibold uppercase text-slate-500">Verification Summary</h3>
+                        <table class="w-full text-xs text-left text-slate-600 border border-slate-200 rounded-xl overflow-hidden">
+                            <thead class="bg-slate-50 text-slate-500 uppercase tracking-[0.2em] text-[0.6rem]">
+                                <tr>
+                                    <th class="px-3 py-2">Item</th>
+                                    <th class="px-3 py-2">รายละเอียดการเทียบ</th>
+                                    <th class="px-3 py-2 text-center">Confidence</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-slate-100">
+                                <tr>
+                                    <td class="px-3 py-2 font-semibold text-slate-900">ข้อมูลทั่วไป</td>
+                                    <td class="px-3 py-2">ชื่อผู้เบิก, เลขที่ CA-011394, และช่วงเวลาในใบเสร็จทุกหน้าตรงกับใบปะหน้า</td>
+                                    <td class="px-3 py-2 text-center font-semibold text-emerald-600">100%</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2 font-semibold text-slate-900">ยอดรวม</td>
+                                    <td class="px-3 py-2">เงินทดรอง 2,000 · ค่าใช้จ่าย 1,357 · เงินคืน 643 ตรงกับใบสรุปและสลิปโอน</td>
+                                    <td class="px-3 py-2 text-center font-semibold text-emerald-600">100%</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2 font-semibold text-slate-900">บันทึกบัญชี</td>
+                                    <td class="px-3 py-2">GL 63101, 63103, 64802 จับคู่กับใบเสร็จ HomePro / M Morrow / Grab ตามจำนวนจริง</td>
+                                    <td class="px-3 py-2 text-center font-semibold text-emerald-600">100%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-xs text-slate-500">ข้อมูลยืนยันจาก <code>resources/analytic/ADV-BK-6910037.md</code> · ระบบยังขอให้ตรวจสอบคุณภาพใบเสร็จก่อนปิดเคส</p>
+                    </section>
+
+                    <section class="rounded-2xl border border-slate-200 bg-white p-4 space-y-2">
+                        <h3 class="text-xs font-semibold uppercase text-slate-500">สถานะเอกสารแนบ</h3>
+                        <ul class="space-y-1">
+                            <li>• HomePro tax invoice · พลาสติกกันกระแทก 185 + ถุงขยะ 216 · เอกสารชัด ✅</li>
+                            <li>• M Morrow office supplies 865 บาท · ตรงกับ Other Supplies 1,050 รวมกับ HomePro 185 ✅</li>
+                            <li>• Grab receipt 91 บาท · ภาพถ่ายเบลอ ต้องตรวจสอบ · Slip SCB คืนเงิน 643 บาทชัดเจน ✅</li>
+                        </ul>
+                    </section>
+
+                    <section class="rounded-2xl border border-slate-200 bg-slate-50/70 p-4 space-y-2">
+                        <h3 class="text-xs font-semibold uppercase text-slate-500">ข้อเสนอแนะสำหรับผู้ตรวจสอบ</h3>
+                        <ul class="space-y-1">
+                            <li>• ติดต่อผู้เบิกเพื่อขอไฟล์ใบเสร็จ Grab ที่ชัดเจน หรือยืนยันยอดจากระบบ Grab</li>
+                            <li>• อัปเดตสถานะหลังตรวจสอบหลักฐานครบถ้วน</li>
+                        </ul>
+                    </section>
+                </div>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

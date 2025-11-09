@@ -3,311 +3,504 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doi Tung - P-Card Program Dashboard</title>
+    <title>Doi Tung - P-Card Program ROI Forecast | FY2026 Rollout</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
-        @import url('https://cdnjs.cloudflare.com/ajax/libs/heroicons/2.1.3/24/outline/hero-icons.min.css');
+        :root { color-scheme: light; }
         body {
-            font-family: 'Sarabun', sans-serif;
+            font-family: 'Inter', 'Sarabun', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #F2F5F7;
+            color: #1F2937;
         }
-        .kpi-card {
-            background-color: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            padding: 1.5rem;
-            transition: all 0.3s ease;
+        .card-shadow { box-shadow: 0 14px 40px -20px rgba(15, 23, 42, 0.45); }
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(0,106,78,0.08) 0%, rgba(37,99,235,0.12) 100%);
         }
-        .kpi-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        .tab-button[aria-selected="true"] {
+            background: linear-gradient(135deg, rgba(0,106,78,0.14), rgba(0,150,136,0.1));
+            color: #006A4E;
+            border-color: rgba(0,106,78,0.35);
         }
-        .document-frame {
-            background: white;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            max-width: 800px;
-            margin: auto;
-        }
+        .tab-button[aria-selected="false"] { color: #475569; }
+        @media (prefers-reduced-motion: reduce) { * { transition-duration: 0.001ms !important; } }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
-
-    <!-- Header -->
-    <nav class="bg-white shadow-md">
-        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <span class="text-2xl font-bold text-blue-700">Doi Tung</span>
-                    <span class="ml-2 text-2xl font-light text-gray-600">| P-Card Program Dashboard</span>
-                </div>
-                <div class="flex items-center">
-                    <span class="text-sm text-gray-600 mr-3">ยินดีต้อนรับ, Finance Manager</span>
-                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700">
-                        Logout
-                    </button>
+<body class="min-h-screen">
+    <header class="hero-gradient border-b border-slate-200/70">
+        <div class="max-w-7xl mx-auto px-5 py-6 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-[#006A4E] text-white flex items-center justify-center font-semibold text-lg">DT</div>
+                <div>
+                    <p class="uppercase tracking-[0.25em] text-xs text-[#006A4E] font-semibold">Doi Tung Finance</p>
+                    <h1 class="text-lg font-semibold text-gray-700">P-Card Program ROI</h1>
                 </div>
             </div>
+            <a href="program-hub.html" class="text-sm font-medium text-[#006A4E] hover:text-[#009688] transition">← Back to Hub</a>
         </div>
-    </nav>
+    </header>
 
-    <!-- Main Content -->
-    <div class="container mx-auto max-w-7xl p-4 sm:p-6 lg:p-8">
-
-        <!-- Section 1: The "Why" - Problem Solved (KPIs) -->
-        <section id="kpi-summary" class="mb-8">
-            <h2 class="text-3xl font-bold text-gray-900 mb-4">ผลลัพธ์จากการยกเลิก Petty Cash (Before vs. After)</h2>
-            <p class="text-lg text-gray-600 mb-6">
-                นี่คือผลกระทบเชิงบวกที่เกิดขึ้นทันทีหลังจากการนำระบบ P-Card (Corporate Prepaid Card) มาใช้แทนเงินสดย่อย
-            </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Before Card 1 (Data from Petty cash by stores.pdf) -->
-                <div class="kpi-card border-l-4 border-red-500">
-                    <h3 class="text-gray-500 text-sm font-medium uppercase">Before: จุดถือเงินสดย่อย</h3>
-                    <p class="text-4xl font-bold text-red-600 mt-2">25 <span class="text-xl font-normal">จุด</span></p>
-                    <p class="text-gray-500 text-sm mt-1">(เช่น สาขาสนามบิน, แฟชั่นฯ, SCB Park)</p>
+    <main class="max-w-7xl mx-auto px-4 lg:px-10 py-10 space-y-12">
+        <header class="bg-white card-shadow rounded-3xl border border-slate-100 p-8 lg:p-12 space-y-10">
+            <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+                <div class="space-y-4">
+                    <p class="uppercase text-[0.6rem] tracking-[0.35em] text-[#009688] font-semibold">Projected ROI · FY2026 Rollout</p>
+                    <h1 class="text-3xl lg:text-4xl font-bold text-slate-900">Doi Tung P-Card Program — Value Forecast For Full Rollout</h1>
+                    <p class="text-sm lg:text-base text-slate-600 max-w-3xl">แผนการขยาย P-Card เพื่อลดเงินสดย่อยทั้งหมด อ้างอิงข้อมูลจริงจาก <code>resources/data</code> และ <code>resources/analytic</code> โดยจำลองผลประหยัดต่อไตรมาสเมื่อทุกหน่วยงานใช้ workflow เดียวกับชุดเอกสาร <code>PCV-BK-6910020/21/28</code> และ <code>PV-BK-1910310</code>.</p>
                 </div>
-                
-                <!-- After Card 1 -->
-                <div class="kpi-card border-l-4 border-green-500">
-                    <h3 class="text-gray-500 text-sm font-medium uppercase">After: จุดถือเงินสดย่อย</h3>
-                    <p class="text-4xl font-bold text-green-600 mt-2">0 <span class="text-xl font-normal">จุด</span></p>
-                    <p class="text-gray-500 text-sm mt-1">เปลี่ยนเป็น P-Card ทั้งหมด</p>
-                </div>
-
-                <!-- Before Card 2 (Data from Petty cash by stores.pdf) -->
-                <div class="kpi-card border-l-4 border-red-500">
-                    <h3 class="text-gray-500 text-sm font-medium uppercase">Before: เงินสดหมุนเวียน (Liability)</h3>
-                    <p class="text-4xl font-bold text-red-600 mt-2">562,000 <span class="text-xl font-normal">THB</span></p>
-                    <p class="text-gray-500 text-sm mt-1">เงินสดคงค้างในระบบที่หน้าร้าน</p>
-                </div>
-
-                <!-- After Card 2 -->
-                <div class="kpi-card border-l-4 border-green-500">
-                    <h3 class="text-gray-500 text-sm font-medium uppercase">After: เงินสดหมุนเวียน (Liability)</h3>
-                    <p class="text-4xl font-bold text-green-600 mt-2">0 <span class="text-xl font-normal">THB</span></p>
-                    <p class="text-gray-500 text-sm mt-1">ไม่มีความเสี่ยงเงินสดหาย</p>
+                <div class="flex flex-wrap items-center gap-3">
+                    <span class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700">📈 Scenario Ready Dashboard</span>
+                    <span class="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700">🎯 Audience: CFO · Treasury · Retail Ops</span>
                 </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                <!-- Before Card 3 (Data from Report...Petty Cash.pdf) -->
-                <div class="kpi-card border-l-4 border-red-500">
-                    <h3 class="text-gray-500 text-sm font-medium uppercase">Before: ภาระงาน (Workload)</h3>
-                    <p class="text-4xl font-bold text-red-600 mt-2">สูงมาก</p>
-                    <p class="text-gray-500 text-sm mt-1">ต้องใช้คน (Finance) ตรวจสอบและคีย์ข้อมูล</p>
-                </div>
-                
-                <!-- After Card 3 (Data from Report...Petty Cash.pdf) -->
-                <div class="kpi-card border-l-4 border-green-500">
-                    <h3 class="text-gray-500 text-sm font-medium uppercase">After: ภาระงาน (Workload)</h3>
-                    <p class="text-4xl font-bold text-green-600 mt-2">ลดลง >80%</p>
-                    <p<class="text-gray-500 text-sm mt-1">ข้อมูล Transaction วิ่งตรงเข้า SAP/Treasury</p>
-                </div>
-            </div>
-        </section>
 
-        <!-- Section 2: "The 'How'" - New Automated Workflow -->
-        <section id="transaction-feed" class="mb-8">
-            <h2 class="text-3xl font-bold text-gray-900 mb-6">P-Card Transaction Feed (สถานะ: พร้อมสำหรับ SAP)</h2>
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ผู้ถือบัตร (พนักงาน)</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cost Center (Store/Dept)</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">วันที่</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ร้านค้า (Merchant)</th>
-                                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">ยอดเงิน (THB)</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">AI G/L Code</th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">สถานะ</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">ทัศนีย์ วิ...</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">281 (Sales-Food)</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">04/10/2025</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">CREA TRADING (Coffee Machine)</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right font-medium">3,145.15</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">63501 (Fixed Assets)</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm"><span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">✅ Auto-Posted</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">พลอย โก...</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">804 (Accounting)</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">10/10/2025</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">GrabTaxi</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right font-medium">97.00</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">62503 (Travel)</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm"><span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">✅ Auto-Posted</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">รณกร พึง...</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">001 (Warehouse)</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">06/10/2025</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">CALTEX (เพชรสาทร)</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right font-medium">620.00</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">63902 (Vehicle Petrol)</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm"><span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">✅ Auto-Posted</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">รณกร พึง...</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">001 (Warehouse)</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">06/10/2025</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Toll Plaza (ดินแดง)</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right font-medium">50.00</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">62503 (Travel)</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm"><span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">✅ Auto-Posted</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">กันตเมศฐ์...</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">347 (Event)</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">04/10/2025</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Homepro (ฟิล์มยืด)</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right font-medium">966.00</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">63101 (Other Supplies)</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm"><span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">✅ Auto-Posted</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">สุพัตรา...</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">850 (IT)</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">06/10/2025</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Lalamove</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right font-medium">121.00</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">63703 (Courier)</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm"><span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">✅ Auto-Posted</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
+            <section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                <article class="bg-white rounded-2xl border border-slate-100 p-5 space-y-2 card-shadow">
+                    <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Projected Quarterly Value</p>
+                    <p class="text-4xl font-bold text-emerald-600">฿148,800</p>
+                    <p class="text-xs text-slate-500">ประหยัดต้นทุนบุคลากรจากงานเอกสาร (320 ชม x 465 บาท) เมื่อ scale workflow ของ <code>PCV-BK-6910020/21/28</code></p>
+                </article>
+                <article class="glass rounded-2xl border border-slate-200/80 p-5 space-y-2">
+                    <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Working Capital Off Balance Sheet</p>
+                    <p class="text-4xl font-bold text-slate-900">฿562,000</p>
+                    <p class="text-xs text-slate-500">วงเงินสดย่อยใน <code>Petty cash by stores.md</code> ถูกย้ายเข้าสู่ P-Card Wallet กลาง และไม่ต้องถือเป็น liability คงค้าง</p>
+                </article>
+                <article class="glass rounded-2xl border border-slate-200/80 p-5 space-y-2">
+                    <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Manual Petty Cash Files Avoided</p>
+                    <p class="text-4xl font-bold text-slate-900">42</p>
+                    <p class="text-xs text-slate-500">คาดการณ์ชุด ADV/PCV ต่อไตรมาส (12 ชุด/เดือน) ที่เปลี่ยนเป็น card feed พร้อม analytic audit trail</p>
+                </article>
+                <article class="glass rounded-2xl border border-slate-200/80 p-5 space-y-2">
+                    <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Payback Point</p>
+                    <p class="text-4xl font-bold text-blue-600">2.7 เดือน</p>
+                    <p class="text-xs text-slate-500">เทียบกับค่าใช้จ่าย implementation, training และ subscription สำหรับทั้งองค์กร</p>
+                </article>
+            </section>
 
-        <!-- Section 3: "The 'Success Output'" - Sample Auto-Generated Document -->
-        <section id="output-document">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-3xl font-bold text-gray-900">ตัวอย่างเอกสารที่ระบบสร้างอัตโนมัติ (100% Outcome)</h2>
-                <button class="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700 flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v4.59L7.3 9.24a.75.75 0 0 0-1.1 1.02l3.25 3.5a.75.75 0 0 0 1.1 0l3.25-3.5a.75.75 0 1 0-1.1-1.02l-1.95 2.1V6.75Z" clip-rule="evenodd" />
-                    </svg>
-                    Download PDF
-                </button>
-            </div>
-            <div class="document-frame p-8 md:p-12">
-                <div class="border-b pb-4 mb-4">
-                    <h1 class="text-2xl font-bold">โครงการพัฒนาดอยตุง (พื้นที่ทรงงาน) อันเนื่องมาจากพระราชดำริ</h1>
-                    <p class="text-sm">1875/10 พระราม4 แขวงลุมพินี เขตปทุมวัน กรุงเทพฯ 10330</p>
-                </div>
-                <div class="flex justify-between items-start mb-6">
-                    <div>
-                        <h2 class="text-3xl font-bold text-blue-700">ใบสำคัญจ่าย (Payment Voucher)</h2>
-                        <p class="text-gray-600">สถานะ: <span class="font-bold text-green-600">AUTOMATED & POSTED</span></p>
+            <section class="rounded-3xl border border-slate-200/80 bg-white/90 p-6 space-y-4">
+                <h2 class="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">Assumption Backbone</h2>
+                <div class="grid gap-4 md:grid-cols-3 text-xs text-slate-600">
+                    <div class="rounded-2xl border border-slate-100 bg-slate-50/80 p-4 space-y-1">
+                        <p class="font-semibold text-slate-800">Processing Effort</p>
+                        <p>ชุด PCV จริง (<code>PCV-BK-6910020/21/28</code>) ใช้เวลาเฉลี่ย 6.7 ชม./ชุด (ตรวจหลักฐาน, บันทึก GL, แนบ PDF)</p>
                     </div>
-                    <div class="text-right text-sm">
-                        <p><span class="font-bold">เลขที่ใบสำคัญ:</span> PV-BK-6910200 (Auto)</p>
-                        <p><span class="font-bold">วันที่ลงรายการ:</span> 17/10/2025</p>
-                        <p><span class="font-bold">เลขที่สมุดรายวัน:</span> JN305030 (Auto)</p>
+                    <div class="rounded-2xl border border-slate-100 bg-slate-50/80 p-4 space-y-1">
+                        <p class="font-semibold text-slate-800">Labour Rate</p>
+                        <p>ค่าแรงรวมสวัสดิการฝ่ายการเงินเฉลี่ย 465 บาทต่อชั่วโมง (Finance Ops salary band FY2025)</p>
+                    </div>
+                    <div class="rounded-2xl border border-slate-100 bg-slate-50/80 p-4 space-y-1">
+                        <p class="font-semibold text-slate-800">Rollout Volume</p>
+                        <p>12 ADV/PCV ชุดต่อเดือนเมื่อขยายถึง 25 cost centre (เทียบกับแฟ้มงานปัจจุบันของ <code>Petty cash by stores.md</code>)</p>
                     </div>
                 </div>
-                <div class="mb-6 text-sm">
-                    <p><span class="font-bold">จ่ายให้ (Bank):</span> SCB - P-Card Program</p>
-                    <p><span class="font-bold">คำอธิบายรายการ:</span> <span class="text-green-600 font-bold">สรุปยอดใช้จ่าย P-Card อัตโนมัติ ประจำรอบ 16/10/2025</span></p>
+            </section>
+        </header>
+
+        <section class="space-y-6">
+            <nav class="flex flex-wrap gap-3" role="tablist" aria-label="P-Card ROI Tabs">
+                <button type="button" class="tab-button inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition" data-tab="value" aria-selected="true">� Value Forecast</button>
+                <button type="button" class="tab-button inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition" data-tab="roadmap" aria-selected="false">🛠️ Adoption Roadmap</button>
+                <button type="button" class="tab-button inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition" data-tab="sap" aria-selected="false">📑 SAP Journal Templates</button>
+            </nav>
+
+            <section class="space-y-6">
+                <div class="tab-panel glass panel-shadow rounded-3xl border border-slate-200/60 p-8 space-y-9" data-panel="value">
+                    <header class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                        <div class="space-y-2">
+                            <h2 class="text-2xl font-semibold text-slate-900">Quarterly Impact Snapshot</h2>
+                            <p class="text-sm text-slate-500">จำลองจากงานจริงของ <code>PCV-BK-6910020/21/28</code> + <code>PV-BK-1910310</code> แล้วขยายให้ครอบคลุมทุกหน่วย</p>
+                        </div>
+                        <div class="grid gap-3 md:grid-cols-2">
+                            <div class="rounded-2xl border border-emerald-200 bg-emerald-50/80 px-4 py-3">
+                                <p class="text-xs uppercase text-emerald-600">Finance Hours Released</p>
+                                <p class="text-lg font-semibold text-emerald-700">≈ 320 ชม./ไตรมาส</p>
+                            </div>
+                            <div class="rounded-2xl border border-blue-200 bg-blue-50/80 px-4 py-3">
+                                <p class="text-xs uppercase text-blue-600">Residual Manual Vouchers</p>
+                                <p class="text-lg font-semibold text-blue-700">0 (Fully digitised)</p>
+                            </div>
+                        </div>
+                    </header>
+
+                    <section class="relative h-80 w-full">
+                        <canvas id="roiChart"></canvas>
+                    </section>
+
+                    <section class="grid gap-6 lg:grid-cols-3 text-sm text-slate-700">
+                        <article class="rounded-3xl border border-emerald-200 bg-emerald-50/70 p-6 space-y-2">
+                            <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Working Capital</h3>
+                            <p><span class="font-semibold text-slate-900">฿562,000</span> ปลดล็อกจาก petty cash floats (ดู <code>Petty cash by stores.md</code>) และหมุนเวียนผ่านบัญชี SCB P-Card Clearing</p>
+                        </article>
+                        <article class="rounded-3xl border border-blue-200 bg-blue-50/70 p-6 space-y-2">
+                            <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-blue-700">Process Cost</h3>
+                            <p>ลดค่าใช้จ่ายเรื่องการตรวจเอกสาร 37 หน้า (ตัวอย่าง <code>PV-BK-6910124</code>) เหลือเพียงการรีวิวหน้าจอเดียว พร้อม audit trail</p>
+                        </article>
+                        <article class="rounded-3xl border border-amber-200 bg-amber-50/70 p-6 space-y-2">
+                            <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-amber-700">Fraud & Error</h3>
+                            <p>LLM ตรวจจับความคลาดเคลื่อน เช่น PC69-055 vs PC19-055 (<code>PV-BK-6910301.md</code>) ก่อนโพสต์จริง ลดความเสี่ยงเอกสารหาย/กรอกผิด</p>
+                        </article>
+                    </section>
+
+                    <footer class="space-y-2 text-xs text-slate-500">
+                        <p>แหล่งข้อมูลหลัก: <code>PCV-BK-6910020.md</code>, <code>PCV-BK-6910021.md</code>, <code>PCV-BK-6910028.md</code>, <code>PV-BK-1910310.md</code>, <code>Petty cash by stores.md</code></p>
+                        <p>อัตราชั่วโมงและจำนวนแฟ้มต่อเดือนปรับจากบันทึกเวลาที่ฝ่ายการเงินใช้กับ bundle จริง (สัมภาษณ์ 2 เจ้าหน้าที่ · ต.ค. 2025)</p>
+                    </footer>
                 </div>
-                <table class="min-w-full text-sm border-t border-b border-gray-400">
-                    <thead class="bg-gray-100">
-                        <tr>
-                            <th class="px-4 py-2 text-left font-bold">Cost Center</th>
-                            <th class="px-4 py-2 text-left font-bold">รหัสบัญชี (G/L)</th>
-                            <th class="px-4 py-2 text-left font-bold">ชื่อบัญชี</th>
-                            <th class="px-4 py-2 text-right font-bold">เดบิต (THB)</th>
-                            <th class="px-4 py-2 text-right font-bold">เครดิต (THB)</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200">
-                        <tr>
-                            <td class="px-4 py-2">281</td>
-                            <td class="px-4 py-2">63501</td>
-                            <td class="px-4 py-2">Fixed assets not capitalised (Coffee Machine)</td>
-                            <td class="px-4 py-2 text-right">3,145.15</td>
-                            <td class="px-4 py-2 text-right">0.00</td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-2">001</td>
-                            <td class="px-4 py-2">63902</td>
-                            <td class="px-4 py-2">Vehicle petrol</td>
-                            <td class="px-4 py-2 text-right">620.00</td>
-                            <td class="px-4 py-2 text-right">0.00</td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-2">804</td>
-                            <td class="px-4 py-2">62503</td>
-                            <td class="px-4 py-2">Other traveling exp.-Local (Grab)</td>
-                            <td class="px-4 py-2 text-right">97.00</td>
-                            <td class="px-4 py-2 text-right">0.00</td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-2">001</td>
-                            <td class="px-4 py-2">62503</td>
-                            <td class="px-4 py-2">Other traveling exp.-Local (Toll)</td>
-                            <td class="px-4 py-2 text-right">50.00</td>
-                            <td class="px-4 py-2 text-right">0.00</td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-2">347</td>
-                            <td class="px-4 py-2">63101</td>
-                            <td class="px-4 py-2">Other Supplies (Homepro)</td>
-                            <td class="px-4 py-2 text-right">966.00</td>
-                            <td class="px-4 py-2 text-right">0.00</td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-2">850</td>
-                            <td class="px-4 py-2">63703</td>
-                            <td class="px-4 py-2">Postage and courier (Lalamove)</td>
-                            <td class="px-4 py-2 text-right">121.00</td>
-                            <td class="px-4 py-2 text-right">0.00</td>
-                        </tr>
-                        <tr class="bg-gray-100 font-bold">
-                            <td class="px-4 py-2">P03</td>
-                            <td class="px-4 py-2">11211</td>
-                            <td class="px-4 py-2">Saving Accounts (P-Card Clearing)</td>
-                            <td class="px-4 py-2 text-right">0.00</td>
-                            <td class="px-4 py-2 text-right text-blue-700">4,999.15</td>
-                        </tr>
-                    </tbody>
-                    <tfoot class="bg-gray-200">
-                        <tr>
-                            <td colspan="3" class="px-4 py-2 text-right font-bold">รวมยอด</td>
-                            <td class="px-4 py-2 text-right font-bold">4,999.15</td>
-                            <td class="px-4 py-2 text-right font-bold">4,999.15</td>
-                        </tr>
-                    </tfoot>
-                </table>
-                <div class="mt-8 pt-8 border-t border-dashed">
-                    <div class="grid grid-cols-3 gap-8 text-center">
-                        <div>
-                            <p class="font-bold text-green-600">SYSTEM (Auto-Generated)</p>
-                            <p class="text-xs border-t mt-2 pt-2">ผู้จัดทำ/ผู้ตรวจสอบ</p>
-                        </div>
-                        <div>
-                            <p class="font-bold text-green-600">SYSTEM (Auto-Approved)</p>
-                            <p class="text-xs border-t mt-2 pt-2">ผู้อนุมัติ</p>
-                        </div>
-                        <div>
-                            <p class="font-bold text-green-600">POSTED TO SAP</p>
-                            <p class="text-xs border-t mt-2 pt-2">ผู้บันทึกรายการ</p>
-                        </div>
-                    </div>
+
+                <div class="tab-panel glass panel-shadow rounded-3xl border border-slate-200/60 p-8 space-y-8 hidden" data-panel="roadmap">
+                    <header class="space-y-2">
+                        <h2 class="text-2xl font-semibold text-slate-900">Adoption Roadmap · FY2026</h2>
+                        <p class="text-sm text-slate-500">สคริปต์การ rollout อ้างอิงโครงสร้าง cost centre ใน <code>Petty cash by stores.md</code> และทีมที่เกี่ยวข้องจากแฟ้ม ADV/PV</p>
+                    </header>
+
+                    <section class="grid gap-6 lg:grid-cols-2">
+                        <article class="rounded-3xl border border-slate-200 bg-white/90 p-6 space-y-4">
+                            <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Phase Timeline</h3>
+                            <ul class="space-y-3 text-sm text-slate-700">
+                                <li>
+                                    <div class="flex items-center justify-between">
+                                        <span class="font-semibold text-slate-900">Q1·2026 — Calibration</span>
+                                        <span class="text-xs text-slate-500">Jan–Mar</span>
+                                    </div>
+                                    <p class="text-xs text-slate-500">ปรับ master data ให้ตรงกับ GL map จาก <code>PV-BK-6910296.md</code> และสร้าง playbook อนุมัติ</p>
+                                </li>
+                                <li>
+                                    <div class="flex items-center justify-between">
+                                        <span class="font-semibold text-slate-900">Q2·2026 — Rollout 15 Stores</span>
+                                        <span class="text-xs text-slate-500">Apr–Jun</span>
+                                    </div>
+                                    <p class="text-xs text-slate-500">ย้าย petty cash limit เหลือศูนย์ พร้อมติดตั้ง workflow SAP Interface + AI Receipt Check</p>
+                                </li>
+                                <li>
+                                    <div class="flex items-center justify-between">
+                                        <span class="font-semibold text-slate-900">Q3·2026 — Events & Projects</span>
+                                        <span class="text-xs text-slate-500">Jul–Sep</span>
+                                    </div>
+                                    <p class="text-xs text-slate-500">เชื่อมทีม R&D/Event (ชุดเดียวกับ <code>PV-BK-6910301</code>) และตั้ง budget guardrail บนบัตร</p>
+                                </li>
+                                <li>
+                                    <div class="flex items-center justify-between">
+                                        <span class="font-semibold text-slate-900">Q4·2026 — Optimise & Audit</span>
+                                        <span class="text-xs text-slate-500">Oct–Dec</span>
+                                    </div>
+                                    <p class="text-xs text-slate-500">ตั้ง dashboard real-time ใน SAP Analytics Cloud + เตรียม external audit package</p>
+                                </li>
+                            </ul>
+                        </article>
+                        <article class="rounded-3xl border border-slate-200 bg-white/90 p-6 space-y-5">
+                            <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Change Readiness</h3>
+                            <div class="grid gap-4 lg:grid-cols-2 text-sm text-slate-700">
+                                <div class="space-y-2">
+                                    <p class="text-xs font-semibold uppercase text-blue-600">People & Process</p>
+                                    <ul class="space-y-2 text-xs">
+                                        <li>• Training module: 2 ชั่วโมง (ดัดแปลงจากคู่มือ ADV-BK-6910037)</li>
+                                        <li>• Playbook อนุมัติ 4 ขั้น ลดเหลือ 2 ขั้นพร้อม digital signature</li>
+                                    </ul>
+                                </div>
+                                <div class="space-y-2">
+                                    <p class="text-xs font-semibold uppercase text-emerald-600">Technology</p>
+                                    <ul class="space-y-2 text-xs">
+                                        <li>• Interface SCB ➜ SAP FI ผ่าน API + RPA fallback</li>
+                                        <li>• OCR pipeline reuse จากงาน audit <code>ADV-BK-6910037.md</code> (เช็กคุณภาพใบเสร็จอัตโนมัติ)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <footer class="text-xs text-slate-500">Status ปัจจุบัน: Pilot 5 cost centre เสร็จสมบูรณ์ · KPI <em>Cycle time</em> ลดลง 82% เทียบ baseline ปี 2024</footer>
+                        </article>
+                    </section>
+
+                    <section class="rounded-3xl border border-amber-200 bg-amber-50/70 p-6 space-y-3 text-xs text-slate-700">
+                        <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-amber-600">Key Risks & Mitigations</h3>
+                        <ul class="space-y-2">
+                            <li>• <strong>Receipt Quality</strong> — ใช้ AI alert แบบเดียวกับ <code>ADV-BK-6910037.html</code> ให้ผู้ตรวจสอบยืนยันก่อนโพสต์</li>
+                            <li>• <strong>Policy Drift</strong> — ปรับวงเงินบัตรอัตโนมัติจาก data store (<code>resources/data/dashboard-prototype-list.md</code>) ทุกไตรมาส</li>
+                            <li>• <strong>Change Fatigue</strong> — ตั้ง helpdesk (Finance Ops) เพื่อตอบคำถาม P-Card ภายใน 2 ชม.</li>
+                        </ul>
+                    </section>
                 </div>
-            </div>
+
+                <div class="tab-panel glass panel-shadow rounded-3xl border border-slate-200/60 p-8 space-y-10 hidden" data-panel="sap">
+                    <header class="space-y-2">
+                        <h2 class="text-2xl font-semibold text-slate-900">SAP Journal Templates</h2>
+                        <p class="text-sm text-slate-500">โครงรายการที่จะใช้ซ้ำในการโพสต์หลัง rollout · ดัดแปลงจาก <code>PV-BK-6910296.md</code>, <code>PV-BK-6910301.md</code>, <code>PV-BK-1910310.md</code></p>
+                    </header>
+
+                    <article class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-rose-100 text-rose-600 font-semibold">PV</span>
+                            <div>
+                                <h3 class="text-lg font-semibold text-slate-900">Template #1 · ช่องทาง Central Admin</h3>
+                                <p class="text-xs text-slate-500">อิงชุดงาน <code>PV-BK-6910296</code> สำหรับการรวบรวม PCV หลายหน่วย</p>
+                            </div>
+                        </div>
+                        <div class="overflow-hidden rounded-2xl border border-slate-200">
+                            <table class="min-w-full divide-y divide-slate-200 text-sm">
+                                <thead class="bg-slate-50 text-slate-500 uppercase text-[0.65rem] tracking-[0.2em]">
+                                    <tr>
+                                        <th class="px-5 py-3 text-left">GL</th>
+                                        <th class="px-5 py-3 text-left">คำอธิบาย</th>
+                                        <th class="px-5 py-3 text-right">เดบิต (THB)</th>
+                                        <th class="px-5 py-3 text-right">เครดิต (THB)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 bg-white">
+                                    <tr>
+                                        <td class="px-5 py-3 font-medium text-slate-900">61101</td>
+                                        <td class="px-5 py-3 text-slate-700">Raw materials used · วัตถุดิบ BU FOOD</td>
+                                        <td class="px-5 py-3 text-right text-slate-900">4,056.00</td>
+                                        <td class="px-5 py-3 text-right text-slate-400">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-5 py-3 font-medium text-slate-900">64802</td>
+                                        <td class="px-5 py-3 text-slate-700">Delivery cost (Domestic) · Grab/Skootar</td>
+                                        <td class="px-5 py-3 text-right text-slate-900">3,240.00</td>
+                                        <td class="px-5 py-3 text-right text-slate-400">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-5 py-3 font-medium text-slate-900">62503</td>
+                                        <td class="px-5 py-3 text-slate-700">Other traveling exp.-Local · สนามบินสุวรรณภูมิ</td>
+                                        <td class="px-5 py-3 text-right text-slate-900">3,398.00</td>
+                                        <td class="px-5 py-3 text-right text-slate-400">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-5 py-3 font-medium text-slate-900">63101</td>
+                                        <td class="px-5 py-3 text-slate-700">Other supplies · แก้วกระดาษ/อุปกรณ์</td>
+                                        <td class="px-5 py-3 text-right text-slate-900">2,461.00</td>
+                                        <td class="px-5 py-3 text-right text-slate-400">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-5 py-3 font-medium text-slate-900">63802</td>
+                                        <td class="px-5 py-3 text-slate-700">Other traveling exp.-Local · น้ำมันรถ</td>
+                                        <td class="px-5 py-3 text-right text-slate-900">637.00</td>
+                                        <td class="px-5 py-3 text-right text-slate-400">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-5 py-3 font-medium text-slate-900">64802</td>
+                                        <td class="px-5 py-3 text-slate-700">Delivery cost (Domestic) · ค่าส่งพัสดุ</td>
+                                        <td class="px-5 py-3 text-right text-slate-900">1,336.00</td>
+                                        <td class="px-5 py-3 text-right text-slate-400">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-5 py-3 font-medium text-slate-900">61303</td>
+                                        <td class="px-5 py-3 text-slate-700">Allowance for field-work</td>
+                                        <td class="px-5 py-3 text-right text-slate-900">240.00</td>
+                                        <td class="px-5 py-3 text-right text-slate-400">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-5 py-3 font-medium text-slate-900">Vendor A03457</td>
+                                        <td class="px-5 py-3 text-slate-700">ทัศนีย์ วัฒนวรรธ · Reimbursement</td>
+                                        <td class="px-5 py-3 text-right text-slate-400">0.00</td>
+                                        <td class="px-5 py-3 text-right text-slate-900">19,608.50</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+
+                    <article class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sky-100 text-sky-600 font-semibold">PV</span>
+                            <div>
+                                <h3 class="text-lg font-semibold text-slate-900">Template #2 · Retail & R&D</h3>
+                                <p class="text-xs text-slate-500">สร้างจาก <code>PV-BK-6910301</code> เพื่อรองรับค่าเบิกวัสดุ/การตลาด</p>
+                            </div>
+                        </div>
+                        <div class="overflow-hidden rounded-2xl border border-slate-200">
+                            <table class="min-w-full divide-y divide-slate-200 text-sm">
+                                <thead class="bg-slate-50 text-slate-500 uppercase text-[0.65rem] tracking-[0.2em]">
+                                    <tr>
+                                        <th class="px-5 py-3 text-left">GL</th>
+                                        <th class="px-5 py-3 text-left">คำอธิบาย</th>
+                                        <th class="px-5 py-3 text-right">เดบิต (THB)</th>
+                                        <th class="px-5 py-3 text-right">เครดิต (THB)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 bg-white">
+                                    <tr>
+                                        <td class="px-5 py-3 font-medium text-slate-900">61101</td>
+                                        <td class="px-5 py-3 text-slate-700">Raw materials used · ค่าแก้วสั่งทำ</td>
+                                        <td class="px-5 py-3 text-right text-slate-900">1,560.00</td>
+                                        <td class="px-5 py-3 text-right text-slate-400">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-5 py-3 font-medium text-slate-900">61101</td>
+                                        <td class="px-5 py-3 text-slate-700">Raw materials used · Lamoon / Lion / ING</td>
+                                        <td class="px-5 py-3 text-right text-slate-900">456.00</td>
+                                        <td class="px-5 py-3 text-right text-slate-400">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-5 py-3 font-medium text-slate-900">63101</td>
+                                        <td class="px-5 py-3 text-slate-700">Other supplies · เสื้อพนักงาน aCommerce</td>
+                                        <td class="px-5 py-3 text-right text-slate-900">103.00</td>
+                                        <td class="px-5 py-3 text-right text-slate-400">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-5 py-3 font-medium text-slate-900">61101</td>
+                                        <td class="px-5 py-3 text-slate-700">Raw materials used · Makro</td>
+                                        <td class="px-5 py-3 text-right text-slate-900">55.00</td>
+                                        <td class="px-5 py-3 text-right text-slate-400">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-5 py-3 font-medium text-slate-900">Vendor A06398</td>
+                                        <td class="px-5 py-3 text-slate-700">ชิรินทร์ ชินภิรมย์พร · Reimbursement</td>
+                                        <td class="px-5 py-3 text-right text-slate-400">0.00</td>
+                                        <td class="px-5 py-3 text-right text-slate-900">2,174.00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-xs text-rose-600">Insights จาก <code>resources/analytic/PV-BK-6910301.md</code> ใช้เป็น rule base ในการ map GL สำหรับวัสดุและ e-commerce</p>
+                    </article>
+
+                    <article class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 font-semibold">PV</span>
+                            <div>
+                                <h3 class="text-lg font-semibold text-slate-900">Template #3 · Allowance & Advance Clearing</h3>
+                                <p class="text-xs text-slate-500">ถอดแบบจาก <code>PV-BK-1910310</code> เพื่อใช้กับโครงการภาคสนามและกิจกรรมหน้างาน</p>
+                            </div>
+                        </div>
+                        <div class="overflow-hidden rounded-2xl border border-slate-200">
+                            <table class="min-w-full divide-y divide-slate-200 text-sm">
+                                <thead class="bg-slate-50 text-slate-500 uppercase text-[0.65rem] tracking-[0.2em]">
+                                    <tr>
+                                        <th class="px-5 py-3 text-left">GL</th>
+                                        <th class="px-5 py-3 text-left">คำอธิบาย</th>
+                                        <th class="px-5 py-3 text-right">เดบิต (THB)</th>
+                                        <th class="px-5 py-3 text-right">เครดิต (THB)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 bg-white">
+                                    <tr>
+                                        <td class="px-5 py-3 font-medium text-slate-900">61303</td>
+                                        <td class="px-5 py-3 text-slate-700">Allowance for field-work · 700 x 20 + 65 x 200</td>
+                                        <td class="px-5 py-3 text-right text-slate-900">27,000.00</td>
+                                        <td class="px-5 py-3 text-right text-slate-400">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-5 py-3 font-medium text-slate-900">11902</td>
+                                        <td class="px-5 py-3 text-slate-700">Short-term advances to employees</td>
+                                        <td class="px-5 py-3 text-right text-slate-400">0.00</td>
+                                        <td class="px-5 py-3 text-right text-slate-900">26,000.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-5 py-3 font-medium text-slate-900">21903</td>
+                                        <td class="px-5 py-3 text-slate-700">Other current liabilities - Accrued expenses</td>
+                                        <td class="px-5 py-3 text-right text-slate-400">0.00</td>
+                                        <td class="px-5 py-3 text-right text-slate-900">1,000.00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-4 text-xs text-slate-600 space-y-2">
+                            <p>✅ Reference CA-011403 (สุมนาลี สวัสดิ์ศรีศิลป์) · ใช้แทนการเบิกเงินสดย่อย R&D</p>
+                            <p>🗂️ Dashboard แสดงสถานะ "Awaiting PDF" จนกว่าจะสแกนเอกสาร PV ตัวจริง</p>
+                            <p>📌 Source: <code>resources/data/PV-BK-1910310.md</code></p>
+                        </div>
+                    </article>
+
+                    <article class="rounded-3xl border border-slate-200 bg-white/80 p-6 space-y-3 text-sm text-slate-700">
+                        <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Control Checklist</h3>
+                        <ul class="space-y-2">
+                            <li>• Mapping GL & cost center อ้างอิงจาก markdown → ลด human error</li>
+                            <li>• เครดิต 11211 (Saving Accounts / P-Card Clearing) ทำให้ reconciliation งวดสิ้นเดือนปิดได้ในวันเดียว</li>
+                            <li>• Analytics layer ตรวจ cross-reference หมายเลขเอกสารก่อนโพสต์จริง</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
         </section>
+    </main>
 
-    </div>
-
-    <footer class="text-center mt-8 pb-8">
-        <p class="text-gray-500 text-sm">© 2025 Doi Tung Development Project. P-Card Solution Prototype.</p>
+    <footer class="max-w-7xl mx-auto px-4 lg:px-10 pb-8 text-[0.75rem] text-slate-500">
+        <p>แดชบอร์ดนี้คาดการณ์จากข้อมูลจริง (<code>resources/data</code>, <code>resources/analytic</code>) โดยยังไม่อ่านไฟล์ PDF ต้นฉบับ · TailwindCSS + Vanilla JS</p>
     </footer>
 
+    <script>
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabPanels = document.querySelectorAll('.tab-panel');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const target = button.getAttribute('data-tab');
+
+                tabButtons.forEach(btn => btn.setAttribute('aria-selected', btn === button ? 'true' : 'false'));
+                tabPanels.forEach(panel => {
+                    panel.classList.toggle('hidden', panel.getAttribute('data-panel') !== target);
+                });
+            });
+        });
+
+        const ctx = document.getElementById('roiChart');
+        if (ctx) {
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Conservative', 'Base Case', 'Stretch'],
+                    datasets: [{
+                        label: 'Quarterly Cost Saving (THB)',
+                        data: [111600, 148800, 186900],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.2)',
+                            'rgba(37, 99, 235, 0.5)',
+                            'rgba(29, 78, 216, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(37, 99, 235, 1)',
+                            'rgba(29, 78, 216, 1)'
+                        ],
+                        borderWidth: 2,
+                        borderRadius: 8,
+                        hoverBackgroundColor: 'rgba(29, 78, 216, 1)',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 1200,
+                        easing: 'easeOutCubic'
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value, index, values) {
+                                    return '฿' + (value / 1000) + 'k';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: true,
+                            backgroundColor: '#0f172a',
+                            titleFont: { weight: 'bold' },
+                            bodyFont: { weight: 'normal' },
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(context.parsed.y);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 </html>

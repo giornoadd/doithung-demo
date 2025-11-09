@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doi Tung Petty Cash Automation – README</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             color-scheme: light;
@@ -11,29 +12,36 @@
         body {
             font-family: 'Inter', 'Sarabun', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             margin: 0;
-            padding: 32px 18px 80px;
-            background: #f7f9fb;
-            color: #1f2937;
+            padding: 0;
+            background: #F2F5F7;
+            color: #1F2937;
             line-height: 1.65;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(0,106,78,0.08) 0%, rgba(37,99,235,0.12) 100%);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+            padding: 24px 20px;
         }
         main {
             max-width: 960px;
-            margin: 0 auto;
+            margin: 40px auto;
             background: #ffffff;
             border-radius: 18px;
-            box-shadow: 0 20px 45px -25px rgba(15, 23, 42, 0.35);
+            box-shadow: 0 14px 40px -20px rgba(15, 23, 42, 0.45);
             padding: 48px clamp(20px, 4vw, 60px);
         }
         h1 {
             font-size: clamp(2.2rem, 4vw, 2.8rem);
-            color: #0d4d3a;
+            color: #006A4E;
             margin-bottom: 12px;
+            font-weight: 700;
         }
         h2 {
             font-size: clamp(1.4rem, 3vw, 1.8rem);
-            color: #134e9b;
+            color: #009688;
             margin-top: 36px;
             margin-bottom: 12px;
+            font-weight: 700;
         }
         p {
             margin: 12px 0;
@@ -48,7 +56,7 @@
             font-size: 0.96rem;
         }
         table thead {
-            background: #e9f2ff;
+            background: rgba(0,106,78,0.08);
         }
         table th, table td {
             border: 1px solid #d4dde8;
@@ -98,15 +106,27 @@
     </style>
 </head>
 <body>
+    <div class="hero-gradient">
+        <div style="max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 20px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 48px; height: 48px; border-radius: 12px; background: #006A4E; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem;">DT</div>
+                <div>
+                    <p style="text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.7rem; color: #006A4E; font-weight: 600; margin: 0;">Doi Tung Finance</p>
+                    <h2 style="font-size: 1.3rem; text-align: left; letter-spacing: 0; color: #475569; margin: 0; font-weight: 600;">README</h2>
+                </div>
+            </div>
+            <a href="program-hub.html" class="btn-hub">← Back to Hub</a>
+        </div>
+    </div>
     <main>
         <h1>Doi Tung Petty Cash Automation – Project Hub</h1>
-        <p>เอกสารฉบับนี้สรุปภาพรวม โจทย์ โซลูชัน และผลลัพธ์ของ <strong>โครงการยกเลิก Petty Cash ด้วย AI + P-Card</strong> สำหรับหน่วยงานการเงินของดอยตุง พร้อมรวบรวมลิงก์ไปยังต้นแบบแบบอินเทอร์แอคทีฟและสตอรี่บอร์ดที่ใช้ในงานพรีเซนต์</p>
+    <p>เอกสารฉบับนี้สรุปภาพรวม โจทย์ โซลูชัน และผลลัพธ์ของ <strong>โครงการยกเลิก Petty Cash ด้วย AI + P-Card</strong> สำหรับหน่วยงานการเงินของดอยตุง พร้อมรวบรวมลิงก์ไปยังต้นแบบแบบอินเทอร์แอคทีฟ ตั้งแต่ประสบการณ์พนักงาน (LINE Bot) ไปจนถึงแดชบอร์ดผู้บริหารและคอนโซลบริหาร Prompt สำหรับทีม Automation</p>
 
         <h2>โครงเรื่อง (Problem → Solution → Impact)</h2>
         <ol>
             <li><strong>ปัญหาเดิม</strong> – การเบิกเงินสดย่อยใช้แรงงานสูง มีความเสี่ยงจากการคีย์ข้อมูลมือ และผู้มีส่วนได้ส่วนเสียไม่เชื่อมั่น AI</li>
-            <li><strong>แนวทางใหม่</strong> – สร้างประสบการณ์ 3 ขั้นตอนต่อเนื่อง: รับข้อมูลจากพนักงาน (LINE Bot) → ตรวจสอบความมั่นใจของ AI บนแดชบอร์ด → สรุปรายงาน P-Card พร้อมนำส่ง SAP โดยอัตโนมัติ</li>
-            <li><strong>ผลลัพธ์ที่คาดหวัง</strong> – อัตโนมัติ 80% ของปริมาณงาน, ความถูกต้อง 100%, ลดภาระงานและความเสี่ยงเงินสดคงค้าง 562,000 บาท</li>
+            <li><strong>แนวทางใหม่</strong> – สร้างประสบการณ์ 3 ขั้นตอนต่อเนื่อง: รับข้อมูลจากพนักงาน (LINE Bot) → ตรวจสอบความมั่นใจของ AI บนแดชบอร์ด → ฉายภาพความคุ้มค่าการ rollout ด้วย ROI forecast ก่อนปิดผลลัพธ์สำหรับ SAP</li>
+            <li><strong>ผลลัพธ์ที่คาดหวัง</strong> – อัตโนมัติ 80% ของปริมาณงาน, ความถูกต้อง 100%, ลดภาระงานและความเสี่ยงเงินสดคงค้าง 562,000 บาท พร้อมกรอบคาดการณ์ผลตอบแทน ≤ 3 เดือน</li>
         </ol>
 
         <h2>โปรโตไทป์และไฟล์สำคัญ</h2>
@@ -122,7 +142,7 @@
                 <tr>
                     <td>Project Hub</td>
                     <td>แลนดิ้งเพจนําเสนอเรื่องราวและเชื่อมทุกเดโม</td>
-                    <td><a href="index.html">index.html</a></td>
+                    <td><a href="program-hub.html">program-hub.html</a></td>
                 </tr>
                 <tr>
                     <td>Step 1 – Employee Input</td>
@@ -135,14 +155,19 @@
                     <td><a href="dashboard-prototype.html">dashboard-prototype.html</a></td>
                 </tr>
                 <tr>
-                    <td>Step 3a – Program Tracking</td>
-                    <td>ภาพรวมการแทนเงินสดย่อยด้วย P-Card</td>
+                    <td>Step 3a – ROI Forecast</td>
+                    <td>แบบจำลองผลตอบแทน FY2026 จากการ rollout P-Card</td>
                     <td><a href="pcard-program-prototype.html">pcard-program-prototype.html</a></td>
                 </tr>
                 <tr>
-                    <td>Step 3b – SAP Output</td>
-                    <td>ไฟล์รายงานสรุปเพียงหน้าเดียวเพื่อบันทึก SAP</td>
+                    <td>Step 3b – Executive Output</td>
+                    <td>สรุปรายงานเพื่อส่งมอบให้ CFO/SAP พร้อม template journal</td>
                     <td><a href="pcard-report-prototype.html">pcard-report-prototype.html</a></td>
+                </tr>
+                <tr>
+                    <td>Prompt Console (Admin)</td>
+                    <td>คอนโซลสำหรับบริหาร system prompt / persona ของแต่ละ Agent</td>
+                    <td><a href="prompt/admin-prompt-console.html">prompt/admin-prompt-console.html</a></td>
                 </tr>
                 <tr>
                     <td>Design Storyboard</td>
@@ -157,7 +182,7 @@
             </tbody>
         </table>
 
-        <blockquote>เคล็ดลับ: เริ่มชมจาก <code>index.html</code> เพื่อเข้าใจโครงเรื่อง แล้วไล่เปิดดีโมแต่ละขั้นผ่านปุ่มบนเพจนั้นได้เลย</blockquote>
+    <blockquote>เคล็ดลับ: เริ่มชมจาก <code>program-hub.html</code> เพื่อไล่ตามโครงเรื่อง และใช้ปุ่มในเพจนั้นเพื่อนำทางไปยังเดโมแต่ละขั้น รวมถึงลิงก์ไปยัง Prompt Console</blockquote>
 
         <h2>วิธีใช้งานต้นแบบ</h2>
         <ol>
@@ -168,11 +193,14 @@
 
         <h2>โครงสร้างโฟลเดอร์ (ย่อ)</h2>
     <pre><code>.
-├── index.html                     # Landing page เล่าเรื่อง Problem → Solution → Impact
+├── program-hub.html               # Landing page เล่าเรื่อง Problem → Solution → Impact
 ├── line-prototype.html            # เดโม LINE Chatbot รับใบเสร็จ
 ├── dashboard-prototype.html       # เดโมแดชบอร์ด Human-in-the-Loop
-├── pcard-program-prototype.html   # เดโมการกำกับ P-Card แทน Petty Cash
-├── pcard-report-prototype.html    # เดโมรายงานผลลัพธ์สำหรับ SAP
+├── pcard-program-prototype.html   # เดโมแบบจำลอง ROI rollout P-Card
+├── pcard-report-prototype.html    # เดโมรายงานผู้บริหาร + template SAP
+├── prompt/
+│   ├── admin-prompt-console.html  # คอนโซลบริหารคำสั่ง Agent
+│   └── *.md                       # Prompt instruction สำหรับแต่ละ Agent
 ├── story-board.html               # สตอรี่บอร์ดสเก็ตช์ 8 การทดลอง
 ├── image/
 │   ├── Gemini_Generated_Image_1.png ... 8.png  # ภาพประกอบการ์ด

@@ -4,21 +4,24 @@
 
 ## โครงเรื่อง (Problem → Solution → Impact)
 1. **ปัญหาเดิม** – การเบิกเงินสดย่อยใช้แรงงานสูง มีความเสี่ยงจากการคีย์ข้อมูลมือ และผู้มีส่วนได้ส่วนเสียไม่เชื่อมั่น AI
-2. **แนวทางใหม่** – สร้างประสบการณ์ 3 ขั้นตอนต่อเนื่อง: รับข้อมูลจากพนักงาน (LINE Bot) → ตรวจสอบความมั่นใจของ AI บนแดชบอร์ด → สรุปรายงาน P-Card พร้อมนำส่ง SAP โดยอัตโนมัติ
-3. **ผลลัพธ์ที่คาดหวัง** – อัตโนมัติ 80% ของปริมาณงาน, ความถูกต้อง 100%, ลดภาระงานและความเสี่ยงเงินสดคงค้าง 562,000 บาท
+2. **แนวทางใหม่** – สร้างประสบการณ์ 3 ขั้นตอนต่อเนื่อง: รับข้อมูลจากพนักงาน (LINE Bot) → ตรวจสอบความมั่นใจของ AI บนแดชบอร์ด → ฉายภาพความคุ้มค่าการ rollout ด้วย ROI forecast ก่อนปิดผลลัพธ์สำหรับ SAP
+3. **ผลลัพธ์ที่คาดหวัง** – อัตโนมัติ 80% ของปริมาณงาน, ความถูกต้อง 100%, ลดภาระงานและความเสี่ยงเงินสดคงค้าง 562,000 บาท พร้อมกรอบคาดการณ์ผลตอบแทน ≤ 3 เดือน
 
 ## โปรโตไทป์และไฟล์สำคัญ
 | ขั้นตอน | คำอธิบาย |ไฟล์|
 |---|---|---|
-| Project Hub | แลนดิ้งเพจนําเสนอเรื่องราวและเชื่อมทุกเดโม | [index.html](index.html) |
+| Project Hub | แลนดิ้งเพจนําเสนอเรื่องราวและเชื่อมทุกเดโม | [program-hub.html](program-hub.html) |
 | Step 1 – Employee Input | LINE Chatbot สำหรับส่งใบเสร็จผ่านมือถือ | [line-prototype.html](line-prototype.html) |
 | Step 2 – Finance Control | AI Confidence Dashboard แก้โจทย์ “Untrust AI” | [dashboard-prototype.html](dashboard-prototype.html) |
-| Step 3a – Program Tracking | ภาพรวมการแทนเงินสดย่อยด้วย P-Card | [pcard-program-prototype.html](pcard-program-prototype.html) |
-| Step 3b – SAP Output | ไฟล์รายงานสรุปเพียงหน้าเดียวเพื่อบันทึก SAP | [pcard-report-prototype.html](pcard-report-prototype.html) |
+| Step 3a – ROI Forecast | แบบจำลองผลตอบแทน FY2026 จากการ rollout P-Card | [pcard-program-prototype.html](pcard-program-prototype.html) |
+| Step 3b – Executive Output | สรุปรายงานเพื่อส่งมอบให้ CFO/SAP พร้อม template journal | [pcard-report-prototype.html](pcard-report-prototype.html) |
+| Prompt Admin Console | จัดการ system prompt และ instruction ของ Agent ทั้งหมด | [prompt/admin-prompt-console.html](prompt/admin-prompt-console.html) |
+| Knowledge Base | รวบรวมโน้ตสรุปสำหรับการบรีฟทีมและผู้บริหาร | [readme.html](readme.html) |
 | Design Storyboard | สเก็ตช์ 8 แนวคิดที่ได้จากสปรินต์ | [story-board.html](story-board.html) |
 | Brief สำหรับภาพประกอบ | ข้อกำหนดภาพสเก็ตช์ | [image/story-board.md](image/story-board.md) |
+| Source Documents | HTML preview ของแฟ้ม PV/ADV/PCV ที่ใช้ฝึก AI (โฟลเดอร์ `details/`) | `details/*.html` |
 
-> เคล็ดลับ: เริ่มชมจาก `project-hub.html` เพื่อเข้าใจโครงเรื่อง แล้วไล่เปิดดีโมแต่ละขั้นผ่านปุ่มบนเพจนั้นได้เลย
+> เคล็ดลับ: เริ่มชมจาก `program-hub.html` เพื่อเข้าใจโครงเรื่อง แล้วไล่เปิดดีโมแต่ละขั้นผ่านปุ่มบนเพจนั้นได้เลย
 
 ## วิธีใช้งานต้นแบบ
 1. เปิดโฟลเดอร์โปรเจ็กต์ใน VS Code หรือเบราว์เซอร์
@@ -28,12 +31,15 @@
 ## โครงสร้างโฟลเดอร์ (ย่อ)
 ```text
 .
-├── project-hub.html               # Landing page เล่าเรื่อง Problem → Solution → Impact
+├── program-hub.html               # Landing page เล่าเรื่อง Problem → Solution → Impact
 ├── line-prototype.html            # เดโม LINE Chatbot รับใบเสร็จ
 ├── dashboard-prototype.html       # เดโมแดชบอร์ด Human-in-the-Loop
-├── pcard-program-prototype.html   # เดโมการกำกับ P-Card แทน Petty Cash
-├── pcard-report-prototype.html    # เดโมรายงานผลลัพธ์สำหรับ SAP
+├── pcard-program-prototype.html   # เดโมแบบจำลอง ROI rollout P-Card
+├── pcard-report-prototype.html    # เดโมรายงานผู้บริหาร + template SAP
+├── readme.html                    # บทสรุปเชิงเนื้อหาในรูปแบบเพจนำเสนอ
 ├── story-board.html               # สตอรี่บอร์ดสเก็ตช์ 8 การทดลอง
+├── details/                       # HTML preview ของแฟ้ม PV/ADV/PCV ทั้งหมด
+├── prompt/                        # Prompt instruction และ Admin Console
 ├── image/
 │   ├── Gemini_Generated_Image_1.png ... 8.png  # ภาพประกอบการ์ด
 │   └── story-board.md                        # สรุปรายละเอียดสเก็ตช์

@@ -6,7 +6,7 @@
     <title>Doi Tung Finance | LINE OA Prototype</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -339,7 +339,10 @@
         </div>
     </div>
 
-    <button type="button" onclick="location.reload()" class="fixed bottom-6 right-6 z-50 rounded-full bg-slate-900/90 px-3 py-2 text-xs font-semibold text-white shadow-lg">🔄 Restart Demo</button>
+    <div class="fixed top-4 right-4 z-50 flex gap-2">
+        <a href="program-hub.html" class="rounded-full bg-[#006A4E] px-4 py-2 text-xs font-semibold text-white shadow-lg hover:bg-[#009688] transition">← Hub</a>
+        <button type="button" onclick="location.reload()" class="rounded-full bg-slate-900/90 px-4 py-2 text-xs font-semibold text-white shadow-lg hover:bg-slate-700 transition">🔄 Restart</button>
+    </div>
 
     <script>
         const homeView = document.getElementById('line-oa-home-view');
@@ -412,23 +415,60 @@
                 return;
             }
             setCameraEnabled(false);
-            addUserImage('https://placehold.co/300x450/eee/333?text=Sample+Receipt');
+            addUserImage('demo-image/demo_0001.png');
 
             registerTimeout(() => {
                 addBotMessage('ได้รับใบเสร็จครับ... 🤖 กำลังประมวลผลข้อมูลสักครู่...');
             }, 1000);
 
             registerTimeout(() => {
-                addBotMessage('AI ตรวจสอบข้อมูลเบื้องต้น:\n• ยอดเงิน: 150.00 บาท\n• ร้านค้า: (ไม่พบข้อมูล)\n• วันที่: 08/11/2025\n\nยอดเงินนี้ (150 บาท) ถูกต้อง และจะถูกส่งไปที่ระบบ my petty cash เพื่อให้ Branch Manager ทำการ Approve นะครับ');
+                addProcessingIndicator();
+            }, 1800);
+
+            registerTimeout(() => {
+                addBotMessage('นี่คือรายละเอียดค่าใช้จ่ายจากรูปภาพที่คุณอัปโหลดครับ\n\n1) ใบเสร็จ GrabExpress (Car)\n   • วันที่: 07 ต.ค. 25\n   • วิธีชำระเงิน: CASHLESS\n   • ค่าบริการ (Item Carrying Fee) 340 บาท\n   • ส่วนลด (Rewards) -34 บาท\n   ⇒ ยอดรวมสุทธิ: 306 บาท\n\n2) ใบรับค่าผ่านทางพิเศษ (การทางพิเศษแห่งประเทศไทย)\n   • วันที่ (จากรอยเจาะ): 15 ก.ค. 25\n   • ประเภทรถ: 4 ล้อ\n   ⇒ ราคา: 50 บาท\n\nข้อมูลนี้ถูกต้องหรือไม่? หากใช่ กรุณากดยืนยันครับ');
                 renderQuickReplies();
-            }, 2500);
+            }, 3800);
+        }
+
+        function addProcessingIndicator() {
+            if (!chatBody) return;
+            chatBody.insertAdjacentHTML('beforeend', `
+                <div class="mt-4 flex items-end gap-3 animate-fade-in">
+                    <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-lineGreen text-xs font-semibold text-white">DT</div>
+                    <div class="chat-bubble bubble-left bg-white p-4 space-y-2">
+                        <div class="text-xs font-semibold text-slate-600 uppercase tracking-wide">🔍 AI Processing</div>
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-2 text-xs text-slate-700">
+                                <span class="text-emerald-600">✓</span>
+                                <span>OCR Extraction</span>
+                                <span class="ml-auto text-emerald-600 font-semibold">98%</span>
+                            </div>
+                            <div class="h-1 bg-slate-200 rounded-full overflow-hidden">
+                                <div class="h-full bg-emerald-500 rounded-full transition-all duration-1000" style="width: 98%"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-2 text-xs text-slate-700">
+                                <span class="text-blue-600">⟳</span>
+                                <span>Policy Verification</span>
+                                <span class="ml-auto text-blue-600 font-semibold">95%</span>
+                            </div>
+                            <div class="h-1 bg-slate-200 rounded-full overflow-hidden">
+                                <div class="h-full bg-blue-500 rounded-full transition-all duration-1000" style="width: 95%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `);
+            scrollChatToBottom();
         }
 
         function triggerConfirm() {
             hideQuickReplies();
             addUserMessage('✅ ยืนยืน');
             registerTimeout(() => {
-                addBotMessage('ดำเนินการสำเร็จ! 🚀 รายการเบิกจ่าย Ref: DT-98765 ถูกส่งเข้าระบบเรียบร้อยแล้วครับ ขอบคุณที่ใช้บริการ');
+                addBotMessage('ดำเนินการสำเร็จ! 🚀 รายการเบิกจ่ายถูกบันทึกภายใต้ voucher queue: PV-BK-6910296 แล้วครับ ขอบคุณที่ใช้บริการ');
                 setCameraEnabled(false);
             }, 1000);
         }

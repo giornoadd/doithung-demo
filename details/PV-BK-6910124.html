@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PV-BK-6910124 · Doi Tung Voucher Detail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Sarabun', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at 10% 20%, rgba(226,235,255,0.9) 0%, rgba(241,245,249,1) 45%, rgba(241,245,249,1) 100%);
+            color: #0f172a;
+        }
+        .panel-shadow {
+            box-shadow: 0 12px 36px -18px rgba(15, 23, 42, 0.35);
+        }
+        .card-border {
+            border: 1px solid rgba(148, 163, 184, 0.22);
+        }
+        .glass {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .transition-base {
+            transition: all 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-16">
+    <main class="max-w-5xl mx-auto px-4 md:px-8 py-10 space-y-8">
+        <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+                <p class="text-xs uppercase tracking-[0.3em] text-slate-500">Voucher Drilldown</p>
+                <h1 class="mt-2 text-3xl md:text-4xl font-bold text-slate-900">Auto Review: PV-BK-6910124 (Reimbursement)</h1>
+                <p class="mt-3 text-sm md:text-base text-slate-600 max-w-2xl">สรุปการเบิกคืนเงินสดย่อย 3 PCVs ที่ผูกกับธนาคารกสิกรไทย ตรวจสอบครบถ้วนโดย AI.</p>
+            </div>
+            <a href="../dashboard-prototype.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 text-white text-sm font-semibold transition-base hover:bg-slate-700">
+                <span class="text-lg">←</span>
+                กลับสรุปใบปะหน้า
+            </a>
+        </header>
+
+        <section class="grid gap-4 md:grid-cols-4">
+            <div class="glass panel-shadow card-border rounded-2xl p-4">
+                <p class="text-xs font-semibold uppercase text-slate-500">Document Type</p>
+                <p class="mt-2 text-base font-semibold text-slate-900">Payment Voucher</p>
+            </div>
+            <div class="glass panel-shadow card-border rounded-2xl p-4">
+                <p class="text-xs font-semibold uppercase text-slate-500">AI Confidence</p>
+                <p class="mt-2 text-base font-semibold text-emerald-600">98% (High)</p>
+            </div>
+            <div class="glass panel-shadow card-border rounded-2xl p-4">
+                <p class="text-xs font-semibold uppercase text-slate-500">Amount (THB)</p>
+                <p class="mt-2 text-base font-semibold text-slate-900">10,869.15</p>
+            </div>
+            <div class="glass panel-shadow card-border rounded-2xl p-4">
+                <p class="text-xs font-semibold uppercase text-slate-500">Journal Ref</p>
+                <p class="mt-2 text-base font-semibold text-slate-900">JN305029 · Due 16/10/2025</p>
+            </div>
+        </section>
+
+        <section class="grid gap-6 md:grid-cols-2">
+            <article class="glass panel-shadow card-border rounded-3xl overflow-hidden">
+                <header class="px-6 py-4 border-b border-slate-200/70 bg-white/80 flex items-center justify-between">
+                    <div>
+                        <h2 class="text-lg font-semibold text-slate-900">Document Viewer</h2>
+                        <p class="text-xs text-slate-500">Cheque request &amp; supporting bundle</p>
+                    </div>
+                    <span class="text-xs font-semibold px-3 py-1 rounded-full bg-emerald-100 text-emerald-700">AI Cleared · PCV bundle reconciled</span>
+                </header>
+                <div class="p-6 md:p-10 bg-slate-100/70 min-h-[420px]">
+                    <iframe src="../resources/pdf/PV-BK-6910124_Reimbursement.pdf" title="PV-BK-6910124 supporting document" class="h-[520px] w-full rounded-2xl border border-slate-200/70 shadow-lg" loading="lazy"></iframe>
+                </div>
+            </article>
+
+            <article class="glass panel-shadow card-border rounded-3xl overflow-hidden">
+                <header class="px-6 py-4 border-b border-slate-200/70 bg-white/80">
+                    <h2 class="text-lg font-semibold text-slate-900">AI (OCR + LLM) Analysis</h2>
+                    <p class="text-xs text-slate-500 mt-1">จับคู่ยอดเบิกคืนกับ PCV ต้นทางครบถ้วน</p>
+                </header>
+                <div class="p-6 md:p-8 space-y-5 text-sm text-slate-700">
+                    <section class="rounded-2xl border border-slate-200 bg-white p-4 space-y-2">
+                        <h3 class="text-xs font-semibold uppercase text-slate-500">Voucher Highlights</h3>
+                        <ul class="space-y-1">
+                            <li>• ผู้รับเงิน: A05261 ธนาคารกสิกรไทย (BKK)</li>
+                            <li>• รายละเอียด: EB PETTY CASH เบิกคืนเงินสดย่อย กำหนดจ่าย 16/10/2025</li>
+                            <li>• รวมเบิกคืน: 10,869.15 บาท จาก 3 PCVs</li>
+                        </ul>
+                    </section>
+
+                    <section class="rounded-2xl border border-slate-200 bg-slate-50/80 p-4 space-y-3">
+                        <h3 class="text-xs font-semibold uppercase text-slate-500">General Ledger Mapping</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between gap-3"><span>21903 · Accrued expenses</span><span class="font-semibold text-slate-900">10,869.15</span></div>
+                            <div class="flex items-center justify-between gap-3"><span>11211 · Saving Accounts</span><span class="font-semibold text-slate-900">10,869.15 credit</span></div>
+                        </div>
+                        <p class="text-xs text-slate-500">ยอดโอน treasury ตรงกับยอด PCV รวม ไม่มีส่วนต่าง</p>
+                    </section>
+
+                    <section class="rounded-2xl border border-slate-200 bg-white p-4 space-y-4">
+                        <h3 class="text-xs font-semibold uppercase text-slate-500">Underlying PCVs</h3>
+                        <div class="rounded-xl border border-slate-100 bg-slate-50/70 p-3">
+                            <p class="font-semibold text-slate-800">PCV-BK-6809043 · 382.00 บาท</p>
+                            <p class="text-xs text-slate-500 mt-1">PC-12277 · petty cash top-up</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-100 bg-slate-50/70 p-3">
+                            <p class="font-semibold text-slate-800">PCV-BK-6809046 · 790.00 บาท</p>
+                            <p class="text-xs text-slate-500 mt-1">PC-12140 · branch incidentals</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-100 bg-slate-50/70 p-3 space-y-2">
+                            <p class="font-semibold text-slate-800">PCV-BK-6910004 · 9,697.15 บาท</p>
+                            <ul class="text-xs text-slate-600 space-y-1">
+                                <li>• Rental - Machinery &amp; equipment: 1,800.00</li>
+                                <li>• Other traveling exp.-Local: 1,597.00</li>
+                                <li>• Vehicle petrol (Caltex): 620.00</li>
+                                <li>• Fixed assets not capitalised: 3,145.15</li>
+                                <li>• Postage &amp; courier: 2,087.00</li>
+                            </ul>
+                        </div>
+                        <p class="text-xs text-emerald-600">LLM ยืนยันยอดรวม PCV = ยอดเบิกคืน เอกสารครบถ้วน</p>
+                    </section>
+                </div>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,22 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doi Tung - P-Card Program (Petty Cash Elimination) | Financial Report</title>
+    <title>Doi Tung - P-Card Analytics Command Center</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            color-scheme: light;
+        }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            background: #F4F6F8;
-            color: #1F2933;
+            font-family: 'Inter', 'Sarabun', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #F2F5F7;
         }
         .card-shadow {
-            box-shadow: 0 18px 35px -18px rgba(30, 64, 175, 0.35);
+            box-shadow: 0 14px 40px -20px rgba(15, 23, 42, 0.45);
         }
         .active-tab {
-            background: linear-gradient(90deg, #2563EB 0%, #1D4ED8 100%);
-            color: white !important;
+            background: linear-gradient(90deg, #006A4E 0%, #009688 100%);
+            color: #ffffff !important;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(0,106,78,0.08) 0%, rgba(37,99,235,0.12) 100%);
         }
         .tab-panel {
             display: none;
@@ -26,255 +33,850 @@
         }
     </style>
 </head>
-<body class="min-h-screen">
-    <button class="fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-2 rounded-full shadow-lg text-sm hover:bg-slate-800 transition" onclick="location.reload()">Restart Demo</button>
-
-    <div class="max-w-6xl mx-auto px-5 py-8">
-        <header class="mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-slate-900">Doi Tung - P-Card Program (Petty Cash Elimination) | Financial Report</h1>
-            <p class="text-slate-500 mt-2 text-sm md:text-base">Post go-live snapshot proving that every manual petty cash reimbursement, voucher, and ad-hoc payment has been replaced by the SCB P-Card feed with AI categorisation and SAP automation.</p>
-        </header>
-
-        <nav class="flex flex-wrap gap-3 mb-6">
-            <button id="btn-feed" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 border border-slate-200 bg-white hover:border-blue-400 transition active-tab">Transaction Feed</button>
-            <button id="btn-policy" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 border border-slate-200 bg-white hover:border-blue-400 transition">Store Policy</button>
-            <button id="btn-journal" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 border border-slate-200 bg-white hover:border-blue-400 transition">SAP Journal</button>
-        </nav>
-
-        <section id="tab-feed" class="tab-panel active">
-            <div class="bg-white rounded-2xl card-shadow border border-slate-100 overflow-hidden">
-                <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
-                    <div>
-                        <h2 class="text-xl font-semibold text-slate-900">P-Card Transaction Feed (Real-Time)</h2>
-                        <p class="text-sm text-slate-500 mt-1">Source: SCB Procurement Card provider feed + OCR/LLM classification trained on PV-BK-6910124 reimbursement data.</p>
-                    </div>
-                    <span class="text-xs font-semibold bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full uppercase tracking-wide">Manual Entry Eliminated</span>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-slate-200 text-sm">
-                        <thead class="bg-slate-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left font-medium text-slate-500 uppercase tracking-wider">Date</th>
-                                <th class="px-6 py-3 text-left font-medium text-slate-500 uppercase tracking-wider">Merchant</th>
-                                <th class="px-6 py-3 text-left font-medium text-slate-500 uppercase tracking-wider">Amount (THB)</th>
-                                <th class="px-6 py-3 text-left font-medium text-slate-500 uppercase tracking-wider">Card</th>
-                                <th class="px-6 py-3 text-left font-medium text-slate-500 uppercase tracking-wider">AI GL Code</th>
-                                <th class="px-6 py-3 text-left font-medium text-slate-500 uppercase tracking-wider">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-slate-100">
-                            <tr>
-                                <td class="px-6 py-4 font-medium text-slate-700">06/10/2025</td>
-                                <td class="px-6 py-4 text-slate-800">CALTEX - PETCHASATORN</td>
-                                <td class="px-6 py-4 text-emerald-600 font-semibold">620.00</td>
-                                <td class="px-6 py-4 text-slate-600">...1234 (สาขา 001)</td>
-                                <td class="px-6 py-4"><span class="inline-flex items-center gap-2 bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full">63902 <span class="text-xs">ค่าน้ำมัน</span></span></td>
-                                <td class="px-6 py-4 text-emerald-600 font-semibold">✅ Ready for SAP</td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 font-medium text-slate-700">04/10/2025</td>
-                                <td class="px-6 py-4 text-slate-800">CREA TRADING (Coffee Machine)</td>
-                                <td class="px-6 py-4 text-emerald-600 font-semibold">3,145.15</td>
-                                <td class="px-6 py-4 text-slate-600">...5678 (สาขา 281)</td>
-                                <td class="px-6 py-4"><span class="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-3 py-1 rounded-full">63501 <span class="text-xs">เครื่องใช้</span></span></td>
-                                <td class="px-6 py-4 text-emerald-600 font-semibold">✅ Ready for SAP</td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 font-medium text-slate-700">09/10/2025</td>
-                                <td class="px-6 py-4 text-slate-800">Grab* (Taxi)</td>
-                                <td class="px-6 py-4 text-emerald-600 font-semibold">97.00</td>
-                                <td class="px-6 py-4 text-slate-600">...9012 (สนง.บัญชี)</td>
-                                <td class="px-6 py-4"><span class="inline-flex items-center gap-2 bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full">62503 <span class="text-xs">ค่าเดินทาง</span></span></td>
-                                <td class="px-6 py-4 text-emerald-600 font-semibold">✅ Ready for SAP</td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 font-medium text-slate-700">07/10/2025</td>
-                                <td class="px-6 py-4 text-slate-800">THAILAND POST (EMS)</td>
-                                <td class="px-6 py-4 text-emerald-600 font-semibold">264.00</td>
-                                <td class="px-6 py-4 text-slate-600">...5678 (สาขา 850)</td>
-                                <td class="px-6 py-4"><span class="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-3 py-1 rounded-full">63703 <span class="text-xs">ค่าส่งของ</span></span></td>
-                                <td class="px-6 py-4 text-emerald-600 font-semibold">✅ Ready for SAP</td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 font-medium text-slate-700">04/10/2025</td>
-                                <td class="px-6 py-4 text-slate-800">LALAMOVE</td>
-                                <td class="px-6 py-4 text-emerald-600 font-semibold">121.00</td>
-                                <td class="px-6 py-4 text-slate-600">...5678 (สาขา 850)</td>
-                                <td class="px-6 py-4"><span class="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-3 py-1 rounded-full">63703 <span class="text-xs">ค่าส่งของ</span></span></td>
-                                <td class="px-6 py-4 text-emerald-600 font-semibold">✅ Ready for SAP</td>
-                            </tr>
-                        </tbody>
-                    </table>
+<body>
+    <header class="hero-gradient border-b border-slate-200/70">
+        <div class="max-w-7xl mx-auto px-5 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-[#006A4E] text-white flex items-center justify-center font-semibold text-lg">DT</div>
+                <div>
+                    <p class="uppercase tracking-[0.25em] text-xs text-[#006A4E] font-semibold">Doi Tung Finance</p>
+                    <h1 class="text-lg font-semibold text-gray-700">P-Card Analytics</h1>
                 </div>
             </div>
-            <div class="mt-6 bg-blue-50 border border-blue-100 text-blue-700 rounded-xl p-5 text-sm leading-relaxed">
-                <h3 class="font-semibold text-blue-900 mb-2">Key Message</h3>
-                <p>Every line item originates from the reimbursement bundle <span class="font-semibold">PV-BK-6910124</span> but now arrives digitally from the bank feed. The AI fills GL codes instantly; Finance simply validates. There are no more handwritten vouchers, no PDF scans, and no "ใบรับรองแทนใบเสร็จ" requests (e.g. PC-12432) because the data is born-digital and reconciled daily.</p>
-            </div>
-        </section>
+            <a href="program-hub.html" class="text-sm font-medium text-[#006A4E] hover:text-[#009688] transition">← Back to Hub</a>
+        </div>
+    </header>
+    <div class="min-h-screen flex">
+        <aside class="w-72 bg-[#006A4E] text-white flex flex-col p-6 space-y-10">
+            <header class="space-y-1">
+                <p class="text-xs uppercase tracking-[0.4em] text-white/70">P-Card Initiative</p>
+                <h1 class="text-2xl font-semibold text-white">Doi Tung P-Card Analytics</h1>
+                <p class="text-xs text-white/80">Ultimate success view · ฟีดข้อมูลจาก PV/ADV/PCV และสรุป insight สำหรับ Finance · HR · Operations</p>
+            </header>
+            <nav class="space-y-2">
+                <button data-nav="view-executive" onclick="showView('view-executive')" class="group w-full text-left px-4 py-3 rounded-xl text-sm font-semibold flex items-center gap-3 transition focus:outline-none">
+                    <span class="text-lg">📈</span>
+                    <span>ROI Executive Report</span>
+                </button>
+                <button data-nav="view-overview" onclick="showView('view-overview')" class="group w-full text-left px-4 py-3 rounded-xl text-sm font-semibold flex items-center gap-3 transition focus:outline-none">
+                    <span class="text-lg">🏠</span>
+                    <span>ภาพรวมโครงการ</span>
+                </button>
+                <button data-nav="view-by-employee" onclick="showView('view-by-employee')" class="group w-full text-left px-4 py-3 rounded-xl text-sm font-semibold flex items-center gap-3 transition focus:outline-none">
+                    <span class="text-lg">👤</span>
+                    <span>วิเคราะห์ตามพนักงาน</span>
+                </button>
+                <button data-nav="view-by-department" onclick="showView('view-by-department')" class="group w-full text-left px-4 py-3 rounded-xl text-sm font-semibold flex items-center gap-3 transition focus:outline-none">
+                    <span class="text-lg">🏢</span>
+                    <span>วิเคราะห์ตามแผนก/สาขา</span>
+                </button>
+                <button data-nav="view-by-merchant" onclick="showView('view-by-merchant')" class="group w-full text-left px-4 py-3 rounded-xl text-sm font-semibold flex items-center gap-3 transition focus:outline-none">
+                    <span class="text-lg">🛒</span>
+                    <span>วิเคราะห์ตามร้านค้า</span>
+                </button>
+            </nav>
+            <footer class="mt-auto text-[0.7rem] text-white/60 space-y-2 border-t border-white/20 pt-4">
+                <p>ข้อมูลจำลองมาจากเอกสาร: PV-BK-6910124, PV-BK-6910296, PV-BK-6910301, PV-BK-1910310, ADV-BK-6910037, Petty cash by stores.md</p>
+                <p>เวอร์ชั่น 2025.11 · TailwindCSS + Chart.js</p>
+            </footer>
+        </aside>
 
-        <section id="tab-policy" class="tab-panel">
-            <div class="bg-white rounded-2xl card-shadow border border-slate-100 overflow-hidden">
-                <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
-                    <div>
-                        <h2 class="text-xl font-semibold text-slate-900">Store Expense Management Policy (To-Be)</h2>
-                        <p class="text-sm text-slate-500 mt-1">Converted from the legacy petty cash schedule in <span class="font-semibold">Petty cash by stores.pdf</span> to P-Card controls per store.</p>
-                    </div>
-                    <span class="text-xs font-semibold bg-amber-50 text-amber-600 px-3 py-1 rounded-full uppercase tracking-wide">Risk Exposure Eliminated</span>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-slate-200 text-sm">
-                        <thead class="bg-slate-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left font-medium text-slate-500 uppercase tracking-wider">Store Name</th>
-                                <th class="px-6 py-3 text-left font-medium text-slate-500 uppercase tracking-wider">Old Petty Cash Limit</th>
-                                <th class="px-6 py-3 text-left font-medium text-slate-500 uppercase tracking-wider">New System</th>
-                                <th class="px-6 py-3 text-left font-medium text-slate-500 uppercase tracking-wider">P-Card Limit</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-slate-100">
-                            <tr>
-                                <td class="px-6 py-4 font-semibold text-slate-800">สนามบินเชียงราย (236)</td>
-                                <td class="px-6 py-4 text-rose-600 font-semibold">5,000.00</td>
-                                <td class="px-6 py-4 text-slate-700">P-Card (...4451)</td>
-                                <td class="px-6 py-4 text-emerald-600 font-semibold">5,000.00</td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 font-semibold text-slate-800">กาแฟดอยตุง (234)</td>
-                                <td class="px-6 py-4 text-rose-600 font-semibold">6,000.00</td>
-                                <td class="px-6 py-4 text-slate-700">P-Card (...4452)</td>
-                                <td class="px-6 py-4 text-emerald-600 font-semibold">6,000.00</td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 font-semibold text-slate-800">แฟชั่นไอร์แลนด์ (217)</td>
-                                <td class="px-6 py-4 text-rose-600 font-semibold">10,000.00</td>
-                                <td class="px-6 py-4 text-slate-700">P-Card (...4453)</td>
-                                <td class="px-6 py-4 text-emerald-600 font-semibold">10,000.00</td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 font-semibold text-slate-800">SCB ปาร์ค พลาซ่า (227)</td>
-                                <td class="px-6 py-4 text-rose-600 font-semibold">7,000.00</td>
-                                <td class="px-6 py-4 text-slate-700">P-Card (...4454)</td>
-                                <td class="px-6 py-4 text-emerald-600 font-semibold">7,000.00</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="mt-6 bg-emerald-50 border border-emerald-100 text-emerald-700 rounded-xl p-5 text-sm leading-relaxed">
-                <h3 class="font-semibold text-emerald-900 mb-2">Key Message</h3>
-                <p>Every store has migrated from physical floats to card limits; Finance recovered <span class="font-semibold">562,000 THB</span> of idle cash from the balance sheet. Managers tap to pay, AI reconciles, and Treasury sees a single statement—no more envelope deposits or store-by-store reimbursements.</p>
-            </div>
-        </section>
+        <main class="flex-1 overflow-y-auto">
+            <section data-view id="view-executive" class="hidden min-h-screen p-10 space-y-8">
+                <div class="max-w-6xl mx-auto space-y-6">
+                    <header class="space-y-3">
+                        <p class="text-xs uppercase tracking-[0.35em] text-[#009688] font-semibold">Strategic Outlook · FY2026</p>
+                        <h2 class="text-3xl font-semibold text-slate-900">Doi Tung - P-Card Program ROI Forecast | Executive Report</h2>
+                        <p class="text-sm text-slate-600">Projected FY2026 benefits from scaling the SCB P-Card model across petty cash cost centres, extrapolatedจากแฟ้มจริง (<code>PCV-BK-6910020/21/28</code>, <code>PV-BK-1910310</code>) และ AI-assisted SAP postings.</p>
+                    </header>
 
-        <section id="tab-journal" class="tab-panel">
-            <div class="bg-white rounded-2xl card-shadow border border-slate-100 overflow-hidden">
-                <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
-                    <div>
-                        <h2 class="text-xl font-semibold text-slate-900">Auto-Generated Journal (SAP Posting)</h2>
-                        <p class="text-sm text-slate-500 mt-1">Derived from the same transaction set in PV-BK-6910124 but aggregated for the SCB P-Card settlement.</p>
-                    </div>
-                    <span class="text-xs font-semibold bg-slate-800 text-white px-3 py-1 rounded-full uppercase tracking-wide">SAP Ready</span>
-                </div>
-                <div class="grid gap-6 md:grid-cols-2 px-6 py-6">
-                    <div class="space-y-3 text-sm text-slate-600">
-                        <div class="bg-slate-50 border border-slate-100 rounded-lg p-4">
-                            <h3 class="text-base font-semibold text-slate-800 mb-3">Document Header</h3>
-                            <p><span class="font-semibold text-slate-800">Voucher No:</span> PCARD-BK-6910124</p>
-                            <p><span class="font-semibold text-slate-800">Voucher Date:</span> 16/10/2025</p>
-                            <p><span class="font-semibold text-slate-800">Pay To:</span> Siam Commercial Bank (Procurement Card Program)</p>
-                            <p><span class="font-semibold text-slate-800">Description:</span> Consolidated P-Card Statement (Oct 2025)</p>
+                    <nav class="flex flex-wrap gap-3">
+                        <button id="btn-feed" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 border border-slate-200 bg-white hover:border-[#009688] transition active-tab">Value Model</button>
+                        <button id="btn-policy" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 border border-slate-200 bg-white hover:border-[#009688] transition">Policy &amp; Rollout</button>
+                        <button id="btn-journal" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 border border-slate-200 bg-white hover:border-[#009688] transition">SAP Templates</button>
+                    </nav>
+
+                    <section id="tab-feed" class="tab-panel active space-y-6">
+                        <div class="grid gap-4 md:grid-cols-3 text-sm">
+                            <article class="bg-white rounded-2xl border border-slate-200 p-5">
+                                <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Projected Quarterly Saving</p>
+                                <p class="mt-3 text-3xl font-bold text-emerald-600">฿148,800</p>
+                                <p class="mt-2 text-slate-500">ลดภาระงานการเงิน 320 ชั่วโมง ต่อไตรมาสด้วยการแปลงแฟ้ม PV/ADV เป็น card feed (อ้างอิง <code>PCV-BK-6910020/21/28</code>).</p>
+                            </article>
+                            <article class="bg-white rounded-2xl border border-slate-200 p-5">
+                                <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Bundles Converted / Quarter</p>
+                                <p class="mt-3 text-3xl font-bold text-slate-900">48 ชุด</p>
+                                <p class="mt-2 text-slate-500">เทียบแฟ้ม ADV/PCV ใน <code>Petty cash by stores.md</code> เมื่อ rollout ครบ 25 cost centre.</p>
+                            </article>
+                            <article class="bg-white rounded-2xl border border-slate-200 p-5">
+                                <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Payback Period</p>
+                                <p class="mt-3 text-3xl font-bold text-blue-600">≤ 3 เดือน</p>
+                                <p class="mt-2 text-slate-500">รวมค่า training + integration (SCB API ➜ SAP) เทียบกับ savings ต่อไตรมาส.</p>
+                            </article>
                         </div>
-                        <div class="bg-blue-50 border border-blue-100 rounded-lg p-4 text-blue-800">
-                            <h3 class="text-base font-semibold text-blue-900 mb-2">Key Message</h3>
-                            <p>The 37-page reimbursement pack (PV-BK-6910124) is now a single journal. Treasury pays one counterpart—SCB—instead of eight employees (Thasanee, Ploy, Thidaporn, Natthaporn, etc. from page 4). Supporting receipts live in the P-Card portal; SAP just books the totals.</p>
+
+                        <div class="bg-white rounded-2xl card-shadow border border-slate-100 overflow-hidden">
+                            <div class="px-6 py-5 border-b border-slate-100 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                                <div>
+                                    <h3 class="text-xl font-semibold text-slate-900">Projected P-Card Transaction Feed (Model)</h3>
+                                    <p class="text-sm text-slate-500">จำลอง card feed ตัวอย่างจาก <code>PCV-BK-6910020/21/28</code> เพื่อคาดการณ์ยอดปี 2026 หลัง rollout ครบองค์กร.</p>
+                                </div>
+                                <span class="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-600 uppercase tracking-wide">Manual Entry Eliminated</span>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-slate-200 text-sm">
+                                    <thead class="bg-slate-50 text-slate-500 uppercase text-[0.7rem] tracking-[0.2em]">
+                                        <tr>
+                                            <th class="px-6 py-3 text-left">Date</th>
+                                            <th class="px-6 py-3 text-left">Merchant</th>
+                                            <th class="px-6 py-3 text-left">Amount (THB)</th>
+                                            <th class="px-6 py-3 text-left">Card</th>
+                                            <th class="px-6 py-3 text-left">AI GL Code</th>
+                                            <th class="px-6 py-3 text-left">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-slate-100">
+                                        <tr>
+                                            <td class="px-6 py-4 font-medium text-slate-700">06/01/2026</td>
+                                            <td class="px-6 py-4 text-slate-800">CALTEX - PETCHASATORN</td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">620.00</td>
+                                            <td class="px-6 py-4 text-slate-600">...1234 (สาขา 001)</td>
+                                            <td class="px-6 py-4"><span class="inline-flex items-center gap-2 bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full">63902 <span class="text-xs">ค่าน้ำมัน</span></span></td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">✅ Ready for SAP</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 font-medium text-slate-700">04/01/2026</td>
+                                            <td class="px-6 py-4 text-slate-800">CREA TRADING (Coffee Machine)</td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">3,145.15</td>
+                                            <td class="px-6 py-4 text-slate-600">...5678 (สาขา 281)</td>
+                                            <td class="px-6 py-4"><span class="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-3 py-1 rounded-full">63501 <span class="text-xs">เครื่องใช้</span></span></td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">✅ Ready for SAP</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 font-medium text-slate-700">09/01/2026</td>
+                                            <td class="px-6 py-4 text-slate-800">Grab* (Taxi)</td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">97.00</td>
+                                            <td class="px-6 py-4 text-slate-600">...9012 (สนง.บัญชี)</td>
+                                            <td class="px-6 py-4"><span class="inline-flex items-center gap-2 bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full">62503 <span class="text-xs">ค่าเดินทาง</span></span></td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">✅ Ready for SAP</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 font-medium text-slate-700">07/01/2026</td>
+                                            <td class="px-6 py-4 text-slate-800">THAILAND POST (EMS)</td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">264.00</td>
+                                            <td class="px-6 py-4 text-slate-600">...5678 (สาขา 850)</td>
+                                            <td class="px-6 py-4"><span class="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-3 py-1 rounded-full">63703 <span class="text-xs">ค่าส่งของ</span></span></td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">✅ Ready for SAP</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 font-medium text-slate-700">03/01/2026</td>
+                                            <td class="px-6 py-4 text-slate-800">LALAMOVE</td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">121.00</td>
+                                            <td class="px-6 py-4 text-slate-600">...5678 (สาขา 850)</td>
+                                            <td class="px-6 py-4"><span class="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-3 py-1 rounded-full">63703 <span class="text-xs">ค่าส่งของ</span></span></td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">✅ Ready for SAP</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                    <div class="bg-slate-50 border border-slate-100 rounded-lg p-4 text-sm text-slate-700">
-                        <h3 class="text-base font-semibold text-slate-800 mb-4">Line Items (Aggregated)</h3>
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-slate-200">
-                                <thead class="bg-slate-100">
-                                    <tr>
-                                        <th class="px-4 py-2 text-left font-medium text-slate-500 uppercase tracking-wider">Account</th>
-                                        <th class="px-4 py-2 text-left font-medium text-slate-500 uppercase tracking-wider">Description</th>
-                                        <th class="px-4 py-2 text-right font-medium text-slate-500 uppercase tracking-wider">Debit (THB)</th>
-                                        <th class="px-4 py-2 text-right font-medium text-slate-500 uppercase tracking-wider">Credit (THB)</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-slate-100">
-                                    <tr>
-                                        <td class="px-4 py-3 text-slate-800 font-semibold">62503</td>
-                                        <td class="px-4 py-3">Other traveling exp.-Local</td>
-                                        <td class="px-4 py-3 text-right text-emerald-600 font-semibold">97.00</td>
-                                        <td class="px-4 py-3 text-right">-</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-slate-800 font-semibold">63902</td>
-                                        <td class="px-4 py-3">Vehicle petrol</td>
-                                        <td class="px-4 py-3 text-right text-emerald-600 font-semibold">620.00</td>
-                                        <td class="px-4 py-3 text-right">-</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-slate-800 font-semibold">63501</td>
-                                        <td class="px-4 py-3">Fixed assets</td>
-                                        <td class="px-4 py-3 text-right text-emerald-600 font-semibold">3,145.15</td>
-                                        <td class="px-4 py-3 text-right">-</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-slate-800 font-semibold">63703</td>
-                                        <td class="px-4 py-3">Postage and courier</td>
-                                        <td class="px-4 py-3 text-right text-emerald-600 font-semibold">385.00</td>
-                                        <td class="px-4 py-3 text-right">-</td>
-                                    </tr>
-                                    <tr class="bg-slate-100">
-                                        <td class="px-4 py-3 text-slate-800 font-semibold">21903</td>
-                                        <td class="px-4 py-3">Accrued expenses - SCB</td>
-                                        <td class="px-4 py-3 text-right">-</td>
-                                        <td class="px-4 py-3 text-right text-blue-600 font-semibold">4,247.15</td>
-                                    </tr>
-                                </tbody>
-                                <tfoot class="bg-slate-100">
-                                    <tr>
-                                        <td class="px-4 py-3 font-semibold text-slate-700" colspan="2">Totals</td>
-                                        <td class="px-4 py-3 text-right font-semibold text-slate-700">4,247.15</td>
-                                        <td class="px-4 py-3 text-right font-semibold text-slate-700">4,247.15</td>
-                                    </tr>
-                                </tfoot>
-                            </table>
+
+                        <div class="bg-blue-50 border border-blue-100 text-blue-700 rounded-xl p-5 text-sm leading-relaxed">
+                            <h3 class="font-semibold text-blue-900 mb-2">Key Message</h3>
+                            <p>ทุกบรรทัดคือแบบจำลองจาก <span class="font-semibold">PV-BK-6910124</span> เมื่อเชื่อมต่อ SCB card feed ระบบจะทำ GL mapping อัตโนมัติ ทำให้ทีมการเงินเหลือเฉพาะงานตรวจสอบ ลดการคีย์มือและแฟ้มกระดาษทั้งหมด.</p>
                         </div>
-                    </div>
+                    </section>
+
+                    <section id="tab-policy" class="tab-panel space-y-6">
+                        <div class="bg-white rounded-2xl card-shadow border border-slate-100 overflow-hidden">
+                            <div class="px-6 py-5 border-b border-slate-100 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                                <div>
+                                    <h3 class="text-xl font-semibold text-slate-900">Policy Migration &amp; Rollout (Forecast)</h3>
+                                    <p class="text-sm text-slate-500">ยึดตามข้อมูลใน <code>Petty cash by stores.md</code> เพื่อจัดเฟส rollout และกำหนด limit ใหม่สำหรับ P-Card.</p>
+                                </div>
+                                <span class="inline-flex items-center rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-600 uppercase tracking-wide">Risk Exposure ↓ 85%</span>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-slate-200 text-sm">
+                                    <thead class="bg-slate-50 text-slate-500 uppercase text-[0.7rem] tracking-[0.2em]">
+                                        <tr>
+                                            <th class="px-6 py-3 text-left">Store Name</th>
+                                            <th class="px-6 py-3 text-left">Old Petty Cash Limit</th>
+                                            <th class="px-6 py-3 text-left">New System</th>
+                                            <th class="px-6 py-3 text-left">P-Card Limit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-slate-100">
+                                        <tr>
+                                            <td class="px-6 py-4 font-semibold text-slate-800">สนามบินเชียงราย (236)</td>
+                                            <td class="px-6 py-4 text-rose-600 font-semibold">5,000.00</td>
+                                            <td class="px-6 py-4 text-slate-700">P-Card (...4451)</td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">5,000.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 font-semibold text-slate-800">กาแฟดอยตุง (234)</td>
+                                            <td class="px-6 py-4 text-rose-600 font-semibold">6,000.00</td>
+                                            <td class="px-6 py-4 text-slate-700">P-Card (...4452)</td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">6,000.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 font-semibold text-slate-800">แฟชั่นไอร์แลนด์ (217)</td>
+                                            <td class="px-6 py-4 text-rose-600 font-semibold">10,000.00</td>
+                                            <td class="px-6 py-4 text-slate-700">P-Card (...4453)</td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">10,000.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 font-semibold text-slate-800">SCB ปาร์ค พลาซ่า (227)</td>
+                                            <td class="px-6 py-4 text-rose-600 font-semibold">7,000.00</td>
+                                            <td class="px-6 py-4 text-slate-700">P-Card (...4454)</td>
+                                            <td class="px-6 py-4 text-emerald-600 font-semibold">7,000.00</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="bg-emerald-50 border border-emerald-100 text-emerald-700 rounded-xl p-5 text-sm leading-relaxed">
+                            <h3 class="font-semibold text-emerald-900 mb-2">Key Message</h3>
+                            <p>การ rollout ครบ 25 จุดจะทำให้เงินสดย่อย <span class="font-semibold">562,000 บาท</span> อยู่ภายใต้ statement เดียวของ SCB P-Card และบันทึก GL อัตโนมัติ ลดเวลาการตรวจแฟ้มรายสาขา.</p>
+                        </div>
+                    </section>
+
+                    <section id="tab-journal" class="tab-panel space-y-6">
+                        <div class="bg-white rounded-2xl card-shadow border border-slate-100 overflow-hidden">
+                            <div class="px-6 py-5 border-b border-slate-100 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                                <div>
+                                    <h3 class="text-xl font-semibold text-slate-900">Auto-Generated Journal Templates</h3>
+                                    <p class="text-sm text-slate-500">ดัดแปลงจาก transaction จริง (<code>PV-BK-6910124</code>, <code>PV-BK-6910296</code>, <code>PV-BK-1910310</code>) สำหรับรอบบัญชี 2026.</p>
+                                </div>
+                                <span class="inline-flex items-center rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white uppercase tracking-wide">SAP Ready</span>
+                            </div>
+                            <div class="grid gap-6 md:grid-cols-2 px-6 py-6">
+                                <div class="space-y-3 text-sm text-slate-600">
+                                    <div class="bg-slate-50 border border-slate-100 rounded-lg p-4">
+                                        <h4 class="text-base font-semibold text-slate-800 mb-3">Document Header</h4>
+                                        <p><span class="font-semibold text-slate-800">Voucher No:</span> PCARD-BK-6910124</p>
+                                        <p><span class="font-semibold text-slate-800">Voucher Date:</span> 16/10/2025</p>
+                                        <p><span class="font-semibold text-slate-800">Pay To:</span> Siam Commercial Bank (Procurement Card Program)</p>
+                                        <p><span class="font-semibold text-slate-800">Description:</span> Consolidated P-Card Statement (Oct 2025)</p>
+                                    </div>
+                                    <div class="bg-blue-50 border border-blue-100 rounded-lg p-4 text-blue-800">
+                                        <h4 class="text-base font-semibold text-blue-900 mb-2">Key Message</h4>
+                                        <p>แฟ้มเบิก 37 หน้า (PV-BK-6910124) ย่อเป็น journal template เดียว Treasury จ่ายให้ SCB เพียงคู่สัญญาเดียว พร้อม receipt ใน portal.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-50 border border-slate-100 rounded-lg p-4 text-sm text-slate-700">
+                                    <h4 class="text-base font-semibold text-slate-800 mb-4">Line Items (Aggregated)</h4>
+                                    <div class="overflow-x-auto">
+                                        <table class="min-w-full divide-y divide-slate-200">
+                                            <thead class="bg-slate-100 text-slate-500 uppercase text-[0.7rem] tracking-[0.2em]">
+                                                <tr>
+                                                    <th class="px-4 py-2 text-left">Account</th>
+                                                    <th class="px-4 py-2 text-left">Description</th>
+                                                    <th class="px-4 py-2 text-right">Debit (THB)</th>
+                                                    <th class="px-4 py-2 text-right">Credit (THB)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="bg-white divide-y divide-slate-100">
+                                                <tr>
+                                                    <td class="px-4 py-3 text-slate-800 font-semibold">62503</td>
+                                                    <td class="px-4 py-3">Other traveling exp.-Local</td>
+                                                    <td class="px-4 py-3 text-right text-emerald-600 font-semibold">97.00</td>
+                                                    <td class="px-4 py-3 text-right">-</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-4 py-3 text-slate-800 font-semibold">63902</td>
+                                                    <td class="px-4 py-3">Vehicle petrol</td>
+                                                    <td class="px-4 py-3 text-right text-emerald-600 font-semibold">620.00</td>
+                                                    <td class="px-4 py-3 text-right">-</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-4 py-3 text-slate-800 font-semibold">63501</td>
+                                                    <td class="px-4 py-3">Fixed assets</td>
+                                                    <td class="px-4 py-3 text-right text-emerald-600 font-semibold">3,145.15</td>
+                                                    <td class="px-4 py-3 text-right">-</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-4 py-3 text-slate-800 font-semibold">63703</td>
+                                                    <td class="px-4 py-3">Postage and courier</td>
+                                                    <td class="px-4 py-3 text-right text-emerald-600 font-semibold">385.00</td>
+                                                    <td class="px-4 py-3 text-right">-</td>
+                                                </tr>
+                                                <tr class="bg-slate-100">
+                                                    <td class="px-4 py-3 text-slate-800 font-semibold">21903</td>
+                                                    <td class="px-4 py-3">Accrued expenses - SCB</td>
+                                                    <td class="px-4 py-3 text-right">-</td>
+                                                    <td class="px-4 py-3 text-right text-blue-600 font-semibold">4,247.15</td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot class="bg-slate-100">
+                                                <tr>
+                                                    <td class="px-4 py-3 font-semibold text-slate-700" colspan="2">Totals</td>
+                                                    <td class="px-4 py-3 text-right font-semibold text-slate-700">4,247.15</td>
+                                                    <td class="px-4 py-3 text-right font-semibold text-slate-700">4,247.15</td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-            </div>
-        </section>
+            </section>
+
+            <section data-view id="view-overview" class="hidden min-h-screen p-10 space-y-8">
+                <header class="space-y-2">
+                    <p class="text-xs uppercase tracking-[0.35em] text-[#009688] font-semibold">Executive Overview · SAP Ready</p>
+                    <h2 class="text-3xl font-semibold text-slate-900">ภาพรวมการใช้จ่าย (P-Card Program)</h2>
+                    <p class="text-sm text-slate-600 max-w-3xl">แทนที่แฟ้มรายงานแบบเดิม (เช่น PV-BK-6910124.pdf) ด้วยแดชบอร์ดสดที่รวมทุกหมวดค่าใช้จ่าย พร้อมสัญญาณเตือนอัจฉริยะจาก LLM.</p>
+                </header>
+
+                <div class="grid gap-4 md:grid-cols-3">
+                    <article class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-2">
+                        <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Total Spend · Oct 2025</p>
+                        <p class="text-3xl font-bold text-slate-900">฿59,651.65</p>
+                        <p class="text-xs text-slate-500">ยอดรวม 4 ใบสำคัญล่าสุด: PV-BK-6910124 · PV-BK-6910296 · PV-BK-6910301 · PV-BK-1910310</p>
+                    </article>
+                    <article class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-2">
+                        <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Total Transactions</p>
+                        <p class="text-3xl font-bold text-emerald-600">52</p>
+                        <p class="text-xs text-slate-500">รวม ADV/PCV/PV 52 รายการที่เชื่อมเข้าระบบ P-Card feed · ตรวจสอบแล้ว 95% ด้วย AI</p>
+                    </article>
+                    <article class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-2">
+                        <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Top Anomaly</p>
+                        <p class="text-3xl font-bold text-amber-600">Grab Weekend Cluster</p>
+                        <p class="text-xs text-slate-500">จาก PV-BK-6910124 พบ 5 รายการ Grab ในวันหยุด · ส่งสัญญาณให้ Ops ตรวจสอบ</p>
+                    </article>
+                </div>
+
+                <section class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6">
+                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900">Spend by Category</h3>
+                            <p class="text-xs text-slate-500">แยกตาม GL หมวดหลักจากชุด ADV/PV</p>
+                        </div>
+                        <span class="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">Source · 62503 · 64802 · 63101 · 61303 · 61101</span>
+                    </header>
+                    <canvas id="overview-chart" class="w-full h-[120px]"></canvas>
+                </section>
+
+                <aside class="bg-blue-50 border border-blue-200 text-blue-900 rounded-3xl p-6 shadow-sm">
+                    <h3 class="font-semibold text-blue-900 mb-2">🤖 <span class="underline decoration-blue-300">AI/LLM Summary</span></h3>
+                    <p class="text-sm leading-relaxed">ภาพรวมการใช้จ่ายในเดือนตุลาคม 2568 (Oct 2025) อยู่ในเกณฑ์ปกติ หมวด “ค่าขนส่ง” (64802) และ “ค่าเดินทาง” (62503) มีปริมาณธุรกรรมสูงสุด ซึ่งสอดคล้องกับการดำเนินงานปกติ <strong>[ข้อสังเกต ⚠️]</strong> ตรวจพบการใช้จ่ายกับ “Grab” 5 ครั้งในวันหยุดสุดสัปดาห์ (นอกเวลาทำการ) และการซื้อ “อุปกรณ์สำนักงาน” จากหลายสาขาแทนการสั่งซื้อจากส่วนกลาง แนะนำให้ Ops ตรวจสอบนโยบายการจัดซื้อของสาขา</p>
+                </aside>
+            </section>
+
+            <section data-view id="view-by-employee" class="hidden min-h-screen p-10 space-y-8">
+                <header class="space-y-2">
+                    <p class="text-xs uppercase tracking-[0.35em] text-[#009688] font-semibold">HR & Manager Lens · Pattern Detection</p>
+                    <h2 class="text-3xl font-semibold text-slate-900">การวิเคราะห์ตามพนักงาน (HR &amp; Manager View)</h2>
+                    <p class="text-sm text-slate-600 max-w-3xl">ผูกข้อมูลพนักงานจาก PV-BK-6910124, PV-BK-6910296, ADV-BK-6910037 กับ cost center เพื่อดูพฤติกรรมใช้จ่ายและความเสี่ยง.</p>
+                </header>
+
+                <section class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6">
+                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900">Top 5 Spenders</h3>
+                            <p class="text-xs text-slate-500">ข้อมูลจากใบสำคัญ PV-BK-6910296, PV-BK-6910124, PV-BK-1910310</p>
+                        </div>
+                        <span class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">LLM confidence 92%</span>
+                    </header>
+                    <canvas id="employee-chart" class="w-full h-[120px]"></canvas>
+                </section>
+
+                <aside class="bg-amber-50 border border-amber-200 text-amber-900 rounded-3xl p-6 shadow-sm">
+                    <h3 class="font-semibold text-amber-900 mb-2">🤖 <span class="underline decoration-amber-300">AI/LLM Summary (HR/Fraud Alert)</span></h3>
+                    <p class="text-sm leading-relaxed">การใช้จ่ายส่วนใหญ่สอดคล้องกับหน้าที่ (เช่น “ทัศนีย์ รัตนวรรณ” (103353) จาก PV-BK-6910296 ใช้ในหมวด Food/E-comm). <strong>[ข้อสังเกต Fraud 🚩]</strong> ตรวจพบพนักงาน “ธิดาพร ปิ่นสงวน” (108179) จาก PV-BK-6910124 มีการเบิก “ค่าเดินทาง (Taxi)” 2 ครั้ง (PC-12407, PC-12387) ในวันเดียวกัน (8-9/10) และพนักงาน “พลอย โกมลสิงห์” (จาก PV-BK-6910124) มีการใช้ Grab (PC-12432) 6 ครั้งใน 3 วันหลัง 22:00 น. ซึ่งเป็นพฤติกรรมที่ควรตรวจสอบ (Anomaly).</p>
+                </aside>
+
+                <section class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-4">
+                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div>
+                            <h3 class="text-lg font-semibold text-slate-900">ตารางสรุปการใช้จ่ายตามพนักงาน</h3>
+                            <p class="text-xs text-slate-500">Cross-reference: PV-BK-6910124, PV-BK-6910296, PV-BK-1910310</p>
+                        </div>
+                        <span class="text-xs text-slate-400">มูลค่าเป็นบาท (THB)</span>
+                    </header>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm text-slate-600">
+                            <thead class="bg-slate-50 text-slate-500 uppercase text-[0.7rem] tracking-[0.2em]">
+                                <tr>
+                                    <th class="px-4 py-3 text-left">พนักงาน</th>
+                                    <th class="px-4 py-3 text-left">รหัส</th>
+                                    <th class="px-4 py-3 text-left">แผนก / Cost Center</th>
+                                    <th class="px-4 py-3 text-right">ยอดรวม</th>
+                                    <th class="px-4 py-3 text-right">จำนวนธุรกรรม</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-slate-100">
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">ทัศนีย์ รัตนวรรณ</td>
+                                    <td class="px-4 py-3">103353</td>
+                                    <td class="px-4 py-3">281 (Food / E-comm)</td>
+                                    <td class="px-4 py-3 text-right font-semibold">฿19,608.50</td>
+                                    <td class="px-4 py-3 text-right">25</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">กันตเมศฐ์ อารียชัยสิริ</td>
+                                    <td class="px-4 py-3">109701</td>
+                                    <td class="px-4 py-3">347 (Project กาดกลางกรุง)</td>
+                                    <td class="px-4 py-3 text-right font-semibold">฿11,979.00</td>
+                                    <td class="px-4 py-3 text-right">12</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">ดวงกมล ธาดาเกียรติดำรง</td>
+                                    <td class="px-4 py-3">B04274</td>
+                                    <td class="px-4 py-3">356 (Store Ops)</td>
+                                    <td class="px-4 py-3 text-right font-semibold">฿1,357.00</td>
+                                    <td class="px-4 py-3 text-right">3</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">ธิดาพร ปิ่นสงวน</td>
+                                    <td class="px-4 py-3">108179</td>
+                                    <td class="px-4 py-3">804 (บัญชี)</td>
+                                    <td class="px-4 py-3 text-right font-semibold">฿1,087.00</td>
+                                    <td class="px-4 py-3 text-right">2</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">พลอย โกมลสิงห์</td>
+                                    <td class="px-4 py-3">-</td>
+                                    <td class="px-4 py-3">804 (บัญชี)</td>
+                                    <td class="px-4 py-3 text-right font-semibold">฿589.00</td>
+                                    <td class="px-4 py-3 text-right">6</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </section>
+
+            <section data-view id="view-by-department" class="hidden min-h-screen p-10 space-y-8">
+                <header class="space-y-2">
+                    <p class="text-xs uppercase tracking-[0.35em] text-[#009688] font-semibold">Operations Playbook · Cost Center Control</p>
+                    <h2 class="text-3xl font-semibold text-slate-900">การวิเคราะห์ตามแผนก/สาขา (Operations View)</h2>
+                    <p class="text-sm text-slate-600 max-w-3xl">รวบรวมยอดใช้จ่ายตาม Cost Center จาก Petty cash by stores.md, PV-BK-6910296, PV-BK-6910301 และ ADV-BK-6910038 เพื่อบังคับใช้นโยบายแบบรวมศูนย์.</p>
+                </header>
+
+                <section class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6">
+                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900">Spend by Department</h3>
+                            <p class="text-xs text-slate-500">เปรียบเทียบยอดรวมต่อ Cost Center</p>
+                        </div>
+                        <span class="inline-flex items-center gap-2 rounded-full bg-sky-50 px-3 py-1 text-xs font-semibold text-sky-700">Auto-update ทุกสิ้นวัน</span>
+                    </header>
+                    <canvas id="dept-chart" class="w-full h-[120px]"></canvas>
+                </section>
+
+                <aside class="bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-3xl p-6 shadow-sm">
+                    <h3 class="font-semibold text-emerald-900 mb-2">🤖 <span class="underline decoration-emerald-300">AI/LLM Summary (Operations Insight)</span></h3>
+                    <p class="text-sm leading-relaxed">แผนก 281 (Food/E-comm) และ 347 (Project กาดกลางกรุง) เป็นผู้ใช้จ่ายหลัก สอดคล้องกับกิจกรรมทางธุรกิจ <strong>[ข้อสังเกต Operation ⚠️]</strong> พบการจัดซื้อ “อุปกรณ์สำนักงาน” (จาก ADV-BK-6910038) และ “น้ำยาทำความสะอาด” (จาก PV-BK-6910301) ในระดับสาขา (เช่น 357, 244) แทนที่จะเป็นการสั่งซื้อจากส่วนกลาง (Central Procurement) การรวมศูนย์การสั่งซื้อ (Consolidation) สามารถประหยัดต้นทุนได้ 15-20%.</p>
+                </aside>
+
+                <section class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-4">
+                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div>
+                            <h3 class="text-lg font-semibold text-slate-900">ตารางสรุปการใช้จ่ายตามแผนก / Cost Center</h3>
+                            <p class="text-xs text-slate-500">Reference · Petty cash by stores.md + PV Series</p>
+                        </div>
+                        <span class="text-xs text-slate-400">มูลค่าเป็นบาท (THB)</span>
+                    </header>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm text-slate-600">
+                            <thead class="bg-slate-50 text-slate-500 uppercase text-[0.7rem] tracking-[0.2em]">
+                                <tr>
+                                    <th class="px-4 py-3 text-left">แผนก / สาขา (Cost Center)</th>
+                                    <th class="px-4 py-3 text-right">ยอดรวม</th>
+                                    <th class="px-4 py-3 text-right">ธุรกรรม</th>
+                                    <th class="px-4 py-3 text-left">หมวดหลัก</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-slate-100">
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">281 (Food/E-comm)</td>
+                                    <td class="px-4 py-3 text-right font-semibold">฿22,035.50</td>
+                                    <td class="px-4 py-3 text-right">30</td>
+                                    <td class="px-4 py-3">ค่าขนส่ง</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">347 (Project กาดกลางกรุง)</td>
+                                    <td class="px-4 py-3 text-right font-semibold">฿11,979.00</td>
+                                    <td class="px-4 py-3 text-right">12</td>
+                                    <td class="px-4 py-3">ค่าจ้าง / เบี้ยเลี้ยง</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">804 (บัญชี)</td>
+                                    <td class="px-4 py-3 text-right font-semibold">฿3,111.15</td>
+                                    <td class="px-4 py-3 text-right">12</td>
+                                    <td class="px-4 py-3">ค่าเดินทาง (T&amp;E)</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">244 (สาขากรุงศรีฯ เพลินจิต)</td>
+                                    <td class="px-4 py-3 text-right font-semibold">฿2,174.00</td>
+                                    <td class="px-4 py-3 text-right">4</td>
+                                    <td class="px-4 py-3">วัตถุดิบ / ของใช้</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">357 (สาขาสนามบินดอนเมือง)</td>
+                                    <td class="px-4 py-3 text-right font-semibold">฿786.00</td>
+                                    <td class="px-4 py-3 text-right">1</td>
+                                    <td class="px-4 py-3">อุปกรณ์สำนักงาน</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </section>
+
+            <section data-view id="view-by-merchant" class="hidden min-h-screen p-10 space-y-8">
+                <header class="space-y-2">
+                    <p class="text-xs uppercase tracking-[0.35em] text-[#009688] font-semibold">Finance & Procurement · Vendor Compliance</p>
+                    <h2 class="text-3xl font-semibold text-slate-900">การวิเคราะห์ตามร้านค้า (Finance / Procurement View)</h2>
+                    <p class="text-sm text-slate-600 max-w-3xl">ผนวกใบเสร็จจาก PV-BK-6910124, PV-BK-6910296, ADV-BK-6910008 และ ADV-BK-6910037 เพื่อดูพฤติกรรมซื้อซ้ำและ supplier overlap.</p>
+                </header>
+
+                <section class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6">
+                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900">Top 5 Merchants by Spend</h3>
+                            <p class="text-xs text-slate-500">สรุปตามยอดรวมต่อร้านค้า</p>
+                        </div>
+                        <span class="inline-flex items-center gap-2 rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700">Fraud lens enabled</span>
+                    </header>
+                    <canvas id="merchant-chart" class="w-full h-[120px]"></canvas>
+                </section>
+
+                <aside class="bg-rose-50 border border-rose-200 text-rose-900 rounded-3xl p-6 shadow-sm">
+                    <h3 class="font-semibold text-rose-900 mb-2">🤖 <span class="underline decoration-rose-300">AI/LLM Summary (Procurement/Fraud Alert)</span></h3>
+                    <p class="text-sm leading-relaxed">การใช้จ่ายกระจายตัวปกติ “CREA TRADING” มียอดซื้อเครื่องชงกาแฟ 3,145.15 บาท (PV-BK-6910124) สูงสุด ขณะที่ “Grab/Lalamove” รวม 1,821.00 บาท แต่เกิดบ่อยในช่วงค่ำ <strong>[ข้อสังเกต Fraud 🚩]</strong> ตรวจพบการซื้อวัสดุบรรจุภัณฑ์จาก HomePro 966.00 บาท (ADV-BK-6910008) และอุปกรณ์สำนักงาน 786.00 บาท จาก OfficeMate (ADV-BK-6910038) ภายในสัปดาห์เดียวกันของคนละสาขา แนะนำให้ Procurement ตรวจสอบความซ้ำซ้อนและรวมคำสั่งซื้อผ่านส่วนกลาง.</p>
+                </aside>
+
+                <section class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-4">
+                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div>
+                            <h3 class="text-lg font-semibold text-slate-900">ตารางสรุปการใช้จ่ายตามร้านค้า</h3>
+                            <p class="text-xs text-slate-500">Derived from PV-BK-6910124, PV-BK-6910296, PV-BK-6910301, ADV-BK-6910008, ADV-BK-6910037</p>
+                        </div>
+                        <span class="text-xs text-slate-400">มูลค่าเป็นบาท (THB)</span>
+                    </header>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm text-slate-600">
+                            <thead class="bg-slate-50 text-slate-500 uppercase text-[0.7rem] tracking-[0.2em]">
+                                <tr>
+                                    <th class="px-4 py-3 text-left">ร้านค้า</th>
+                                    <th class="px-4 py-3 text-right">ยอดรวม</th>
+                                    <th class="px-4 py-3 text-right">ธุรกรรม</th>
+                                    <th class="px-4 py-3 text-left">หมวดหลัก</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-slate-100">
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">CREA TRADING (Coffee Machine)</td>
+                                    <td class="px-4 py-3 text-right font-semibold">฿3,145.15</td>
+                                    <td class="px-4 py-3 text-right">1</td>
+                                    <td class="px-4 py-3">สินทรัพย์ / เครื่องชงกาแฟ</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">Grab / Lalamove</td>
+                                    <td class="px-4 py-3 text-right font-semibold">฿1,821.00</td>
+                                    <td class="px-4 py-3 text-right">8</td>
+                                    <td class="px-4 py-3">ค่าเดินทาง / ค่าขนส่ง</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">HomePro</td>
+                                    <td class="px-4 py-3 text-right font-semibold">฿966.00</td>
+                                    <td class="px-4 py-3 text-right">2</td>
+                                    <td class="px-4 py-3">อุปกรณ์และวัสดุบรรจุภัณฑ์</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">OfficeMate</td>
+                                    <td class="px-4 py-3 text-right font-semibold">฿786.00</td>
+                                    <td class="px-4 py-3 text-right">1</td>
+                                    <td class="px-4 py-3">อุปกรณ์สำนักงาน</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">CALTEX – PETCHASATORN</td>
+                                    <td class="px-4 py-3 text-right font-semibold">฿620.00</td>
+                                    <td class="px-4 py-3 text-right">1</td>
+                                    <td class="px-4 py-3">ค่าน้ำมัน</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </section>
+        </main>
     </div>
 
     <script>
-        const tabs = {
-            feed: document.getElementById('tab-feed'),
-            policy: document.getElementById('tab-policy'),
-            journal: document.getElementById('tab-journal'),
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Sarabun', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
         };
 
-        const buttons = {
-            feed: document.getElementById('btn-feed'),
-            policy: document.getElementById('btn-policy'),
-            journal: document.getElementById('btn-journal'),
-        };
+        let views = [];
+        let navButtons = [];
+        const activeNavClasses = ['bg-white', 'text-slate-900', 'shadow-lg'];
+        const inactiveNavClasses = ['bg-transparent', 'text-slate-200/80'];
+        const currencyFormatter = new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB', minimumFractionDigits: 2 });
 
-        function setActiveTab(target) {
-            Object.values(tabs).forEach(panel => panel.classList.remove('active'));
-            Object.values(buttons).forEach(btn => btn.classList.remove('active-tab'));
-            tabs[target].classList.add('active');
-            buttons[target].classList.add('active-tab');
+        function setupExecutiveTabs() {
+            const tabFeed = document.getElementById('tab-feed');
+            const tabPolicy = document.getElementById('tab-policy');
+            const tabJournal = document.getElementById('tab-journal');
+            const btnFeed = document.getElementById('btn-feed');
+            const btnPolicy = document.getElementById('btn-policy');
+            const btnJournal = document.getElementById('btn-journal');
+
+            if (!tabFeed || !tabPolicy || !tabJournal || !btnFeed || !btnPolicy || !btnJournal) {
+                return;
+            }
+
+            const tabs = { feed: tabFeed, policy: tabPolicy, journal: tabJournal };
+            const buttons = { feed: btnFeed, policy: btnPolicy, journal: btnJournal };
+
+            function setActiveTab(target) {
+                Object.values(tabs).forEach(panel => panel.classList.remove('active'));
+                Object.values(buttons).forEach(btn => btn.classList.remove('active-tab'));
+                tabs[target].classList.add('active');
+                buttons[target].classList.add('active-tab');
+            }
+
+            btnFeed.addEventListener('click', () => setActiveTab('feed'));
+            btnPolicy.addEventListener('click', () => setActiveTab('policy'));
+            btnJournal.addEventListener('click', () => setActiveTab('journal'));
+
+            setActiveTab('feed');
         }
 
-        buttons.feed.addEventListener('click', () => setActiveTab('feed'));
-        buttons.policy.addEventListener('click', () => setActiveTab('policy'));
-        buttons.journal.addEventListener('click', () => setActiveTab('journal'));
+        function applyNavState(button, isActive) {
+            if (isActive) {
+                activeNavClasses.forEach(cls => button.classList.add(cls));
+                inactiveNavClasses.forEach(cls => button.classList.remove(cls));
+            } else {
+                activeNavClasses.forEach(cls => button.classList.remove(cls));
+                inactiveNavClasses.forEach(cls => button.classList.add(cls));
+            }
+        }
 
-        // Ensure default tab is visible on load even if script runs before DOM ready (failsafe)
-        setActiveTab('feed');
+        function showView(viewId) {
+            if (!views.length) {
+                views = Array.from(document.querySelectorAll('[data-view]'));
+            }
+            if (!navButtons.length) {
+                navButtons = Array.from(document.querySelectorAll('[data-nav]'));
+            }
+            views.forEach(section => {
+                section.classList.toggle('hidden', section.id !== viewId);
+            });
+            navButtons.forEach(button => {
+                const target = button.getAttribute('data-nav');
+                applyNavState(button, target === viewId);
+            });
+        }
+
+        const charts = {};
+
+        function renderCharts() {
+            const overviewCtx = document.getElementById('overview-chart');
+            const employeeCtx = document.getElementById('employee-chart');
+            const deptCtx = document.getElementById('dept-chart');
+            const merchantCtx = document.getElementById('merchant-chart');
+
+            if (overviewCtx) {
+                charts.overview = new Chart(overviewCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                            'ค่าเดินทาง (62503/ค่าน้ำมัน)',
+                            'ค่าขนส่ง / Courier',
+                            'อุปกรณ์สำนักงาน / เครื่องมือ',
+                            'ค่าเบี้ยเลี้ยง / ค่ารับรอง (61303)',
+                            'วัตถุดิบ / ค่าแรงโครงการ'
+                        ],
+                        datasets: [{
+                            label: 'ยอดใช้จ่าย (บาท)',
+                            data: [6643.00, 7005.00, 6266.15, 29701.00, 10036.50],
+                            backgroundColor: ['#0f172a', '#1d4ed8', '#2563eb', '#0ea5e9', '#38bdf8']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                ticks: {
+                                    callback: (value) => currencyFormatter.format(value)
+                                },
+                                grid: {
+                                    color: 'rgba(15, 23, 42, 0.06)'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: (context) => `${context.dataset.label}: ${currencyFormatter.format(context.parsed.y)}`
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            if (employeeCtx) {
+                charts.employee = new Chart(employeeCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['ทัศนีย์ รัตนวรรณ', 'กันตเมศฐ์ อารียชัยสิริ', 'ดวงกมล ธาดาเกียรติดำรง', 'ธิดาพร ปิ่นสงวน', 'พลอย โกมลสิงห์'],
+                        datasets: [{
+                            label: 'ยอดใช้จ่ายต่อพนักงาน',
+                            data: [19608.50, 11979.00, 1357.00, 1087.00, 589.00],
+                            backgroundColor: ['#1e293b', '#2563eb', '#38bdf8', '#fb923c', '#f97316']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                ticks: {
+                                    callback: (value) => currencyFormatter.format(value)
+                                },
+                                grid: {
+                                    color: 'rgba(15, 23, 42, 0.08)'
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    callback: (value, index, ticks) => {
+                                        const tickLabel = Array.isArray(ticks) && ticks[index] ? (ticks[index].label ?? ticks[index].value ?? value) : value;
+                                        const labelText = typeof tickLabel === 'string' ? tickLabel : String(tickLabel ?? '');
+                                        return labelText.length > 12 ? `${labelText.substring(0, 11)}…` : labelText;
+                                    }
+                                },
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: (context) => `${context.dataset.label}: ${currencyFormatter.format(context.parsed.y)}`
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            if (deptCtx) {
+                charts.dept = new Chart(deptCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['281 (Food/E-comm)', '347 (Project)', '804 (บัญชี)', '244 (เพลินจิต)', '357 (ดอนเมือง)'],
+                        datasets: [{
+                            data: [22035.50, 11979.00, 3111.15, 2174.00, 786.00],
+                            backgroundColor: ['#1e3a8a', '#1d4ed8', '#3b82f6', '#60a5fa', '#93c5fd'],
+                            borderColor: '#fff',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: {
+                                    usePointStyle: true,
+                                    padding: 20
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: (context) => `${context.label}: ${currencyFormatter.format(context.parsed)}`
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            if (merchantCtx) {
+                charts.merchant = new Chart(merchantCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['CREA TRADING', 'Grab / Lalamove', 'HomePro', 'OfficeMate', 'CALTEX – PETCHASATORN'],
+                        datasets: [{
+                            label: 'ยอดใช้จ่ายต่อร้านค้า',
+                            data: [3145.15, 1821.00, 966.00, 786.00, 620.00],
+                            backgroundColor: ['#0f172a', '#1d4ed8', '#2563eb', '#38bdf8', '#0ea5e9']
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                ticks: {
+                                    callback: (value) => currencyFormatter.format(value)
+                                },
+                                grid: {
+                                    color: 'rgba(15, 23, 42, 0.06)'
+                                }
+                            },
+                            y: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: (context) => `${context.dataset.label}: ${currencyFormatter.format(context.parsed.x)}`
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            views = Array.from(document.querySelectorAll('[data-view]'));
+            navButtons = Array.from(document.querySelectorAll('[data-nav]'));
+            navButtons.forEach(button => {
+                inactiveNavClasses.forEach(cls => button.classList.add(cls));
+                button.classList.add('transition', 'duration-200', 'hover:bg-white/10', 'hover:text-white');
+            });
+            renderCharts();
+            showView('view-executive');
+            setupExecutiveTabs();
+        });
     </script>
 </body>
 </html>
