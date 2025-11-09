@@ -70,7 +70,7 @@ open program-hub.html
 | Tool | Description | File |
 |------|-------------|------|
 | Prompt Admin Console | จัดการ system prompt และ instruction ของ Agent ทั้งหมด | [prompt/admin-prompt-console.html](prompt/admin-prompt-console.html) |
-| Knowledge Base | รวบรวมโน้ตสรุปสำหรับการบรีฟทีมและผู้บริหาร | [readme.html](readme.html) |
+| Knowledge Base | รายงานสถาปัตยกรรมโซลูชัน และโน้ตสรุปสำหรับการบรีฟทีมและผู้บริหาร | [docs/project-requirement.html](docs/project-requirement.html) |
 | Source Documents | HTML preview ของแฟ้ม PV/ADV/PCV ที่ใช้ฝึก AI (โฟลเดอร์ `details/`) | `details/*.html` |
 
 > เคล็ดลับ: เริ่มชมจาก `program-hub.html` เพื่อเข้าใจโครงเรื่อง แล้วไล่เปิดดีโมแต่ละขั้นผ่านปุ่มบนเพจนั้นได้เลย
