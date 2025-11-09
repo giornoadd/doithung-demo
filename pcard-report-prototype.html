@@ -350,15 +350,57 @@
                     </article>
                 </div>
 
-                <section class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6">
-                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <section class="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm space-y-4">
+                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                         <div>
-                            <h3 class="text-xl font-semibold text-slate-900">Spend by Category</h3>
+                            <h3 class="text-lg font-semibold text-slate-900">Spend by Category</h3>
                             <p class="text-xs text-slate-500">แยกตาม GL หมวดหลักจากชุด ADV/PV</p>
                         </div>
                         <span class="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">Source · 62503 · 64802 · 63101 · 61303 · 61101</span>
                     </header>
-                    <canvas id="overview-chart" class="w-full h-[120px]"></canvas>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm">
+                            <thead class="bg-slate-50 text-slate-500 uppercase text-[0.7rem] tracking-[0.2em]">
+                                <tr>
+                                    <th class="px-4 py-3 text-left">หมวดค่าใช้จ่าย</th>
+                                    <th class="px-4 py-3 text-right">ยอดรวม (บาท)</th>
+                                    <th class="px-4 py-3 text-right">สัดส่วน</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-slate-100">
+                                <tr>
+                                    <td class="px-4 py-3 font-medium text-slate-900">ค่าเบี้ยเลี้ยง / ค่ารับรอง (61303)</td>
+                                    <td class="px-4 py-3 text-right font-semibold text-[#006A4E]">฿29,701.00</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">50.0%</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-medium text-slate-900">วัตถุดิบ / ค่าแรงโครงการ</td>
+                                    <td class="px-4 py-3 text-right font-semibold text-[#009688]">฿10,036.50</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">16.9%</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-medium text-slate-900">ค่าขนส่ง / Courier</td>
+                                    <td class="px-4 py-3 text-right font-semibold text-[#00796B]">฿7,005.00</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">11.8%</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-medium text-slate-900">ค่าเดินทาง (62503/ค่าน้ำมัน)</td>
+                                    <td class="px-4 py-3 text-right font-semibold text-[#26A69A]">฿6,643.00</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">11.2%</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-medium text-slate-900">อุปกรณ์สำนักงาน / เครื่องมือ</td>
+                                    <td class="px-4 py-3 text-right font-semibold text-[#4DB6AC]">฿6,266.15</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">10.5%</td>
+                                </tr>
+                                <tr class="bg-slate-50 font-semibold">
+                                    <td class="px-4 py-3 text-slate-900">รวมทั้งหมด</td>
+                                    <td class="px-4 py-3 text-right text-slate-900">฿59,651.65</td>
+                                    <td class="px-4 py-3 text-right text-slate-900">100%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
 
                 <aside class="bg-blue-50 border border-blue-200 text-blue-900 rounded-3xl p-6 shadow-sm">
@@ -374,15 +416,70 @@
                     <p class="text-sm text-slate-600 max-w-3xl">ผูกข้อมูลพนักงานจาก PV-BK-6910124, PV-BK-6910296, ADV-BK-6910037 กับ cost center เพื่อดูพฤติกรรมใช้จ่ายและความเสี่ยง.</p>
                 </header>
 
-                <section class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6">
-                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <section class="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm space-y-4">
+                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                         <div>
-                            <h3 class="text-xl font-semibold text-slate-900">Top 5 Spenders</h3>
+                            <h3 class="text-lg font-semibold text-slate-900">Top 5 Spenders</h3>
                             <p class="text-xs text-slate-500">ข้อมูลจากใบสำคัญ PV-BK-6910296, PV-BK-6910124, PV-BK-1910310</p>
                         </div>
                         <span class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">LLM confidence 92%</span>
                     </header>
-                    <canvas id="employee-chart" class="w-full h-[120px]"></canvas>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm">
+                            <thead class="bg-slate-50 text-slate-500 uppercase text-[0.7rem] tracking-[0.2em]">
+                                <tr>
+                                    <th class="px-4 py-3 text-left">อันดับ</th>
+                                    <th class="px-4 py-3 text-left">พนักงาน</th>
+                                    <th class="px-4 py-3 text-left">รหัส</th>
+                                    <th class="px-4 py-3 text-left">แผนก</th>
+                                    <th class="px-4 py-3 text-right">ยอดรวม (บาท)</th>
+                                    <th class="px-4 py-3 text-right">ธุรกรรม</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-slate-100">
+                                <tr>
+                                    <td class="px-4 py-3 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#006A4E] text-white text-xs font-bold">1</span></td>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">ทัศนีย์ รัตนวรรณ</td>
+                                    <td class="px-4 py-3 text-slate-600">103353</td>
+                                    <td class="px-4 py-3 text-slate-600">281 (Food/E-comm)</td>
+                                    <td class="px-4 py-3 text-right font-semibold text-[#006A4E]">฿19,608.50</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">25</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#009688] text-white text-xs font-bold">2</span></td>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">กันตเมศฐ์ อารียชัยสิริ</td>
+                                    <td class="px-4 py-3 text-slate-600">109701</td>
+                                    <td class="px-4 py-3 text-slate-600">347 (Project)</td>
+                                    <td class="px-4 py-3 text-right font-semibold text-[#009688]">฿11,979.00</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">12</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#00796B] text-white text-xs font-bold">3</span></td>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">ดวงกมล ธาดาเกียรติดำรง</td>
+                                    <td class="px-4 py-3 text-slate-600">B04274</td>
+                                    <td class="px-4 py-3 text-slate-600">356 (Store Ops)</td>
+                                    <td class="px-4 py-3 text-right font-semibold text-[#00796B]">฿1,357.00</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">3</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#26A69A] text-white text-xs font-bold">4</span></td>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">ธิดาพร ปิ่นสงวน</td>
+                                    <td class="px-4 py-3 text-slate-600">108179</td>
+                                    <td class="px-4 py-3 text-slate-600">804 (บัญชี)</td>
+                                    <td class="px-4 py-3 text-right font-semibold text-[#26A69A]">฿1,087.00</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">2</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#4DB6AC] text-white text-xs font-bold">5</span></td>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">พลอย โกมลสิงห์</td>
+                                    <td class="px-4 py-3 text-slate-600">-</td>
+                                    <td class="px-4 py-3 text-slate-600">804 (บัญชี)</td>
+                                    <td class="px-4 py-3 text-right font-semibold text-[#4DB6AC]">฿589.00</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">6</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
 
                 <aside class="bg-amber-50 border border-amber-200 text-amber-900 rounded-3xl p-6 shadow-sm">
@@ -458,15 +555,70 @@
                     <p class="text-sm text-slate-600 max-w-3xl">รวบรวมยอดใช้จ่ายตาม Cost Center จาก Petty cash by stores.md, PV-BK-6910296, PV-BK-6910301 และ ADV-BK-6910038 เพื่อบังคับใช้นโยบายแบบรวมศูนย์.</p>
                 </header>
 
-                <section class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6">
-                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <section class="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm space-y-4">
+                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                         <div>
-                            <h3 class="text-xl font-semibold text-slate-900">Spend by Department</h3>
+                            <h3 class="text-lg font-semibold text-slate-900">Spend by Department</h3>
                             <p class="text-xs text-slate-500">เปรียบเทียบยอดรวมต่อ Cost Center</p>
                         </div>
                         <span class="inline-flex items-center gap-2 rounded-full bg-sky-50 px-3 py-1 text-xs font-semibold text-sky-700">Auto-update ทุกสิ้นวัน</span>
                     </header>
-                    <canvas id="dept-chart" class="w-full h-[120px]"></canvas>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm">
+                            <thead class="bg-slate-50 text-slate-500 uppercase text-[0.7rem] tracking-[0.2em]">
+                                <tr>
+                                    <th class="px-4 py-3 text-left">แผนก / สาขา</th>
+                                    <th class="px-4 py-3 text-left">รหัส Cost Center</th>
+                                    <th class="px-4 py-3 text-right">ยอดรวม (บาท)</th>
+                                    <th class="px-4 py-3 text-right">ธุรกรรม</th>
+                                    <th class="px-4 py-3 text-right">สัดส่วน</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-slate-100">
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">Food/E-commerce</td>
+                                    <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-1 rounded-md bg-[#006A4E] text-white text-xs font-medium">281</span></td>
+                                    <td class="px-4 py-3 text-right font-semibold text-[#006A4E]">฿22,035.50</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">30</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">55.1%</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">Project กาดกลางกรุง</td>
+                                    <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-1 rounded-md bg-[#009688] text-white text-xs font-medium">347</span></td>
+                                    <td class="px-4 py-3 text-right font-semibold text-[#009688]">฿11,979.00</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">12</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">29.9%</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">บัญชี</td>
+                                    <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-1 rounded-md bg-[#00796B] text-white text-xs font-medium">804</span></td>
+                                    <td class="px-4 py-3 text-right font-semibold text-[#00796B]">฿3,111.15</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">12</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">7.8%</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">สาขากรุงศรีฯ เพลินจิต</td>
+                                    <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-1 rounded-md bg-[#26A69A] text-white text-xs font-medium">244</span></td>
+                                    <td class="px-4 py-3 text-right font-semibold text-[#26A69A]">฿2,174.00</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">4</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">5.4%</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">สาขาสนามบินดอนเมือง</td>
+                                    <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-1 rounded-md bg-[#4DB6AC] text-white text-xs font-medium">357</span></td>
+                                    <td class="px-4 py-3 text-right font-semibold text-[#4DB6AC]">฿786.00</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">1</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">2.0%</td>
+                                </tr>
+                                <tr class="bg-slate-50 font-semibold">
+                                    <td class="px-4 py-3 text-slate-900" colspan="2">รวมทั้งหมด</td>
+                                    <td class="px-4 py-3 text-right text-slate-900">฿40,085.65</td>
+                                    <td class="px-4 py-3 text-right text-slate-900">59</td>
+                                    <td class="px-4 py-3 text-right text-slate-900">100%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
 
                 <aside class="bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-3xl p-6 shadow-sm">
@@ -536,15 +688,64 @@
                     <p class="text-sm text-slate-600 max-w-3xl">ผนวกใบเสร็จจาก PV-BK-6910124, PV-BK-6910296, ADV-BK-6910008 และ ADV-BK-6910037 เพื่อดูพฤติกรรมซื้อซ้ำและ supplier overlap.</p>
                 </header>
 
-                <section class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6">
-                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <section class="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm space-y-4">
+                    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                         <div>
-                            <h3 class="text-xl font-semibold text-slate-900">Top 5 Merchants by Spend</h3>
+                            <h3 class="text-lg font-semibold text-slate-900">Top 5 Merchants by Spend</h3>
                             <p class="text-xs text-slate-500">สรุปตามยอดรวมต่อร้านค้า</p>
                         </div>
                         <span class="inline-flex items-center gap-2 rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700">Fraud lens enabled</span>
                     </header>
-                    <canvas id="merchant-chart" class="w-full h-[120px]"></canvas>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm">
+                            <thead class="bg-slate-50 text-slate-500 uppercase text-[0.7rem] tracking-[0.2em]">
+                                <tr>
+                                    <th class="px-4 py-3 text-left">อันดับ</th>
+                                    <th class="px-4 py-3 text-left">ร้านค้า</th>
+                                    <th class="px-4 py-3 text-left">หมวด</th>
+                                    <th class="px-4 py-3 text-right">ยอดรวม (บาท)</th>
+                                    <th class="px-4 py-3 text-right">ธุรกรรม</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-slate-100">
+                                <tr>
+                                    <td class="px-4 py-3 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#006A4E] text-white text-xs font-bold">1</span></td>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">CREA TRADING</td>
+                                    <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-1 rounded-md bg-blue-50 text-blue-700 text-xs">เครื่องชงกาแฟ</span></td>
+                                    <td class="px-4 py-3 text-right font-semibold text-[#006A4E]">฿3,145.15</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">1</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#009688] text-white text-xs font-bold">2</span></td>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">Grab / Lalamove</td>
+                                    <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-1 rounded-md bg-purple-50 text-purple-700 text-xs">ค่าเดินทาง/ขนส่ง</span></td>
+                                    <td class="px-4 py-3 text-right font-semibold text-[#009688]">฿1,821.00</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">8</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#00796B] text-white text-xs font-bold">3</span></td>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">HomePro</td>
+                                    <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-1 rounded-md bg-orange-50 text-orange-700 text-xs">วัสดุบรรจุภัณฑ์</span></td>
+                                    <td class="px-4 py-3 text-right font-semibold text-[#00796B]">฿966.00</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">2</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#26A69A] text-white text-xs font-bold">4</span></td>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">OfficeMate</td>
+                                    <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-1 rounded-md bg-green-50 text-green-700 text-xs">อุปกรณ์สำนักงาน</span></td>
+                                    <td class="px-4 py-3 text-right font-semibold text-[#26A69A]">฿786.00</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">1</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#4DB6AC] text-white text-xs font-bold">5</span></td>
+                                    <td class="px-4 py-3 font-semibold text-slate-900">CALTEX – PETCHASATORN</td>
+                                    <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-1 rounded-md bg-red-50 text-red-700 text-xs">ค่าน้ำมัน</span></td>
+                                    <td class="px-4 py-3 text-right font-semibold text-[#4DB6AC]">฿620.00</td>
+                                    <td class="px-4 py-3 text-right text-slate-600">1</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
 
                 <aside class="bg-rose-50 border border-rose-200 text-rose-900 rounded-3xl p-6 shadow-sm">
@@ -701,9 +902,11 @@
                             'วัตถุดิบ / ค่าแรงโครงการ'
                         ],
                         datasets: [{
-                            label: 'ยอดใช้จ่าย (บาท)',
+                            label: 'ยอดใช้จ่าย',
                             data: [6643.00, 7005.00, 6266.15, 29701.00, 10036.50],
-                            backgroundColor: ['#0f172a', '#1d4ed8', '#2563eb', '#0ea5e9', '#38bdf8']
+                            backgroundColor: '#006A4E',
+                            borderRadius: 8,
+                            borderSkipped: false
                         }]
                     },
                     options: {
@@ -711,15 +914,37 @@
                         maintainAspectRatio: false,
                         scales: {
                             y: {
+                                beginAtZero: true,
+                                max: 35000,
                                 ticks: {
-                                    callback: (value) => currencyFormatter.format(value)
+                                    callback: (value) => currencyFormatter.format(value),
+                                    font: {
+                                        size: 11,
+                                        family: 'Inter, Sarabun, sans-serif'
+                                    },
+                                    color: '#64748b',
+                                    maxTicksLimit: 6
                                 },
                                 grid: {
-                                    color: 'rgba(15, 23, 42, 0.06)'
+                                    color: 'rgba(148, 163, 184, 0.1)',
+                                    drawBorder: false
+                                },
+                                border: {
+                                    display: false
                                 }
                             },
                             x: {
+                                ticks: {
+                                    font: {
+                                        size: 11,
+                                        family: 'Inter, Sarabun, sans-serif'
+                                    },
+                                    color: '#475569'
+                                },
                                 grid: {
+                                    display: false
+                                },
+                                border: {
                                     display: false
                                 }
                             }
@@ -729,8 +954,25 @@
                                 display: false
                             },
                             tooltip: {
+                                backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                                titleColor: '#f1f5f9',
+                                bodyColor: '#e2e8f0',
+                                borderColor: '#006A4E',
+                                borderWidth: 1,
+                                padding: 12,
+                                cornerRadius: 8,
+                                displayColors: false,
+                                titleFont: {
+                                    size: 13,
+                                    weight: '600',
+                                    family: 'Inter, Sarabun, sans-serif'
+                                },
+                                bodyFont: {
+                                    size: 12,
+                                    family: 'Inter, Sarabun, sans-serif'
+                                },
                                 callbacks: {
-                                    label: (context) => `${context.dataset.label}: ${currencyFormatter.format(context.parsed.y)}`
+                                    label: (context) => currencyFormatter.format(context.parsed.y)
                                 }
                             }
                         }
@@ -744,9 +986,11 @@
                     data: {
                         labels: ['ทัศนีย์ รัตนวรรณ', 'กันตเมศฐ์ อารียชัยสิริ', 'ดวงกมล ธาดาเกียรติดำรง', 'ธิดาพร ปิ่นสงวน', 'พลอย โกมลสิงห์'],
                         datasets: [{
-                            label: 'ยอดใช้จ่ายต่อพนักงาน',
+                            label: 'ยอดใช้จ่าย',
                             data: [19608.50, 11979.00, 1357.00, 1087.00, 589.00],
-                            backgroundColor: ['#1e293b', '#2563eb', '#38bdf8', '#fb923c', '#f97316']
+                            backgroundColor: ['#006A4E', '#009688', '#00796B', '#26A69A', '#4DB6AC'],
+                            borderRadius: 8,
+                            borderSkipped: false
                         }]
                     },
                     options: {
@@ -754,15 +998,32 @@
                         maintainAspectRatio: false,
                         scales: {
                             y: {
+                                beginAtZero: true,
+                                max: 22000,
                                 ticks: {
-                                    callback: (value) => currencyFormatter.format(value)
+                                    callback: (value) => currencyFormatter.format(value),
+                                    font: {
+                                        size: 11,
+                                        family: 'Inter, Sarabun, sans-serif'
+                                    },
+                                    color: '#64748b',
+                                    maxTicksLimit: 6
                                 },
                                 grid: {
-                                    color: 'rgba(15, 23, 42, 0.08)'
+                                    color: 'rgba(148, 163, 184, 0.1)',
+                                    drawBorder: false
+                                },
+                                border: {
+                                    display: false
                                 }
                             },
                             x: {
                                 ticks: {
+                                    font: {
+                                        size: 11,
+                                        family: 'Inter, Sarabun, sans-serif'
+                                    },
+                                    color: '#475569',
                                     callback: (value, index, ticks) => {
                                         const tickLabel = Array.isArray(ticks) && ticks[index] ? (ticks[index].label ?? ticks[index].value ?? value) : value;
                                         const labelText = typeof tickLabel === 'string' ? tickLabel : String(tickLabel ?? '');
@@ -770,6 +1031,9 @@
                                     }
                                 },
                                 grid: {
+                                    display: false
+                                },
+                                border: {
                                     display: false
                                 }
                             }
@@ -779,8 +1043,25 @@
                                 display: false
                             },
                             tooltip: {
+                                backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                                titleColor: '#f1f5f9',
+                                bodyColor: '#e2e8f0',
+                                borderColor: '#006A4E',
+                                borderWidth: 1,
+                                padding: 12,
+                                cornerRadius: 8,
+                                displayColors: true,
+                                titleFont: {
+                                    size: 13,
+                                    weight: '600',
+                                    family: 'Inter, Sarabun, sans-serif'
+                                },
+                                bodyFont: {
+                                    size: 12,
+                                    family: 'Inter, Sarabun, sans-serif'
+                                },
                                 callbacks: {
-                                    label: (context) => `${context.dataset.label}: ${currencyFormatter.format(context.parsed.y)}`
+                                    label: (context) => currencyFormatter.format(context.parsed.y)
                                 }
                             }
                         }
@@ -790,30 +1071,77 @@
 
             if (deptCtx) {
                 charts.dept = new Chart(deptCtx, {
-                    type: 'pie',
+                    type: 'doughnut',
                     data: {
                         labels: ['281 (Food/E-comm)', '347 (Project)', '804 (บัญชี)', '244 (เพลินจิต)', '357 (ดอนเมือง)'],
                         datasets: [{
                             data: [22035.50, 11979.00, 3111.15, 2174.00, 786.00],
-                            backgroundColor: ['#1e3a8a', '#1d4ed8', '#3b82f6', '#60a5fa', '#93c5fd'],
-                            borderColor: '#fff',
-                            borderWidth: 1
+                            backgroundColor: ['#006A4E', '#009688', '#00796B', '#26A69A', '#4DB6AC'],
+                            borderColor: '#ffffff',
+                            borderWidth: 3,
+                            hoverOffset: 8
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        cutout: '65%',
                         plugins: {
                             legend: {
                                 position: 'right',
                                 labels: {
                                     usePointStyle: true,
-                                    padding: 20
+                                    pointStyle: 'circle',
+                                    padding: 16,
+                                    font: {
+                                        size: 12,
+                                        family: 'Inter, Sarabun, sans-serif'
+                                    },
+                                    color: '#475569',
+                                    generateLabels: (chart) => {
+                                        const data = chart.data;
+                                        if (data.labels.length && data.datasets.length) {
+                                            return data.labels.map((label, i) => {
+                                                const value = data.datasets[0].data[i];
+                                                const total = data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                                const percentage = ((value / total) * 100).toFixed(1);
+                                                return {
+                                                    text: `${label} (${percentage}%)`,
+                                                    fillStyle: data.datasets[0].backgroundColor[i],
+                                                    hidden: false,
+                                                    index: i
+                                                };
+                                            });
+                                        }
+                                        return [];
+                                    }
                                 }
                             },
                             tooltip: {
+                                backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                                titleColor: '#f1f5f9',
+                                bodyColor: '#e2e8f0',
+                                borderColor: '#006A4E',
+                                borderWidth: 1,
+                                padding: 12,
+                                cornerRadius: 8,
+                                displayColors: true,
+                                titleFont: {
+                                    size: 13,
+                                    weight: '600',
+                                    family: 'Inter, Sarabun, sans-serif'
+                                },
+                                bodyFont: {
+                                    size: 12,
+                                    family: 'Inter, Sarabun, sans-serif'
+                                },
                                 callbacks: {
-                                    label: (context) => `${context.label}: ${currencyFormatter.format(context.parsed)}`
+                                    label: (context) => {
+                                        const value = context.parsed;
+                                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        const percentage = ((value / total) * 100).toFixed(1);
+                                        return `${currencyFormatter.format(value)} (${percentage}%)`;
+                                    }
                                 }
                             }
                         }
@@ -827,9 +1155,11 @@
                     data: {
                         labels: ['CREA TRADING', 'Grab / Lalamove', 'HomePro', 'OfficeMate', 'CALTEX – PETCHASATORN'],
                         datasets: [{
-                            label: 'ยอดใช้จ่ายต่อร้านค้า',
+                            label: 'ยอดใช้จ่าย',
                             data: [3145.15, 1821.00, 966.00, 786.00, 620.00],
-                            backgroundColor: ['#0f172a', '#1d4ed8', '#2563eb', '#38bdf8', '#0ea5e9']
+                            backgroundColor: ['#006A4E', '#009688', '#00796B', '#26A69A', '#4DB6AC'],
+                            borderRadius: 8,
+                            borderSkipped: false
                         }]
                     },
                     options: {
@@ -838,15 +1168,37 @@
                         maintainAspectRatio: false,
                         scales: {
                             x: {
+                                beginAtZero: true,
+                                max: 3500,
                                 ticks: {
-                                    callback: (value) => currencyFormatter.format(value)
+                                    callback: (value) => currencyFormatter.format(value),
+                                    font: {
+                                        size: 11,
+                                        family: 'Inter, Sarabun, sans-serif'
+                                    },
+                                    color: '#64748b',
+                                    maxTicksLimit: 5
                                 },
                                 grid: {
-                                    color: 'rgba(15, 23, 42, 0.06)'
+                                    color: 'rgba(148, 163, 184, 0.1)',
+                                    drawBorder: false
+                                },
+                                border: {
+                                    display: false
                                 }
                             },
                             y: {
+                                ticks: {
+                                    font: {
+                                        size: 11,
+                                        family: 'Inter, Sarabun, sans-serif'
+                                    },
+                                    color: '#475569'
+                                },
                                 grid: {
+                                    display: false
+                                },
+                                border: {
                                     display: false
                                 }
                             }
@@ -856,8 +1208,25 @@
                                 display: false
                             },
                             tooltip: {
+                                backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                                titleColor: '#f1f5f9',
+                                bodyColor: '#e2e8f0',
+                                borderColor: '#006A4E',
+                                borderWidth: 1,
+                                padding: 12,
+                                cornerRadius: 8,
+                                displayColors: true,
+                                titleFont: {
+                                    size: 13,
+                                    weight: '600',
+                                    family: 'Inter, Sarabun, sans-serif'
+                                },
+                                bodyFont: {
+                                    size: 12,
+                                    family: 'Inter, Sarabun, sans-serif'
+                                },
                                 callbacks: {
-                                    label: (context) => `${context.dataset.label}: ${currencyFormatter.format(context.parsed.x)}`
+                                    label: (context) => currencyFormatter.format(context.parsed.x)
                                 }
                             }
                         }
