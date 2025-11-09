@@ -55,9 +55,13 @@
                             <div>
                                 <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Agent Groups</p>
                                 <div class="mt-3 flex flex-col gap-2">
-                                    <button onclick="showAgentGroup('intake')" class="flex items-center justify-between px-4 py-3 rounded-2xl bg-white/5 text-white text-sm font-semibold border border-[#009688]/30">
+                                    <button onclick="showAllAgents()" class="flex items-center justify-between px-4 py-3 rounded-2xl bg-white/5 text-white text-sm font-semibold border border-[#009688]/30">
+                                        All Agents
+                                        <span class="text-xs bg-[#009688]/20 text-[#009688] px-2 py-0.5 rounded-full">7</span>
+                                    </button>
+                                    <button onclick="showAgentGroup('intake')" class="flex items-center justify-between px-4 py-3 rounded-2xl text-slate-300 text-sm font-semibold border border-transparent hover:border-slate-700 hover:bg-white/5 transition">
                                         Intake & OCR
-                                        <span class="text-xs bg-[#009688]/20 text-[#009688] px-2 py-0.5 rounded-full">3</span>
+                                        <span class="text-xs bg-slate-700/50 text-slate-300 px-2 py-0.5 rounded-full">3</span>
                                     </button>
                                     <button onclick="showAgentGroup('policy')" class="flex items-center justify-between px-4 py-3 rounded-2xl text-slate-300 text-sm font-semibold border border-transparent hover:border-slate-700 hover:bg-white/5 transition">
                                         Policy & Routing
@@ -504,6 +508,91 @@
             const newName = prompt(`Clone "${agentName}" as:`, agentName + ' (Copy)');
             if (newName) {
                 alert(`Agent cloned successfully as:\n"${newName}"\n\nNew file: prompt/${newName.toLowerCase().replace(/\s+/g, '-')}.md`);
+            }
+        }
+
+        // Agent Groups Filter
+        function showAgentGroup(groupName) {
+            // Update button states
+            const groupButtons = document.querySelectorAll('button[onclick^="showAgentGroup"]');
+            groupButtons.forEach(btn => {
+                btn.classList.remove('bg-white/5', 'border-[#009688]/30');
+                btn.classList.add('border-transparent', 'hover:border-slate-700', 'hover:bg-white/5');
+            });
+            
+            event.currentTarget.classList.remove('border-transparent', 'hover:border-slate-700', 'hover:bg-white/5');
+            event.currentTarget.classList.add('bg-white/5', 'border-[#009688]/30');
+
+            // Define agent groups
+            const agentGroups = {
+                'intake': ['employee-interface', 'ocr-extraction', 'data-structuring'],
+                'policy': ['policy-verification', 'routing-orchestrator'],
+                'analytics': ['financial-analyst'],
+                'integration': ['erp-integration']
+            };
+
+            // Get agent cards
+            const agentCards = document.querySelectorAll('[onclick^="loadAgent"]');
+            
+            // Show/hide based on group
+            const groupAgents = agentGroups[groupName] || [];
+            
+            agentCards.forEach(card => {
+                const onclickAttr = card.getAttribute('onclick');
+                const agentId = onclickAttr.match(/loadAgent\('(.+?)'\)/)?.[1];
+                
+                if (groupAgents.includes(agentId)) {
+                    card.style.display = 'block';
+                    card.style.opacity = '1';
+                } else {
+                    card.style.display = 'none';
+                    card.style.opacity = '0';
+                }
+            });
+
+            // Update overview title
+            const overviewTitle = document.querySelector('h3.text-white.text-lg');
+            const groupNames = {
+                'intake': 'Intake & OCR Pipeline',
+                'policy': 'Policy & Routing Logic',
+                'analytics': 'Analytics & Reporting',
+                'integration': 'ERP Integration'
+            };
+            
+            if (overviewTitle) {
+                overviewTitle.textContent = groupNames[groupName] || 'System Architecture & Flow';
+            }
+
+            // Update agent count badge
+            const countBadge = document.querySelector('span.text-xs.bg-slate-800');
+            if (countBadge) {
+                const visibleCount = groupAgents.length;
+                countBadge.textContent = `${visibleCount} Agent${visibleCount !== 1 ? 's' : ''} Active`;
+            }
+        }
+
+        // Show all agents
+        function showAllAgents() {
+            const agentCards = document.querySelectorAll('[onclick^="loadAgent"]');
+            agentCards.forEach(card => {
+                card.style.display = 'block';
+                card.style.opacity = '1';
+            });
+
+            const groupButtons = document.querySelectorAll('button[onclick^="showAgentGroup"]');
+            groupButtons.forEach(btn => {
+                btn.classList.remove('bg-white/5', 'border-[#009688]/30');
+                btn.classList.add('border-transparent', 'hover:border-slate-700', 'hover:bg-white/5');
+            });
+
+            const overviewTitle = document.querySelector('h3.text-white.text-lg');
+            if (overviewTitle) {
+                overviewTitle.textContent = 'System Architecture & Flow';
+            }
+
+            const countBadge = document.querySelector('span.text-xs.bg-slate-800');
+            if (countBadge) {
+                countBadge.textContent = '7 Agents Active';
             }
         }
     </script>
