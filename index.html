@@ -215,6 +215,30 @@
             </tbody>
         </table>
 
+        <h2>📚 เอกสารสำคัญสำหรับผู้บริหาร</h2>
+        
+        <blockquote style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-left: 4px solid #3b82f6; padding: 20px; margin: 24px 0;">
+            <p style="margin: 0 0 12px 0; font-size: 1.05rem; font-weight: 600; color: #1e40af;">📄 รายงานสถาปัตยกรรมโซลูชัน</p>
+            <p style="margin: 0 0 12px 0; font-style: normal; color: #1e293b;">เอกสารวิเคราะห์เชิงลึกสำหรับการตัดสินใจเลือก Solution Architecture พร้อมการเปรียบเทียบ 3 แนวทาง (RPA, Custom Build, COTS Platform) และ Roadmap การดำเนินงาน 4 Phase</p>
+            <div style="margin-top: 16px;">
+                <a href="docs/project-requirement.html" style="display: inline-block; background: #3b82f6; color: white; padding: 10px 24px; border-radius: 8px; font-size: 0.95rem; font-weight: 600; text-decoration: none; box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3); transition: all 0.2s ease;">
+                    📖 อ่านรายงานฉบับเต็ม
+                </a>
+            </div>
+        </blockquote>
+
+        <p><strong>เนื้อหาในรายงาน:</strong></p>
+        <ul>
+            <li>🎯 <strong>Executive Summary</strong> – สรุปข้อเสนอแนะเชิงกลยุทธ์</li>
+            <li>📊 <strong>As-Is Analysis</strong> – วิเคราะห์กระบวนการปัจจุบันและข้อจำกัด</li>
+            <li>🏗️ <strong>3 Solution Sketches</strong> – RPA, Mobile+AI, COTS Platform (พร้อมตาราง Decision Matrix)</li>
+            <li>💰 <strong>TCO & ROI Analysis</strong> – วิเคราะห์ต้นทุนและผลตอบแทน</li>
+            <li>🗺️ <strong>Implementation Roadmap</strong> – แผนการดำเนินงาน 4 Phase (PoC → Integration → Pilot → Rollout)</li>
+            <li>🔗 <strong>Prototype Mapping</strong> – เชื่อมโยงกับ prototypes ทั้งหมดในโปรเจกต์</li>
+        </ul>
+
+        <hr>
+
         <h3 style="font-size: 1.3rem; color: #475569; margin-top: 28px; margin-bottom: 12px;">เครื่องมือสนับสนุน</h3>
         <table>
             <thead>
@@ -229,11 +253,6 @@
                     <td>Prompt Console (Admin)</td>
                     <td>คอนโซลสำหรับบริหาร system prompt / persona ของแต่ละ Agent</td>
                     <td><a href="prompt/admin-prompt-console.html">prompt/admin-prompt-console.html</a></td>
-                </tr>
-                <tr>
-                    <td>Knowledge Base</td>
-                    <td>รายงานสถาปัตยกรรมโซลูชัน และโน้ตสรุปสำหรับการบรีฟทีมและผู้บริหาร</td>
-                    <td><a href="docs/project-requirement.html">docs/project-requirement.html</a></td>
                 </tr>
                 <tr>
                     <td>Source Documents</td>
@@ -251,22 +270,6 @@
             <li>ดับเบิลคลิกไฟล์ HTML (หรือคลิกขวาเลือก “Open with Live Server” หากมีส่วนขยายติดตั้ง)</li>
             <li>ใช้โครงเรื่องด้านบนเพื่อนำเสนอไหลงานครบชุดในการพรีเซนต์</li>
         </ol>
-
-        <h2>โครงสร้างโฟลเดอร์ (ย่อ)</h2>
-    <pre><code>.
-├── program-hub.html               # Landing page เล่าเรื่อง Problem → Solution → Impact
-├── line-prototype.html            # เดโม LINE Chatbot รับใบเสร็จ
-├── dashboard-prototype.html       # เดโมแดชบอร์ด Human-in-the-Loop
-├── pcard-program-prototype.html   # เดโมแบบจำลอง ROI rollout P-Card
-├── pcard-report-prototype.html    # เดโมรายงานผู้บริหาร + template SAP
-├── prompt/
-│   ├── admin-prompt-console.html  # คอนโซลบริหารคำสั่ง Agent
-│   └── *.md                       # Prompt instruction สำหรับแต่ละ Agent
-├── story-board.html               # สตอรี่บอร์ดสเก็ตช์ 8 การทดลอง
-├── image/
-│   ├── Gemini_Generated_Image_1.png ... 8.png  # ภาพประกอบการ์ด
-│   └── story-board.md                        # สรุปรายละเอียดสเก็ตช์
-└── README.md</code></pre>
 
         <h2>หมายเหตุสำหรับการนำเสนอ</h2>
         <ul>
