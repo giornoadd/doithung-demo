@@ -426,9 +426,19 @@
             }, 1800);
 
             registerTimeout(() => {
+                addBotMessage('กรุณาเลือก Voucher No. ที่ต้องการเชื่อมโยงกับใบเสร็จนี้:');
+                renderVoucherChoices();
+            }, 3800);
+        }
+
+        function selectVoucher(voucherId) {
+            hideQuickReplies();
+            addUserMessage(`📋 ${voucherId}`);
+            
+            registerTimeout(() => {
                 addBotMessage('นี่คือรายละเอียดค่าใช้จ่ายจากรูปภาพที่คุณอัปโหลดครับ\n\n1) ใบเสร็จ GrabExpress (Car)\n   • วันที่: 07 ต.ค. 25\n   • วิธีชำระเงิน: CASHLESS\n   • ค่าบริการ (Item Carrying Fee) 340 บาท\n   • ส่วนลด (Rewards) -34 บาท\n   ⇒ ยอดรวมสุทธิ: 306 บาท\n\n2) ใบรับค่าผ่านทางพิเศษ (การทางพิเศษแห่งประเทศไทย)\n   • วันที่ (จากรอยเจาะ): 15 ก.ค. 25\n   • ประเภทรถ: 4 ล้อ\n   ⇒ ราคา: 50 บาท\n\nข้อมูลนี้ถูกต้องหรือไม่? หากใช่ กรุณากดยืนยันครับ');
                 renderQuickReplies();
-            }, 3800);
+            }, 1000);
         }
 
         function addProcessingIndicator() {
@@ -471,6 +481,28 @@
                 addBotMessage('ดำเนินการสำเร็จ! 🚀 รายการเบิกจ่ายถูกบันทึกภายใต้ voucher queue: PV-BK-6910296 แล้วครับ ขอบคุณที่ใช้บริการ');
                 setCameraEnabled(false);
             }, 1000);
+        }
+
+        function renderVoucherChoices() {
+            if (!quickReplyContainer) return;
+            quickReplyContainer.innerHTML = `
+                <div class="flex flex-col gap-2">
+                    <button type="button" onclick="selectVoucher('ADV-BK-6910008')" class="rounded-2xl bg-white border border-slate-200 px-4 py-3 text-left shadow-sm transition-all duration-150 hover:scale-[1.02] hover:border-lineGreen">
+                        <div class="text-sm font-semibold text-slate-800">ADV-BK-6910008</div>
+                        <div class="text-xs text-slate-500 mt-1">Clear Advance Voucher</div>
+                    </button>
+                    <button type="button" onclick="selectVoucher('ADV-BK-6910009')" class="rounded-2xl bg-white border border-slate-200 px-4 py-3 text-left shadow-sm transition-all duration-150 hover:scale-[1.02] hover:border-lineGreen">
+                        <div class="text-sm font-semibold text-slate-800">ADV-BK-6910009</div>
+                        <div class="text-xs text-slate-500 mt-1">Clear Advance Voucher</div>
+                    </button>
+                    <button type="button" onclick="selectVoucher('PV-BK-6910296')" class="rounded-2xl bg-white border-2 border-lineGreen px-4 py-3 text-left shadow-sm transition-all duration-150 hover:scale-[1.02]">
+                        <div class="text-sm font-semibold text-slate-800">PV-BK-6910296</div>
+                        <div class="text-xs text-emerald-600 mt-1">✓ Payment Voucher (แนะนำ)</div>
+                    </button>
+                </div>
+            `;
+            quickReplyContainer.classList.remove('hidden');
+            scrollChatToBottom();
         }
 
         function renderQuickReplies() {
